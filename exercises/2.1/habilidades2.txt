@@ -1,6 +1,9 @@
-O que eu vou aprender na TRYBE:
+
 -UNIX
 -BASH
 -GIT
 -HTML
 -CSS
+-PHYTON
+-REACT
+
