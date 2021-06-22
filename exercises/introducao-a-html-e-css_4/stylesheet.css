@@ -19,3 +19,10 @@
     display: block;
     height: auto;
 }
+
+ul li {
+    list-style-type: none;
+    list-style: none;
+    display: inline-block;
+    padding-right: 15px;
+}
