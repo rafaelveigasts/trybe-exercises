@@ -1,20 +1,23 @@
-h1,
-p {
-    text-align: center;
+div:hover {
+    border: 5px black solid;
 }
 
-li:hover {
-    background-color: black;
-    color: white;
+div:nth-of-type(1) {
+    background-color: red;
 }
 
-li:active {
-    font-family: monospace;
-    background-color: black;
-    color: white;
+div:nth-of-type(2) {
+    background-color: green;
 }
 
-ul,
-ol {
-    list-style: none;
+div:nth-of-type(3) {
+    background-color: violet;
+}
+
+div:nth-of-type(4) {
+    background-color: darkblue;
+}
+
+div:nth-of-type(5) {
+    background-color: lightgoldenrodyellow;
 }
