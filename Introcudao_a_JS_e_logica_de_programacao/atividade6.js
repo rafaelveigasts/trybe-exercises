@@ -1,4 +1,5 @@
-let peca = "bispo"
+let peca = "BISPO"
+peca = peca.toLocaleLowerCase()
 
 
 switch (peca){
