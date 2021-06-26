@@ -14,26 +14,17 @@ Atenção! Note que esse exercício é bem mais complexo que o anterior! Não ba
 let number = 5;
 
 for (let index = 1; index <= number; index++) {
-let line = '';
-let asterisco = number - index;
 
-for (let otherIndex = 0; otherIndex < number; otherIndex++) {
-if (line.length < asterisco) {
-line += ' '
-} else {
-line += '*'
+  let line = '';
+  let asterisco = number - index;
+
+  for (let otherIndex = 0; otherIndex < number; otherIndex++) {
+    if (line.length < asterisco) {
+      line += ' '
+    } else {
+      line += '*'
+    }
+  }
+
+  console.log(line);
 }
-}
-
-console.log(line);
-} 
-
-// let numero = 5;
-
-// for (let linha = 1; linha <= numero; linha++){
-//   let coluna = "";
-//   for (let i = 0; i< numero; i++){
-//     coluna += "*";
-//   }
-//   console.log(coluna)
-// }
