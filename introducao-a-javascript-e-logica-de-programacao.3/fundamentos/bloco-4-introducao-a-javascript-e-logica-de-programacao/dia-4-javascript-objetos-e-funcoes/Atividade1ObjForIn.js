@@ -50,7 +50,7 @@ for (let pessoa in info) {
     console.log("ambos recorrentes")
     break;
   } else {
-    console.log(info[pessoa])
+    console.log(pessoa + " : " + info[pessoa])
   }
 }
 
