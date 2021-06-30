@@ -11,3 +11,16 @@ document.getElementById("second-paragraph").innerText = "Eu que alterei"
 document.getElementById("subtitle").innerText = "Por que é o melhor filme?"
 const paragraph = document.getElementById("paragraph");
 paragraph.style.color = "red";
+
+/*Utilizando o mesmo template de exercício anterior:
+Adicione uma classe igual para os dois parágrafos.
+Recupere os seus parágrafos via código JavaScript , usando a função getElementsByClassName ;
+Altere algum estilo do primeiro deles.
+Recupere o subtítulo e altere a cor dele usando a função getElementsByTagName .
+*/
+document.getElementsByClassName("paragrafo")[0] = paragraph.style.color="blue";
+
+// const subtitle = document.getElementsByTagName("h4"); 
+// subtitle[0].style.color = "dark Blue"
+// subtitle[0].style.backgroundColor = "orange"
+document.getElementsByTagName("h4")[0].style.color = "green"
