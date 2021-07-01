@@ -17,3 +17,5 @@ let bgNoEmergencyTasks =  document.querySelectorAll('.no-emergency-tasks h3')
   }
 
 document.querySelector('.no-emergency-tasks').style.backgroundColor="yellow";
+
+document.querySelector("#footer-container").style.backgroundColor = "green";
