@@ -29,12 +29,13 @@ document.querySelector('#primeiroFilhodoFilho').childNodes[0]
 // Para praticar:
 // Remova todos os elementos filhos de paiDoPai exceto pai , elementoOndeVoceEsta e primeiroFilhoDoFilho .
 
-let conteudo = document.querySelectorAll('div');
-
-for ( let i of conteudo){
-  let elemento = conteudo[i]
-  console.log(elemento)
-  if ((elemento.id !== 'pai') || (elemento.id !=='elementoOndeVoceEsta') || (elemento.id !=='primeiroFilhoDoFilho') ){
-    conteudo.parentElement.removeChild(elemento)
-  }
-}
+let conteudo = document.querySelector('#pai');
+    const segundoEUltimoFilhoDoFilho = document.getElementById('segundoEUltimoFilhoDoFilho');
+    segundoEUltimoFilhoDoFilho.remove();
+    for (let i = 0; i <= conteudo.children.length; i += 1) {
+      let elemento = conteudo.children[i]
+      console.log(elemento);
+      if (elemento.id !== 'elementoOndeVoceEsta') {
+        elemento.remove()
+      }
+    }
