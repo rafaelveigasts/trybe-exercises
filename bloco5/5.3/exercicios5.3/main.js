@@ -65,7 +65,7 @@ myWebpage.addEventListener('mouseover', function(event) {
   event.target.style.color = 'red';
 });
 
-myWebpage.addEventListener('mouseout', function(event) {
+myWebpage.addEventListener('mouseleave', function(event) {
   event.target.style.color = 'unset';
 });
 
@@ -78,7 +78,7 @@ Esse é o fim do script desse exercício de fixação. Lembre-se que não há pr
 */
 
 /*
-Segue abaixo um exemplo do uso de event.target:
+Segue abaixo um exemplo do uso de event.target:*/
 
 
 function resetText(event) {
@@ -89,6 +89,9 @@ function resetText(event) {
 }
 
 firstDiv.addEventListener('dblclick', resetText);
+secondDiv.addEventListener('dblclick', resetText);
+thirdDiv.addEventListener('dblclick', resetText);
+
 // Não precisa passar o parâmetro dentro do addEventListener. O próprio
 // navegador fará esse trabalho por você, não é legal? Desse jeito, o
 // event.target na nossa função retornará o objeto 'divUm'.*/
