@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="" method="get">
+
+    <fieldset class="fieldset">
+
+      <legend>Meu currículo</legend>
+
+      <div>
+        <label for="nome"> Nome:
+          <input type="text" name='nome'  id='input-nome' value='' placeholder="Insira seu nome" maxlength="40" required>
+        </label>
+      </div>
+
+      <div> 
+        <label for="email"> E-mail:
+          <input type="email" name='email' required id='input-email' value='' placeholder="Insira seu e-mail" maxlength="50">
+        </label>
+      </div>
+
+      <div> 
+        <label for="cpf"> CPF:
+          <input type="number" name="cpf"	id="cpf">
+        </label>
+      </div>
+
+      <div>
+          <label for="state">Estado:</label>
+            <select name="state" id="state" required>
+              <option> Selecione seu estado</option>
+          </select>
+      </div>
+
+     
+
+      <div>Tipo de residência:
+        <label for="radio1">
+          <input type="radio" name="residencia" id='radio1' value="casa">Casa
+        </label>
+
+        <label for="radio2">
+          <input type="radio" name="residencia" id="radio2" value="ap">Apartamento
+        </label>
+
+        <label for="radio3">
+          <input type="radio" name="residencia" id="radio3" value="sitio">Sítio
+        </label>
+        </select>
+      </div>
+
+    </fieldset>
+
+    <br>
+
+    <fieldset class="fieldset">
+      <legend>Dados do seu último emprego</legend>
+      <textarea name="" id="" cols="90" rows="5" maxlength="500" required placeholder="Descrição do cargo">
+      </textarea>
+      
+      <div> Data de início:
+        <input type="date" id='datePickerId' required  value="" required>
+      </div>
+
+      <div> Data de saída:
+        <input type="date" id='rarara' required  value="" required>
+      </div>
+
+    </fieldset>
+    
+    <div>
+      <button type="submit" id='submit-btn'>Enviar</button>
+
+      <button type="reset" id="reser-btn">Limpar</button>
+    </div>
+
+  </form>
+
+  <div class="form-data"></div>
+
+  <script src="script.js"> </script>
+</body>
+
+</html>
