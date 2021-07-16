@@ -19,6 +19,7 @@
 
     <div class="container">
       <h1>Meu currículo</h1>
+
       <div class="form-group">
         <label for="nome"> Nome:</label>
           <input type="text" name='nome'  id='input-nome' class="form-control" value='' placeholder="Insira seu nome" maxlength="40" required>
@@ -31,7 +32,7 @@
 
       <div> 
         <label for="cpf"> CPF:</label>
-          <input type="number" name="cpf"	id="cpf" class="form-control">
+          <input type="number" name="cpf"	id="cpf" class="form-control" required>
       </div>
 
       <div class="form-group">
@@ -51,26 +52,22 @@
 
         <label for="">Tipo de residência:</label>
 
-          <div class="form-check">
+          <div id='divRes1' class="form-check">
             <label for="radio1" class="form-check-label "> Casa</label>
               <input type="radio" name="residencia" id='radio1' class="form-check-input" value="casa">
           </div>
 
-          <div class="form-check">
+          <div id='divRes2' class="form-check">
             <label for="radio2">Apartamento</label>
               <input type="radio" name="residencia" id="radio2" class="form-check-input" value="ap">
           </div>
 
-          <div class="form-check"> 
+          <div id='divRes3' class="form-check"> 
             <label for="radio3">Sítio</label>
               <input type="radio" name="residencia" id="radio3" class="form-check-input" value="sitio">
           </div>
         </div>
       </div>
-
-    
-
- 
 
    <div class="container">
       <h2>Dados do seu último emprego</h2>
@@ -79,13 +76,21 @@
 
       </div>
 
-      <div class="form-group"> Data de início:
-        <input type="date" id='datePickerId' required  value="" required>
+      <div id='checkEmprego' class="form-check">
+        <label for="checkEmprego" class="form-check-label">Estou trabalhando atualmente.</label>
+        <input type="checkbox" name="checkEmprego" id='checkEmprego' class="form-check-input" value="checkEmprego" >
       </div>
 
-      <div class="form-group"> Data de saída:
-        <input type="date" id='rarara' required  value="" required>
+      <div class="form-group"> 
+        <label for=""> Data de início:</label>
+        <input type="date" id='datePickerId'   value="" required>
       </div>
+
+      <div id="saida" class="form-group">
+        <label for=""> Data de saída:</label>
+        <input type="date" id='rarara' value="" required>
+      </div>
+      
     </div >
     <div class="container">
       <div class="mb-3">
