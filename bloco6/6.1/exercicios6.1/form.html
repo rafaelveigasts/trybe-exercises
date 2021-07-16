@@ -19,67 +19,92 @@
 
     <div class="container">
       <h1>Meu currículo</h1>
+
       <div class="form-group">
         <label for="nome"> Nome:</label>
           <input type="text" name='nome'  id='input-nome' class="form-control" value='' placeholder="Insira seu nome" maxlength="40" required>
-        
       </div>
 
       <div> 
         <label for="email"> E-mail:</label>
           <input type="email" name='email' required id='input-email' class="form-control" value='' placeholder="Insira seu e-mail" maxlength="50">
-        
       </div>
 
       <div> 
         <label for="cpf"> CPF:</label>
-          <input type="number" name="cpf"	id="cpf" class="form-control cpf-mask">
+          <input type="number" name="cpf"	id="cpf" class="form-control" required>
       </div>
 
-      <div class="dropdown form-group">
+      <div class="form-group">
+        <label for="endereco"> Endereço:</label>
+          <input type="text" name='endereco'  id='input-endereco' class="form-control" value='' placeholder="Insira seu endereço completo" maxlength="100" required>
+      </div>
+
+      <div class="dropdown">
           <label for="state">Estado:</label>
-            <select name="state" id="state" class="form-select" required>
+            <select name="state" id="state" class="form-control" required>
               <option> Selecione seu estado</option>
           </select>
       </div>
     </div>
      
+      <div class="container">
 
-      <div class="container  ">Tipo de residência:
-        <label for="radio1" class="form-check-label "></label>
-          <input type="radio" name="residencia" id='radio1' class="form-check-label" value="casa">Casa
+        <label for="">Tipo de residência:</label>
 
-        <label for="radio2">Apartamento</label>
-          <input type="radio" name="residencia" id="radio2" class="form-check-label" value="ap">
+          <div id='divRes1' class="form-check">
+            <label for="radio1" class="form-check-label "> Casa</label>
+              <input type="radio" name="residencia" id='radio1' class="form-check-input" value="casa">
+          </div>
 
-        <label for="radio3"></label>
-          <input type="radio" name="residencia" id="radio3" class="form-check-label" value="sitio">Sítio
+          <div id='divRes2' class="form-check">
+            <label for="radio2">Apartamento</label>
+              <input type="radio" name="residencia" id="radio2" class="form-check-input" value="ap">
+          </div>
+
+          <div id='divRes3' class="form-check"> 
+            <label for="radio3">Sítio</label>
+              <input type="radio" name="residencia" id="radio3" class="form-check-input" value="sitio">
+          </div>
+        </div>
       </div>
 
-    
+   <div class="container">
+      <h2>Dados do seu último emprego</h2>
+      <div class="form-group">
+        <textarea name="" id="" class='form-floating'cols="90" rows="5" maxlength="500" required placeholder="Comente sobre sua última experiência"></textarea>
 
-    <br>
+      </div>
 
-    <fieldset class="fieldset">
-      <legend>Dados do seu último emprego</legend>
-      <textarea name="" id="" cols="90" rows="5" maxlength="500" required placeholder="Descrição do cargo">
-      </textarea>
+      <div id='checkEmprego' class="form-check">
+        <label for="checkEmprego" class="form-check-label">Estou trabalhando atualmente.</label>
+        <input type="checkbox" name="checkEmprego" id='checkEmprego' class="form-check-input" value="checkEmprego" >
+      </div>
+
+      <div class="form-group"> 
+        <label for=""> Data de início:</label>
+        <input type="date" id='datePickerId'   value="" required>
+      </div>
+
+      <div id="saida" class="form-group">
+        <label for=""> Data de saída:</label>
+        <input type="date" id='rarara' value="" required>
+      </div>
       
-      <div> Data de início:
-        <input type="date" id='datePickerId' required  value="" required>
+    </div >
+    <div class="container">
+      <div class="mb-3">
+        <label for="formFile" class="form-label ">Insira seu cv em PDF:</label>
+        <input class="form-control" type="file" id="formFile">
       </div>
+     </div>
 
-      <div> Data de saída:
-        <input type="date" id='rarara' required  value="" required>
-      </div>
+    <div class="container"> 
+      <button class="btn btn-primary" type="submit" id='submit-btn'>Enviar</button>
 
-    </fieldset>
-    
-    <div>
-      <button type="submit" id='submit-btn'>Enviar</button>
-
-      <button type="reset" id="reser-btn">Limpar</button>
+      <button class="btn btn-primary" type="reset" id="reset-btn">Limpar</button>
     </div>
+
 
   </form>
 
