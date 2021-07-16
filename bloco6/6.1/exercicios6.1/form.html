@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,53 +17,46 @@
 <body>
   <form action="" method="get">
 
-    <fieldset class="fieldset">
-
-      <legend>Meu currículo</legend>
-
-      <div>
-        <label for="nome"> Nome:
-          <input type="text" name='nome'  id='input-nome' value='' placeholder="Insira seu nome" maxlength="40" required>
-        </label>
+    <div class="container">
+      <h1>Meu currículo</h1>
+      <div class="form-group">
+        <label for="nome"> Nome:</label>
+          <input type="text" name='nome'  id='input-nome' class="form-control" value='' placeholder="Insira seu nome" maxlength="40" required>
+        
       </div>
 
       <div> 
-        <label for="email"> E-mail:
-          <input type="email" name='email' required id='input-email' value='' placeholder="Insira seu e-mail" maxlength="50">
-        </label>
+        <label for="email"> E-mail:</label>
+          <input type="email" name='email' required id='input-email' class="form-control" value='' placeholder="Insira seu e-mail" maxlength="50">
+        
       </div>
 
       <div> 
-        <label for="cpf"> CPF:
-          <input type="number" name="cpf"	id="cpf">
-        </label>
+        <label for="cpf"> CPF:</label>
+          <input type="number" name="cpf"	id="cpf" class="form-control cpf-mask">
       </div>
 
-      <div>
+      <div class="dropdown form-group">
           <label for="state">Estado:</label>
-            <select name="state" id="state" required>
+            <select name="state" id="state" class="form-select" required>
               <option> Selecione seu estado</option>
           </select>
       </div>
-
+    </div>
      
 
-      <div>Tipo de residência:
-        <label for="radio1">
-          <input type="radio" name="residencia" id='radio1' value="casa">Casa
-        </label>
+      <div class="container  ">Tipo de residência:
+        <label for="radio1" class="form-check-label "></label>
+          <input type="radio" name="residencia" id='radio1' class="form-check-label" value="casa">Casa
 
-        <label for="radio2">
-          <input type="radio" name="residencia" id="radio2" value="ap">Apartamento
-        </label>
+        <label for="radio2">Apartamento</label>
+          <input type="radio" name="residencia" id="radio2" class="form-check-label" value="ap">
 
-        <label for="radio3">
-          <input type="radio" name="residencia" id="radio3" value="sitio">Sítio
-        </label>
-        </select>
+        <label for="radio3"></label>
+          <input type="radio" name="residencia" id="radio3" class="form-check-label" value="sitio">Sítio
       </div>
 
-    </fieldset>
+    
 
     <br>
 

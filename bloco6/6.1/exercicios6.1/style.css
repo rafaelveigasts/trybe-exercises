@@ -1,26 +1,4 @@
-body{
-  background: rgb(231, 229, 229);
-}
-
-fieldset{
-  max-width: 80%;
-}
-
 div{
-  padding-bottom: 6px;
   padding-top: 6px;
-}
-
-textarea{
-  resize: none;
-  /* https://stackoverflow.com/questions/5271782/how-to-disable-the-resize-grabber-of-textarea */
-}
-
-input{
-  margin-left: 10px;
-}
-
-button{
-  width: 100px;
-  text-align: center;
+  padding-bottom: 6px;
 }
