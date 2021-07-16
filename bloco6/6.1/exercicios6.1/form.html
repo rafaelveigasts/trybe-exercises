@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="" method="get">
+
+    <div class="container">
+      <h1>Meu currículo</h1>
+      <div class="form-group">
+        <label for="nome"> Nome:</label>
+          <input type="text" name='nome'  id='input-nome' class="form-control" value='' placeholder="Insira seu nome" maxlength="40" required>
+        
+      </div>
+
+      <div> 
+        <label for="email"> E-mail:</label>
+          <input type="email" name='email' required id='input-email' class="form-control" value='' placeholder="Insira seu e-mail" maxlength="50">
+        
+      </div>
+
+      <div> 
+        <label for="cpf"> CPF:</label>
+          <input type="number" name="cpf"	id="cpf" class="form-control cpf-mask">
+      </div>
+
+      <div class="dropdown form-group">
+          <label for="state">Estado:</label>
+            <select name="state" id="state" class="form-select" required>
+              <option> Selecione seu estado</option>
+          </select>
+      </div>
+    </div>
+     
+
+      <div class="container  ">Tipo de residência:
+        <label for="radio1" class="form-check-label "></label>
+          <input type="radio" name="residencia" id='radio1' class="form-check-label" value="casa">Casa
+
+        <label for="radio2">Apartamento</label>
+          <input type="radio" name="residencia" id="radio2" class="form-check-label" value="ap">
+
+        <label for="radio3"></label>
+          <input type="radio" name="residencia" id="radio3" class="form-check-label" value="sitio">Sítio
+      </div>
+
+    
+
+    <br>
+
+    <fieldset class="fieldset">
+      <legend>Dados do seu último emprego</legend>
+      <textarea name="" id="" cols="90" rows="5" maxlength="500" required placeholder="Descrição do cargo">
+      </textarea>
+      
+      <div> Data de início:
+        <input type="date" id='datePickerId' required  value="" required>
+      </div>
+
+      <div> Data de saída:
+        <input type="date" id='rarara' required  value="" required>
+      </div>
+
+    </fieldset>
+    
+    <div>
+      <button type="submit" id='submit-btn'>Enviar</button>
+
+      <button type="reset" id="reser-btn">Limpar</button>
+    </div>
+
+  </form>
+
+  <div class="form-data"></div>
+
+  <script src="script.js"> </script>
+</body>
+
+</html>
