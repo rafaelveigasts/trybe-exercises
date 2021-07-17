@@ -3,6 +3,7 @@ const estadosOpcao = ['Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará'
 const botaoSubmmit = document.getElementById('submit-btn');
 const botaoCheckBox = document.getElementById('checkEmprego');
 const botaoDataSaida = document.getElementById('saida');
+const paragrafoPopUp = document.getElementById('pPopUp')
 
 function criarOpcaoEstado() {
 
@@ -13,7 +14,8 @@ function criarOpcaoEstado() {
     elemento.value = opcoes;
     states.add(elemento);
   }
-}
+}  
+
 window.onload = criarOpcaoEstado
 
 datePickerId.max = new Date().toISOString().split("T")[0];
@@ -21,21 +23,39 @@ datePickerId.max = new Date().toISOString().split("T")[0];
 rarara.max = new Date().toISOString().split("T")[0];
 //stackoverflow.com/questions/32378590/set-date-input-fields-max-date-to-today
 
-// botaoSubmmit.addEventListener('click',function(event){
-//   event.preventDefault()
-//   console.log("ola ")
-  
-//   // validar os dados
-//   let name = document.querySelector('[name=nome]');
-//   if (name.value.length > 40 || name.value.length === 0){
-//     alert('Nome inválido.')
-//   }
-// } )
+botaoSubmmit.addEventListener('click', function (event) {
+  event.preventDefault()
+  let name = document.querySelector('[name=nome]');
+  let email = document.querySelector('[name=email]');
+  let cpf = document.querySelector('[name=cpf]');
+  let endereco = document.querySelector('[name=endereco]');
+ 
+  console.log(name.value)
 
-botaoCheckBox.addEventListener('click', function(){
+  // paragrafoPopUp.innerHTML= name.value;
+  // paragrafoPopUp.innerHTML= email.value;
+
+  let data = {
+    nome: name.value,
+    cpf: cpf.value,
+  }
+
+  paragrafoPopUp.innerHTML = data
+
+})
+
+botaoCheckBox.addEventListener('click', function () {
   let display = botaoDataSaida.style.display;
   if (display == "none")
-  botaoDataSaida.style.display = 'block';
+    botaoDataSaida.style.display = 'block';
   else
-  botaoDataSaida.style.display = 'none'
+    botaoDataSaida.style.display = 'none'
 })
+
+
+botaoSubmmit.addEventListener('click', function () {
+  let myModal = new bootstrap.Modal(document.getElementById('popup'))
+  myModal.show()
+}
+)
+
