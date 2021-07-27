@@ -3,11 +3,11 @@
 const assert = require('assert');
 
 const wordLengths = (array) => {
-  const controle = [];
+  const output = [];
   for (let i = 0; i < array.length; i += 1) {
-    controle.push(array[i].length);
+    output.push(array[i].length);
   }
-  return controle;
+  return output;
 }
 
 const words = ['sun', 'potato', 'roundabout', 'pizza'];
