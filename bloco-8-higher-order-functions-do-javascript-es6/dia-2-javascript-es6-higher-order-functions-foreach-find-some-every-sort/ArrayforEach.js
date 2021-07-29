@@ -19,3 +19,13 @@ const enviarEmail = (email) => {
   })
 
 // ForEach espera uma função de no máximo 3 parâmetros, o primeiro parâmetro é o nosso próprio item, o segundo parâmetro é a posição desse item no array, e o terceiro é a própria lista que ele está percorrendo. 
+
+// Agora vamos usar o forEach , para realizar a tabuada do 2. Veja o exemplo abaixo:
+
+const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+
+const tabuada2 = (elemento) => {
+  console.log(`${elemento*2}`)};
+
+  numbers.forEach(tabuada2);
