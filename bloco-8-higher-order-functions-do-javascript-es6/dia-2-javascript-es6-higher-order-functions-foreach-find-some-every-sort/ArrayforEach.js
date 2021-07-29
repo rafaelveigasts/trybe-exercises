@@ -47,3 +47,47 @@ names.forEach(convertToLowerCase);
 // names.forEach(convertToUpperCase);
 console.log(names); // [ 'BIANCA', 'CAMILA', 'FERNANDO', 'ANA ROBERTA' ]
 
+// Para fixar
+// 1 - Use o método forEach chamando a callback showEmailList para apresentar os emails
+
+const emailListInData = [
+  'roberta@email.com',
+  'paulo@email.com',
+  'anaroberta@email.com',
+  'fabiano@email.com',
+];
+
+const showEmailList = (email) => {
+  console.log(`O email ${email} esta cadastrado em nosso banco de dados!`);
+};
+
+emailListInData.forEach((item, position) => {
+  showEmailList(item);
+  console.log(`email enviado número ${position+1}`);
+})
+
+// 2 - Leia e entenda este exemplo do forEach feito no CodePen. https://codepen.io/pen/?editors=0010
+
+// Array contendo a lista de emails.
+const emailList = [
+  "isa@myemail.com",
+  "lipe@myemail.com",
+  "digo@myemail.com",
+  "greg@myemail.com"
+];
+
+// Função callback que recebe o array emailList como parâmetro.
+const showEmailList = (list) => {
+  const div = document.querySelector("#email-list");
+  div.innerHTML = '';
+// Para cada e-mail da lista, a função cria uma tag <p> com a frase '${email}: Enviado com sucesso'
+  list.forEach((email) => {
+    const p = document.createElement("p");
+    p.innerHTML = `${email} : Enviado com sucesso!`;
+    div.appendChild(p);
+  });
+}
+
+const btnFilter = document.querySelector("#btn-filter");
+btnFilter.addEventListener("click", () => showEmailList(emailList));
+
