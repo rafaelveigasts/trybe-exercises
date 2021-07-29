@@ -3,10 +3,10 @@
 const checarNumero = (meuNumero, numero) => meuNumero === numero;
 
 const resultadoLoteria = (meuNumero, callback) => {
-  const numero = Math.round(Math.random() * 5);
+  const numero = Math.ceil(Math.random() * 5);
   console.log(numero)
 
-  if (meuNumero === numero) {
+  if (callback(meuNumero,numero)) {
     return `Parabéns você ganhou`;
   } else {
     return `Tente novamente`;
