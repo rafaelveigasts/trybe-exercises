@@ -29,3 +29,21 @@ const tabuada2 = (elemento) => {
   console.log(`${elemento*2}`)};
 
   numbers.forEach(tabuada2);
+
+//   No exemplo acima, foi executado para cada elemento do array a função multipliesFor2 , que imprime o parâmetro element * 2 no console.
+// Agora estamos tratando de uma HOF , sendo assim é possível se utilizar também dos demais parâmetros para se resolver um problema. Como se pode fazer isso? Veja este exemplo abaixo com o uso de index no forEach :
+
+const names = ['Bianca', 'Camila', 'Fernando', 'Ana Roberta'];
+
+const convertToUpperCase = (name, index) => {
+  names[index] = name.toUpperCase();
+};
+
+const convertToLowerCase = (nome, index) =>{
+  names[index] = nome.toLowerCase();
+}
+
+names.forEach(convertToLowerCase);
+// names.forEach(convertToUpperCase);
+console.log(names); // [ 'BIANCA', 'CAMILA', 'FERNANDO', 'ANA ROBERTA' ]
+
