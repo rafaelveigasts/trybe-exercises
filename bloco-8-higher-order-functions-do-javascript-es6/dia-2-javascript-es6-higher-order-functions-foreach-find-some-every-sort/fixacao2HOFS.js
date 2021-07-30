@@ -75,12 +75,37 @@ const books = [
   },
 ];
 
-// 1 - Encontre o nome da primeira pessoa autora do livro nascida no ano de 1947. Dica: use a função find .
 
-function autor1947() {
-  return books.find((book) => book.author.birthYear === 1947).author.name;
+//  2 - Retorne o nome do livro de menor nome. Dica: use a função forEach .
+
+
+function smallerName(){
+ books.sort((a,b) => a.name.length - b.name.length)
+console.log(books[0].name);
+ return books[0].name
 }
- assert.strictEqual(autor1947(), 'Stephen King');
 
 
+assert.strictEqual(smallerName(), 'Duna');
 
+/*Solução:
+Declaramos a variável nameBook sem nenhum valor;
+Aplica-se a condicional if utilizando operadores lógicos. O primeiro é o not (!) antes de nameBook . Fazemos isso, pois o fato de nameBook não guardar nenhum valor é retornado "undefined" por padrão, consequentemente o JavaScript interpreta ele como um valor "falsy", que se traduz como "false" propriamente. Desta maneira, ao utilizar o operador not (!) antes de nameBook, estamos negando que ele seja falso, ou seja, convertendo-o para "true";
+Utilizamos o operador or/ou (||) para compor a lógica de que se nameBook retornar "true" ou se o tamanho da string contida na chave name de cada objeto em books for menor que o tamanho de nameBook , nossa função irá guardar o nome desse livro em nameBook ;
+Na primeira iteração, como nameBook é undefined, ou seja não guarda o nome de nenhum livro, o primeiro nome de livro será guardado em nameBook . A partir da segunda iteração, é feita a comparação e se o nome do livro for menor que o que está guardado em nameBook , este irá tomar seu lugar e assim por diante até a última iteração.
+
+function smallerName() {
+  let nameBook;
+  // escreva aqui o seu código
+
+  books.forEach((book) => {
+    if (!nameBook || book.name.length < nameBook.length) {
+      nameBook = book.name;
+    }
+  });
+  // Variável nameBook que receberá o valor do menor nome;
+  return nameBook;
+}
+
+assert.strictEqual(smallerName(), 'Duna');
+*/
