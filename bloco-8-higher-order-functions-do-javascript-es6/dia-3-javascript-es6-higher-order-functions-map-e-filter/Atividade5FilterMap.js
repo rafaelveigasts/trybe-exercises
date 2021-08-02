@@ -76,7 +76,7 @@ const expectedResult = [
 function fantasyOrScienceFictionAuthors() 
 {
   return books
-    .filter((genre) => genre.genre!== 'Terror')
+    .filter((book) => book.genre!== 'Terror')
     .map((book) => book.author.name)
     .sort()
 }
