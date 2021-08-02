@@ -1,6 +1,5 @@
 // Para os exercícios 2, 3 e 4 considere o seguinte array:
-const assert = require('assert');
-
+const assert = require('assert')
 const books = [
   {
     id: 1,
@@ -64,18 +63,17 @@ const books = [
   },
 ];
 
+// 3 - Calcule a média de idade que as pessoas autoras tinham quando seus respectivos livros foram lançados.
 
-const expectedResult = "George R. R. Martin, J. R. R. Tolkien, Isaac Asimov, Frank Herbert, Stephen King, H. P. Lovecraft.";
+const expectedResult = 43;
 
-// 2 - Crie uma string com os nomes de todas as pessoas autoras.
+const qtde = books.length
 
-
-function reduceNames() 
+function averageAge() 
 {
   return books
-  .reduce((acc, curr) => acc  + curr.author.name + ',' + ' ', '' )
+  .map((age)=> (age.releaseYear - age.author.birthYear))
+  .reduce((acc, curr) => (acc + curr) )
+  console.log(books)
 }
-
-assert.strictEqual(reduceNames(), expectedResult);
-
-  
+assert.strictEqual(averageAge(), expectedResult);
