@@ -15,7 +15,7 @@ const arrays = [
 function flatten() 
 {
   return Object.values(arrays)
-  .reduce((acc,obj)=> {return acc.concat(obj)}) 
+  .reduce((acc,curr)=> {return acc.concat(curr)}) 
 }
 
 console.log(flatten());
