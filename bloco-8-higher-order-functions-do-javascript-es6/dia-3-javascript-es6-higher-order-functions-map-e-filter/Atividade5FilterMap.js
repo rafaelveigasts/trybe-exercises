@@ -1,5 +1,3 @@
-// - Crie um array ordenado pelos livros com mais de 60 anos de publicação e ordene-o pelo livro mais velho.
-// Dica: use as funções filter e sort
 const assert = require('assert');
 
 const books = [
@@ -64,35 +62,23 @@ const books = [
     releaseYear: 1928,
   },
 ];
+
+// 5 - Crie um array em ordem alfabética apenas com os nomes de todas as pessoas autoras de ficção científica ou fantasia.
+
+
 const expectedResult = [
-  {
-    id: 6,
-    name: 'O Chamado de Cthulhu',
-    genre: 'Terror',
-    author: { name: 'H. P. Lovecraft', birthYear: 1890 },
-    releaseYear: 1928,
-  },
-  {
-    id: 3,
-    name: 'Fundação',
-    genre: 'Ficção Científica',
-    author: { name: 'Isaac Asimov', birthYear: 1920 },
-    releaseYear: 1951,
-  },
-  {
-    id: 2,
-    name: 'O Senhor dos Anéis',
-    genre: 'Fantasia',
-    author: { name: 'J. R. R. Tolkien', birthYear: 1892 },
-    releaseYear: 1954,
-  },
+  'Frank Herbert',
+  'George R. R. Martin',
+  'Isaac Asimov',
+  'J. R. R. Tolkien',
 ];
 
-function oldBooksOrdered() 
+function fantasyOrScienceFictionAuthors() 
 {
   return books
-    .filter((book) => (2021 - book.releaseYear) >60)
-    .sort((a,b) => a.releaseYear - b.releaseYear)
+    .filter((genre) => genre.genre!== 'Terror')
+    .map((book) => book.author.name)
+    .sort()
 }
 
-assert.deepStrictEqual(oldBooksOrdered(), expectedResult);
+assert.deepStrictEqual(fantasyOrScienceFictionAuthors(), expectedResult);
