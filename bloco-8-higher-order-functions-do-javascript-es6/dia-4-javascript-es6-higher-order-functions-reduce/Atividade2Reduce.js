@@ -73,7 +73,7 @@ const expectedResult = "George R. R. Martin, J. R. R. Tolkien, Isaac Asimov, Fra
 function reduceNames() 
 {
   return books
-  .reduce((acc, curr) => acc  + curr.author.name + ',' + ' ', '' )
+  .reduce((acc, curr) => acc  + curr.author.name + ',' + ' ', '').slice(books[-1],-2) + '.'
 }
 
 assert.strictEqual(reduceNames(), expectedResult);
