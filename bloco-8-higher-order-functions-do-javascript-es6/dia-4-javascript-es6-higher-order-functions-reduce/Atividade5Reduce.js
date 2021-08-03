@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { DH_CHECK_P_NOT_PRIME } = require('constants');
 
 const names = [
   'Aanemarie', 'Adervandes', 'Akifusa',
@@ -13,10 +14,10 @@ const names = [
 function containsA() 
 {
   return names
-  .reduce((acc, curV) => acc + curV).split('').filter((value) => value.toLowerCase() === 'a').length;
-
-
-  return contador
+  .reduce( (acc, cur) => {
+    cur === 'A' || cur === 'a' ? acc += 1 : acc
+    return acc;
+    }, 0)
 }
 
 
