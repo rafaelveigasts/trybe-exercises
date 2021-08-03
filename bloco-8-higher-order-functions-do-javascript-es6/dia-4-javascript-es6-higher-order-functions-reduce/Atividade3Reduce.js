@@ -67,13 +67,14 @@ const books = [
 
 const expectedResult = 43;
 
-const qtde = books.length
-
+const tamanho = books.length
 function averageAge() 
 {
-  return books
-  .map((age)=> (age.releaseYear - age.author.birthYear))
-  .reduce((acc, curr) => (acc + curr) )
-  console.log(books)
+  const media = books
+    .map((age)=> age.releaseYear - age.author.birthYear)
+    .reduce((acc, curr) => acc + curr)
+
+    return media/tamanho
 }
+
 assert.strictEqual(averageAge(), expectedResult);

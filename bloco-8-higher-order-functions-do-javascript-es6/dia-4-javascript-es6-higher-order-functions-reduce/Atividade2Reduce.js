@@ -73,9 +73,11 @@ const expectedResult = "George R. R. Martin, J. R. R. Tolkien, Isaac Asimov, Fra
 function reduceNames() 
 {
   return books
-  .reduce((acc, curr) => acc  + curr.author.name + ',' + ' ', '').slice(books[-1],-2) + '.'
+  .reduce((acc, curr) => acc  + curr.author.name + ', ' , '').slice(books[-1],-2) + '.'
 }
+console.log(reduceNames())
 
 assert.strictEqual(reduceNames(), expectedResult);
 
+// https://dotnetianos.wordpress.com/2012/11/01/convert-last-char-javascript/
   
