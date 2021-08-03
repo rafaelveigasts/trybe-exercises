@@ -78,3 +78,5 @@ function averageAge()
 }
 
 assert.strictEqual(averageAge(), expectedResult);
+
+// https://pt.stackoverflow.com/questions/480776/problema-com-o-reduce-para-calcular-m%C3%A9dia-aritm%C3%A9tica-de-array
