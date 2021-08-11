@@ -8,7 +8,9 @@ const getMarsTemperature = () => {
 };
 
 const sendMarsTemperature = () => {
-  setTimeout(() => console.log('Mars temperature is 20 graus Celcius'),(Math.random()*5)+1);
+  setTimeout(() => console.log('Mars temperature is 20 graus Celcius'),(Math.random()*5000)+1);
+
+  // Obs.: no set time out mesmo usando o math.random o tempo tem que ser em milisegundos
 
   // setTimeout(()=> console.log("Returned planet: ", mars), 4000);
 
