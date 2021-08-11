@@ -1,0 +1,22 @@
+Para fixar
+
+Responda às perguntas a seguir, antes de nossa aula ao vivo, para ter certeza de que você entendeu os textos. Discuta a resposta com o restante da turma (que tal uma pessoa abrir uma conversa no Slack para conversarem a respeito?!). Se bater alguma dúvida, volte aos textos!
+
+O que é um código que é executado de modo assíncrono? 
+R: Uma requisição assíncrona é diferente. Ela não trabalha em sincronia. Dessa forma, nós podemos realizar várias requisições ao mesmo tempo, e uma requisição não irá afetar a outra. Isso é impressionante, e ajuda muito na performance e na experiência do usuário também. Em poucas palavras, com um código assíncrono, nosso site se torna mais dinâmico.
+https://hcode.com.br/blog/javascript-assincrono-o-guia-completo-parte-1-o-que-e-um-codigo-assincrono
+
+Qual é a diferença disso para um código que é executado de modo síncrono?
+R: A diferença entre essas duas abordagens é a seguinte: Maneira síncrona: Aguarda a conclusão de cada operação, somente depois executa a próxima operação. ... Maneira assíncrona: nunca espera que cada operação seja concluída, mas executa todas as operações apenas no primeiro
+
+Quando você tem que enfileirar várias callbacks , que problema surge?
+R: callback hell
+
+Por que as Promises são uma forma de se resolver esse problema?
+R: foram criadas para facilitar a leitura de códigos assíncronos e tornar sua lógica mais previsível e legível.
+
+Quando você vai se comunicar com uma API , tal comunicação deve ser síncrona ou assíncrona? Lembre-se de que o serviço ao qual você está se conectando pode demorar muito ou pouco para dar retorno, pode estar fora do ar etc.
+R: deve ser feito de forma assíncrona para não utilizar recursos da máquina local.
+
+Dada a resposta anterior, o que é fetch e para que ele serve?
+R: É responsável por enviar requisições a APIs . Porém, essa não é sua única responsabilidade. Ela também possui ferramentas para tratar os dados recebidos e devolvê-los, além de lidar com os erros.
