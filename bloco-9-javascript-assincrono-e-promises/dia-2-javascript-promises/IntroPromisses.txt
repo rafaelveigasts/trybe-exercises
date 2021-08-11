@@ -1,0 +1,11 @@
+O que vamos aprender?
+
+Callbacks são utilizadas em toda parte no JavaScript . A depender da complexidade do que você quer fazer, no entanto, as callbacks podem, muito rápido, ficar confusas e pouco legíveis. Para tornar o código mais compreensível, surgem as Promises , que você estudará na aula de hoje. E, com as promises, você fará uma pequena página web que colhe dados de um serviço terceiro utilizando a API dele.
+
+Por que isso é importante?
+
+As Promises , embora não sejam muito intuitivas a princípio, foram criadas para facilitar a leitura de códigos assíncronos e tornar sua lógica mais previsível e legível. Elas são uma das formas mais populares de se escrever esse tipo de código em JavaScript hoje em dia. São também a principal forma de você se comunicar com APIs .
+
+A comunicação com serviços de terceiros é parte do dia a dia de qualquer pessoa que programa. Seja para coletar tweets , seja para abrir um mapa do Google Maps , ou até mesmo se comunicar com um banco de dados ou serviço interno da organização, APIs são sempre a forma de se fazer isso. Entender o que são e como usá-las, ou seja, como fazer sua aplicação se comunicar com elas, é absolutamente fundamental. Hoje você entrará em contato com esse conceito e o praticará por todo o restante do curso.
+
+Tenham em mente que Promises não são um conceito trivial ! Vocês terão muito tempo ao longo do curso para entender esse conceito, então se esforcem para fazer o melhor agora, leiam tudo, façam os exercícios e saibam que haverá tempo para absorver essa lógica com calma.

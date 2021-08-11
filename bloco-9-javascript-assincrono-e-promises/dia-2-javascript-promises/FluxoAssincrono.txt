@@ -1,0 +1,7 @@
+Relembrando o fluxo assíncrono
+
+Vamos relembrar rapidamente como funciona a ordem de execução de funções no javascript : as funções são lidas de cima para baixo e suas execuções são colocadas em uma fila. Assim, a primeira função lida é a primeira a ser executada. Quando sua execução termina, ela "entrega seu retorno", permitindo que o mesmo processo ocorra com a próxima função da fila.
+
+A função assíncrona é diferente! Quando o javascript lê uma função desse tipo, ela é enviada para uma área especial, e a fila síncrona continua correndo. Quando a função assíncrona termina sua execução, ela volta para a fila novamente para "entregar a resposta" de sua execução. Vale lembrar que a área especial das assíncronas não é muito ordenada, ou seja, a primeira função assíncrona que entra não é, necessariamente, a primeira a sair, já que depende do tempo de execução de cada uma. Grave essas informações, elas serão importantes para explicar alguns acontecimentos mais a frente!
+
+Com esse sistema de "filas", fica difícil colocar uma ordem nas funções assíncronas. Como fazer uma função executar somente depois de outra, se não existe uma ordem para sua execução? Para isso, as pessoas desenvolvedoras começaram a usar callbacks , o que era excelente a princípio. Porém, em alguns casos, a sequência de callbacks crescia de forma descontrolada, criando o famoso callback hell , que vimos anteriormente. Para contornar o problema, as callbacks deram lugar às Promises !
