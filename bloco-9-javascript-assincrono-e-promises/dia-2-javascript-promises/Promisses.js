@@ -2,8 +2,11 @@
 Promises
 
 As promises se comportam de forma muito parecida com as funções que já conhecemos, mas existem 3 pontos de destaque das Promises em relação à outras funções:
+
 As Promises são assíncronas , ou seja, elas tem um espaço especial para sua execução sem que travem o fluxo de outras funções.
+
 As Promises têm "superpoderes", isto é, funções extras que facilitam o controle do fluxo assíncrono.
+
 As Promises são construídas de um forma distinta: para criar uma nova Promise, usamos um Construtor .
 
 Agora que você já tem uma noção básica do que esperar, vamos passo-a-passo construindo uma Promise para que você entenda cada tijolinho que forma nossa superfunção. Vamos lá?!
