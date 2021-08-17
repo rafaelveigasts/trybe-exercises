@@ -63,7 +63,7 @@ const {
   greetingMessage,
   loginErrorMessage,
   verifyCredentials,
-} = require("./loginValidation.js");
+} = require("./my-new_project/loginValidation.js");
 
 describe("a função verifyCredentials()", () => {
   
