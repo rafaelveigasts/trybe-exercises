@@ -11,15 +11,15 @@ const names = [
 // 5 - Dada o array de nomes, retorne a quantidade de vezes em que aparecem a letra a maiúscula ou minúscula.
 
 
-function containsA() 
-{
-  return names
-  .reduce( (acc, cur) => {
-    cur === 'A' || cur === 'a' ? acc += 1 : acc
+function containsA() {
+  return names.reduce((acc, cur) => {
+  for (let i = 0; i < cur.length; i += 1) {
+      const currName = cur.toUpperCase();
+      currName[ind] === 'A' ? acc += 1 : acc;
+    }
     return acc;
-    }, 0)
-}
-
+  }, 0);
+  }
 
 // console.log(names.map((nome) => nome.split('')))
 // console.log('_________________________');

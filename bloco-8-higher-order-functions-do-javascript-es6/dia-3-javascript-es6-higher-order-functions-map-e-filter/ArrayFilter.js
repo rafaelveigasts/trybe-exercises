@@ -5,7 +5,7 @@
 
 /*Array.prototype.filter() https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
-  O método filter() cria um novo array com todos os elementos que passaram no teste implementado pela função fornecida.
+  O método filter() cria um novo array com todos os elementos que passaram no teste implementado pela função fornecida.acc[i][i]
 
 
       function isBigEnough(value) {
