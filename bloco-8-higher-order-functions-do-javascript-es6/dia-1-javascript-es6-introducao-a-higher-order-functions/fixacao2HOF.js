@@ -11,7 +11,8 @@ const resultadoLoteria = (meuNumero, callback) => {
   } else {
     return `Tente novamente`;
   }
-return callback()
 };
 
 console.log(resultadoLoteria(1, checarNumero));
+
+

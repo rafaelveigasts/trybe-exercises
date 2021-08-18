@@ -80,9 +80,9 @@ test('testa se multiplyByTwo retorna o resultado da multiplicação', () => {
   expect(multiplyByTwo(4)).toBe(8);
 });
 test('testa se é lançado um erro quando number é indefinido', () => {
-  expect(() => { multiplyByTwo() }).toThrow();
+  expect(() => { multiplyByTwo() }).toThrow(); // testa se o erro é lançado
 });
-test('testa se a mensagem de erro é "number é indefinido"', () => {
+test('testa se a mensagem de erro é "number é indefinido"', () => { // testa se a mensagem do erro.
   expect(() => { multiplyByTwo() }).toThrowError(new Error('number é indefinido'));
 });
 
