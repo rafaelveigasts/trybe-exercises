@@ -1,0 +1,6 @@
+{
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.showExecutionMessage": false,
+  "git.ignoreLimitWarning": true
+}
