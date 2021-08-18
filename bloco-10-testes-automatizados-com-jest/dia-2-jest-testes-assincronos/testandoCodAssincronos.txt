@@ -1,0 +1,11 @@
+Testando códigos assíncronos
+
+É comum encontrarmos em JavaScript linhas de código que possuem comportamento assíncrono. Você já conhece três casos em que comportamentos assíncronos acontecem: callbacks , promises e async/await . Para que possamos testar estes casos, o Jest nos fornece algumas soluções com objetivo de que nossos testes saibam o momento em que a função a ser testada foi concluída, e a informação necessária foi retornada. Isto evita que falsos positivos aconteçam e garante seguraça para a aplicação. Vamos analisar cada caso separadamente abaixo:
+
+Callbacks: para testar callbacks utilizamos a função done . Ela é chamada para sinalizar ao Jest que o teste deverá aguardar o retorno da função callback para que a validação aconteça.
+
+Promises: quando testamos promises devemos retorná-la dentro do teste. Lembre-se de utilizar then quando o retorno for um resolve e catch quando o retorno for um reject .
+
+Async/Await: para testar funções com async e await devemos utilizar a palavra chave async na função passada para teste e await onde esperamos algum retorno assíncrono. Lembre-se que o async/await é apenas uma alternativa de sintaxe mais simples para testar promises .
+
+A seguir você conhecerá de forma detalhada todos os conceitos apresentados acima. Não se preocupe, existem exemplos e exercícios para que você possa colocar a teoria em prática e consolidar o aprendizado! 😉
