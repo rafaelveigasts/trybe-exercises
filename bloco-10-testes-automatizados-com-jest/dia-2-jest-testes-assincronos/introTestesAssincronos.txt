@@ -1,0 +1,15 @@
+O que vamos aprender?
+Você já aprendeu como instalar, configurar e utilizar os principais matchers do Jest , certo?
+Agora você irá aprender como testar códigos assíncronos, como reaproveitar configurações entre testes e como separá-las por escopo.
+
+Você será capaz de:
+Escrever testes para códigos assíncronos com diferentes padrões;
+Reaproveitar configurações para diversos testes através do uso de beforeEach e afterEach ;
+Dividir seus testes e suas respectivas configurações em grupos separados por escopos através do uso de describe ;
+
+Por que isso é importante?
+Códigos assíncronos são comuns em JavaScript , e você certamente vai precisar escrevê-los com frequência, e consequentemente testá-los. Por exemplo, quando você faz uma chamada a uma API para buscar dados, você está fazendo uma requisição assíncrona.
+Repetir código é ruim, pois não só você está escrevendo mais do que precisa, mas também está correndo o risco de cometer um erro e replicá-lo em diferentes pontos, tornando sua correção difícil. Além disso, não é fácil replicar o código em sua exatidão, de forma que você, possivelmente, irá deixar alguma coisa para trás (dando mais margens pra erros). Com as configurações dos testes, isso não é diferente — você não quer ter que replicá-las em cada teste que escrever.
+
+Conteúdos
+Em seguida começa o conteúdo de testes em códigos assíncronos. É necessário atenção especial neste conteúdo, pois a habilidade de criar testes (e código testável) é algo extremamente apreciado no mercado. No entanto, esse não é o único motivo para você focar bastante nesse assunto, a outra razão é que a área de testes é um dos planetas dentro do universo de T.I (existe um cargo apenas para a função de criar testes, conhecida por Quality Assurance ou QA) e essa primeira impressão pode parecer confusa, mas é menos complexo do que parece. Lembre-se que estamos aqui para te apoiar e acreditamos no seu potencial! 💪💯
