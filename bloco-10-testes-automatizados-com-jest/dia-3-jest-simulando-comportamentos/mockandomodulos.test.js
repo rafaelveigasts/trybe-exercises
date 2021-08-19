@@ -34,7 +34,7 @@ test("#somar", () => {
 
   expect(math.somar).toHaveBeenCalled();
   expect(math.somar).toHaveBeenCalledTimes(1);
-  expect(math.somar).toHaveBeenCalledWith(1, 2);
+  expect(math.somar).toHaveBeenCalledWith(1, 2); //https://jestjs.io/pt-BR/docs/expect#tohavebeencalled
   expect(math.somar(1, 2)).toBe(3);
 });
 
