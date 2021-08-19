@@ -37,7 +37,7 @@ describe('Quando o ID não existe', () =>
 {
   it('Retorna a mensagem de erro?', () => 
   {
-    findUserById(3).catch((error)=>(
+    getUserName(3).catch((error)=>(
       expect(error.message).toMatch('User with ${id} not found.')
     ))
   })
