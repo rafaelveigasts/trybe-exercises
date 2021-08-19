@@ -27,7 +27,7 @@ describe('O ID existe?', ()=>
 {
   it('Retorna id 1 = Mark?', ()=> 
   ( // aqui
-    getUserName(1).then((user)=>{ // pq usar getusername e não a função find?
+    getUserName(1).then((user)=>{ 
     expect(user).toEqual("Mark");
     })
   )) // aqui
