@@ -17,6 +17,6 @@ console.log(retornaNumeroAleatorio());
 
 // Dentre as principais formas de se mockar algo em Jest, destacam-se três:
 
-// jest.fn();
-// jest.mock();
-// jest.spyOn();
+jest.fn();
+jest.mock();
+jest.spyOn();
