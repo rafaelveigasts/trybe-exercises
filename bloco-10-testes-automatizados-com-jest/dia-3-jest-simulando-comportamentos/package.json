@@ -1,0 +1,16 @@
+{
+  "name": "dia-3-jest-simulando-comportamentos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mocks.test.js",
+  "scripts": {
+    "test": "jest --watchAll",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
