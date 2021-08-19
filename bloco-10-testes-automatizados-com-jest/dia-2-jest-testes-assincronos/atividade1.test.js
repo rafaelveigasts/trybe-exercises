@@ -25,5 +25,5 @@ Para que o Jest espere a função assíncrona ser finalizada, é necessário uti
 
 Para resolver este problema podemos colocar um try/catch em volta da nossa asserção(expect) linha 13. Dessa forma, caso ela falhe, chamamos a callback done dentro do bloco do catch linha 16.  
 
-o código acima irá gerar um falso-positivo, o motivo é que quando chamamos a callback dentro do catch também precisamos passar como argumento o erro capturado: (função correta) linha 17
+o código acima irá gerar um falso-positivo, o motivo é que quando chamamos a callback dentro do catch também precisamos passar como argumento o erro capturado: linha 17
 */
