@@ -30,14 +30,6 @@ describe('O ID existe?', ()=>
   });
 });
 
-
-// {
-//   getUserName(1, (user) => {
-//     try{
-//       expect(user).toBe('Mark');
-//       done();
-//     } catch (error){
-//       done(error);
-//     }
-//   });
-// }
+/*
+Como existe uma promise a ser testada, é necessário o uso do await , para que o teste espere a finalização da promise e, em seguida, execute o teste remanescente. A variável result recebe o retorno da promise que será utilizado para fazer as asserções.
+*/
