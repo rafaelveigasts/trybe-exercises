@@ -130,6 +130,7 @@ describe('Quando o tipo do animal, não existe', () => {
 
 /* 
 Como o array Animals não possui nenhum com o type Lion , será disparada a reject , que retornará um objeto de erro contendo a chave message com o valor "Não possui esse tipo de animal." . A diferença entre esse teste e os outros é o .catch no lugar do .then . O .catch trabalha o resultado da promise quando ocorre um reject ; já o .then , quando ocorre o resolve .
+
 Embora o código acima pareça estar correto, ele testa somente casos em que a função se comporta adequadamente e lança o erro. O que aconteceria se a implementação da função findAnimalsByType estivesse incorreta? Vamos testar.
 Mude a função para em vez de usar o reject também usar o resolve quando o animal não for encontrado:
 */
