@@ -38,8 +38,8 @@ describe('Testa as funções de math', () =>{
     math.dividir.mockImplementation((a,b) => a/b);
     math.dividir.mockReturnValue(15)
     math.dividir(45,3);
-    expect(math.somar).toHaveBeenCalled();
-    expect(math.somar).toHaveBeenCalledTimes(2)
+    expect(math.dividir).toHaveBeenCalled();
+    expect(math.dividir).toHaveBeenCalledTimes(1)
     expect(math.dividir(45,3)).toBe(15);
 
   })
