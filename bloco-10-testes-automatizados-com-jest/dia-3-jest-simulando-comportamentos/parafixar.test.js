@@ -37,12 +37,23 @@ describe('Testa as funções de math', () =>{
   test('Faça o mock da função dividir e implemente um retorno padrão com o valor 15. Implemente também os seguintes valores para a primeira e segunda chamadas: 2 e 5. Teste a chamada, o retorno, os parâmetros e quantas vezes a função foi chamada.', ()=>{
     math.dividir.mockImplementation((a,b) => a/b);
     math.dividir.mockReturnValue(15)
-    math.dividir(45,3);
-    expect(math.dividir).toHaveBeenCalled();
+    math.dividir(2,3);
+    expect(math.dividir).toHaveBeenCalled(); // aqui testa a chamada
     expect(math.dividir).toHaveBeenCalledTimes(1)
-    expect(math.dividir(45,3)).toBe(15);
+    expect(math.dividir).toHaveBeenCalledWith(2,3); // aqui testa os parâmetros
+    expect(math.dividir(4,2)).toBe(15);
+  })
+  test('Faça o mock da função subtrair de maneira que seja possível restaurar sua implementação original. Defina como retorno padrão o valor 20. Teste o número de chamadas e o retorno. Restaure a implementação original da função e teste sua execução.', ()=>{
+    math.subtrair.mockImplementation((a,b)=> a-b);
+    math.subtrair.mockReturnValue(20);
+    math.subtrair();
+    expect(math.subtrair).toHaveBeenCalled(); // teste se a fn foi chamada
+    expect(math.subtrair).toHaveBeenCalledTimes(3);// retorno
+    math.subtrair.mockRestore();
+
 
   })
+
 })
 //https://jestjs.io/pt-BR/docs/mock-function-api#mockfnmockreturnvaluevalue mockFn.mockReturnValue(value)#
 // Aceita um valor que será retornado sempre que a função de simulação é chamada.
