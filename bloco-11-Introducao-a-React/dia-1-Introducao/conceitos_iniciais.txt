@@ -1,0 +1,13 @@
+Conceitos iniciais
+
+React surgiu através de uma necessidade do Facebook , onde o código era grande e de difícil manutenção. Por isso as pessoas engenheiras do Facebook precisaram pensar em uma solução escalável e eficiente, nessa necessidade nasceu o React . Com o tempo essa tecnologia se tornou open-source, conquistou muitos adeptos e grandes empresas passaram a utilizá-la. Veja esse artigo https://medium.com/@ppternunes/a-hist%C3%B3ria-do-react-ba346c416fe1 para saber mais sobre a história do React! (Link também disponível em Recursos Adicionais)
+
+Como dito anteriormente, o React é, atualmente, uma das principais bibliotecas Javascript para construção de interfaces de usuário. Esta poderosa ferramenta foi criada pelos times de desenvolvimento do Facebook com objetivo de organizar, componentizar e, consequentemente, tornar muito mais eficiente cada parte das aplicações que a utilizam.
+
+A ideia principal é tornar possível dividir a sua aplicação em pequenos blocos, reutilizáveis ou não, que podem fazer a gestão das suas próprias informações através do seu estado, ou seja, reagir a eventos, interações, dados, etc. Toda vez que houver uma mudança em um componente, o React atua especificamente na renderização dele, sem que seja necessário atualizar os outros blocos.
+
+A componentização permite ainda utilizar funções específicas, estilizações, testes e outras tecnologias no exato local em que ela será utilizada, permitindo que qualquer possível refatoração do código se torne simples, bem endereçada e fácil de se encontrar.
+
+O exemplo mais prático de uma aplicação React é a própria documentação dela https://pt-br.reactjs.org/. Além de ser possivel visualizar as principais componentizações, como header, menu lateral, conteúdo principal, barra lateral, submenus e footer, conseguimos acessar menus diferentes sem que a página recarregue. Super eficiente, certo? Existem diversas outras ferramentas, como o próprio Facebook e o Slido, que funcionam da mesma forma dinâmica.
+
+Legal, não é mesmo? Vamos conhecer agora o ecossistema que envolve essa tecnologia, começando pelo JSX .
