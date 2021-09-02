@@ -5,34 +5,34 @@ class App extends React.Component{
 
   constructor(){
     super()
-    console.log('é só uma brincadeira')
     this.handleClickA = this.handleClickA.bind(this)
-    this.handleClickB = this.handleClickB.bind(this)
-    this.handleClickC = this.handleClickC.bind(this)
+    this.state = {
+      numeroDeCliques : 0
+    }
   }
 
   handleClickA(){
-    console.log(this)
-    console.log('pega na minha')
+    this.setState((estadoAnterior, _props)=> ({
+      numeroDeCliques: estadoAnterior.numeroDeCliques+1
+    }))
   }
   
-   handleClickB(){
-    console.log(this)
-    console.log('balança mas não para')
-  }
-  
-  handleClickC(){
-    console.log(this)
-    console.log('kkkkkkkkkkkkk')
-  }
+   // Para essa função, não precisamos utilizar o bind porque ela é utilizada
+    // apenas dentro do contexto do componente App
+    getButtonColor(num) {
+      // Essa função contém um ternário que realiza a lógica para mudarmos
+      // a cor do botão para verde quando for um número par
+      return num % 2 === 0 ? 'green' : 'white';
+    }
 
   render(){
-    console.log(this)
+    const { numeroDeCliques } = this.state;
   return (
     <div>
-      <button onClick={this.handleClickA}>Btn A</button>
-      <button onClick={this.handleClickB}>Btn B</button>
-      <button onClick={this.handleClickC}>Btn C</button>
+      <button 
+      onClick={this.handleClickA}
+      style={{ backgroundColor: this.getButtonColor(numeroDeCliques) }}
+      >{this.state.numeroDeCliques}</button>
     </div>
     );
   }
@@ -61,4 +61,10 @@ fazemos isso para a função enxergar o this
 se quiser usar o this.props tem que fazer isso
 para acessar o estado a função tem que acessar o this também
 
+uma atualização de estado acontece de forma assíncrona
+quem decide isso é o react
+
+Para renderizarmos as cores, precisamos acrescentar a função
+que contém a nossa lógica ao "inline style", passando o estado
+correspondente como parâmetro
 */
