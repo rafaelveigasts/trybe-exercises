@@ -6,29 +6,74 @@ class Form extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      textarea: '',
-    }
+      nome: "",
+      idade: 0,
+      email: "",
+      checkbox: false,
+    };
   }
 
-  handleChange(event){
+  handleChange({ target }) {
+    // descontruimos o event para acesso ao name e target
+    const { name } = target;
+
+    // para checkbox abaixo:
+    const value = target.type === "checkbox" ? target.checked : target.value;
     this.setState({
-      textarea: event.target.value,
-    })
+      [name]: value, // aqui o nome da variável será o nome da chave do objeto
+    });
   }
   render() {
     return (
       <div>
         <h1> Exercicio de fixação formulário</h1>
-        <form>
-          <label> Seu nome:
-            <textarea 
-            name="Estado Favorito" 
-            value={ this.state.textarea}
-            onChange={this.handleChange}></textarea>
-          </label>
-          <br/>
-          <select></select>
-        </form>
+        <fieldset>
+          <form>
+            <label>
+              {" "}
+              Seu nome:
+              <textarea
+                name="nome" // esse name que vai pro this.state
+                type="text"
+                value={this.state.nome}
+                onChange={this.handleChange}
+              ></textarea>
+            </label>
+            <br />
+            <label>
+              {" "}
+              Sua idade:
+              <textarea
+                name="idade"
+                type="number"
+                value={this.state.idade}
+                onChange={this.handleChange}
+              ></textarea>
+            </label>
+            <br />
+            <label>
+              {" "}
+              Seu email:
+              <textarea
+                name="email"
+                type="text"
+                value={this.state.email}
+                onChange={this.handleChange}
+              ></textarea>
+            </label>
+            <br />
+            <label>
+              {" "}
+              Você concorda com os termos e serviços?
+              <input
+                name="checkbox"
+                type="checkbox"
+                value={this.state.checkbox}
+                onChange={this.handleChange}
+              ></input>
+            </label>
+          </form>
+        </fieldset>
       </div>
     );
   }
