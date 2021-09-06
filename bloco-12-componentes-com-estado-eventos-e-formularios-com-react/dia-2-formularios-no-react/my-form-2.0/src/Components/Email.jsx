@@ -1,20 +1,20 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-class Username extends React.Component{
+class Email extends React.Component{
   render(){
 
     const { value, handleChange } = this.props
 
     return(
       <fieldset>
-        <label>Nome: 
+        <label>Email: 
           <textarea 
-            name="username" cols="60" rows="2" maxLength="40" 
+            name="email" cols="60" rows="2" maxLength="50" 
             style={
             {resize:'none',
             overflow:'hidden',}}
-            type='text'
+            type='email'
             value={value}
             onChange={handleChange}
             required
@@ -26,9 +26,9 @@ class Username extends React.Component{
   }
 }
 
-Username.propTypes={
+Email.propTypes={
   value: PropTypes.any,
   handleChange: PropTypes.func,
 }
 
-export default Username;
+export default Email;
