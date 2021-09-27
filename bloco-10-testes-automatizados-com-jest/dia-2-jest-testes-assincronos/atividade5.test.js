@@ -1,7 +1,7 @@
 // 5 - Para este exercício, tente adivinhar a saída dos console.log dos testes abaixo sem executá-los, e veja se compreendeu bem o funcionamento do beforeEach e do afterEach .
 
 beforeEach(() => console.log('1 - beforeEach')); // antes do teste 1 e 2 pois executa antes de CADA TESTE
-afterEach(() => console.log('1 - afterEach')); // depois do teste 1 e 2 pois executa antes de CADA TESTE
+afterEach(() => console.log('1 - afterEach')); // depois do teste 1 
 
 test('', () => console.log('1 - test'));
 

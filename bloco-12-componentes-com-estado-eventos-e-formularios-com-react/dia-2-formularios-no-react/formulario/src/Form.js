@@ -1,4 +1,8 @@
 import React from "react";
+import Checkbox from "./Checkbox";
+import SeuEmail from "./SeuEmail";
+import SeuNome from "./Seunome";
+import SuaIdade from "./SuaIdade";
 
 class Form extends React.Component {
   constructor() {
@@ -29,49 +33,10 @@ class Form extends React.Component {
         <h1> Exercicio de fixação formulário</h1>
         <fieldset>
           <form>
-            <label>
-              {" "}
-              Seu nome:
-              <textarea
-                name="nome" // esse name que vai pro this.state
-                type="text"
-                value={this.state.nome}
-                onChange={this.handleChange}
-              ></textarea>
-            </label>
-            <br />
-            <label>
-              {" "}
-              Sua idade:
-              <textarea
-                name="idade"
-                type="number"
-                value={this.state.idade}
-                onChange={this.handleChange}
-              ></textarea>
-            </label>
-            <br />
-            <label>
-              {" "}
-              Seu email:
-              <textarea
-                name="email"
-                type="text"
-                value={this.state.email}
-                onChange={this.handleChange}
-              ></textarea>
-            </label>
-            <br />
-            <label>
-              {" "}
-              Você concorda com os termos e serviços?
-              <input
-                name="checkbox"
-                type="checkbox"
-                value={this.state.checkbox}
-                onChange={this.handleChange}
-              ></input>
-            </label>
+            <SeuNome value={this.state.nome} handleChange={this.handleChange} />
+            <SuaIdade value={this.state.idade} handleChange={this.handleChange} />
+            <SeuEmail value={this.state.email} handleChange={this.handleChange}/>
+            <Checkbox value={this.state.checkbox} handleChange={this.handleChange}/>
           </form>
         </fieldset>
       </div>
