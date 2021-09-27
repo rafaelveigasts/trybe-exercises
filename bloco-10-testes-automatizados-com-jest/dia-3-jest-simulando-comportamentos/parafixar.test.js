@@ -57,4 +57,5 @@ describe('Testa as funções de math', () =>{
 })
 //https://jestjs.io/pt-BR/docs/mock-function-api#mockfnmockreturnvaluevalue mockFn.mockReturnValue(value)#
 // Aceita um valor que será retornado sempre que a função de simulação é chamada.
+// https://jestjs.io/pt-BR/docs/mock-function-api#mockfnmockrestore
 
