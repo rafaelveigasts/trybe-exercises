@@ -134,3 +134,57 @@ it('deve renderizar o componente Sobre', () => {
 Com o fireEvent (que deve ser importado da @testing-library/react ), podemos interagir com os elementos da tela (nesse caso, vamos clicar no link Sobre ). Depois disso, utilizaremos o history.location.pathname para verificar se estamos na página correta e, por último, verificamos se o texto que aparece quando clicamos nesse link no navegador foi encontrado.
 
 Agora que temos mais um caso de uso, é interessante colocar o describe, ele ajudará bastante na hora de separar os testes e numa eventual falha, saberemos qual teste falhou. Vamos colocá-lo abaixo:
+
+// import React from 'react';
+// import { fireEvent } from '@testing-library/react';
+// import renderWithRouter from './renderWithRouter';
+// import App from './App';
+
+describe('teste da aplicação toda', () => {
+// it('deve renderizar o componente App', () => {
+//   const { getByText } = renderWithRouter(<App />);
+//   const home = getByText(/Você está na página Início/);
+//   expect(home).toBeInTheDocument();
+// });
+
+// it('deve renderizar o componente Sobre', () => {
+//   const { getByText, history } = renderWithRouter(<App />);
+//   fireEvent.click(getByText(/Sobre/i));
+//   const pathname = history.location.pathname;
+//   expect(pathname).toBe('/about');
+//   const aboutAll = getByText(/Você está na página Sobre/);
+//   expect(aboutAll).toBeInTheDocument();
+// });
+});
+
+
+Encerrando esse teste de aplicação total, vamos testar a página que deveria aparecer ao digitar na barra de endereços uma página que não existe:
+
+// import React from 'react';
+// import { fireEvent } from '@testing-library/react';
+// import renderWithRouter from './renderWithRouter';
+// import App from './App';
+
+// describe('teste da aplicação toda', () => {
+//   it('deve renderizar o componente App', () => {
+//     const { getByText } = renderWithRouter(<App />);
+//     const home = getByText(/Você está na página Início/);
+//     expect(home).toBeInTheDocument();
+//   });
+
+//   it('deve renderizar o componente Sobre', () => {
+//     const { getByText, history } = renderWithRouter(<App />);
+//     fireEvent.click(getByText(/Sobre/i));
+//     const pathname = history.location.pathname;
+//     expect(pathname).toBe('/about');
+//     const aboutAll = getByText(/Você está na página Sobre/);
+//     expect(aboutAll).toBeInTheDocument();
+//   });
+
+  it('deve testar um caminho não existente e a renderização do Not Found', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/pagina/que-nao-existe/');
+    const noMatch = getByText(/Página não encontrada/i);
+    expect(noMatch).toBeInTheDocument();
+  });
+// });
