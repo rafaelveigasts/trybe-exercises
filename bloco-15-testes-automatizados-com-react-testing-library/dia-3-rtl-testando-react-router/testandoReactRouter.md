@@ -188,3 +188,15 @@ Encerrando esse teste de aplicação total, vamos testar a página que deveria a
     expect(noMatch).toBeInTheDocument();
   });
 // });
+
+A diferença nesse caso é que utilizamos a função history.push() e passamos como argumento algum link que não existe dentro de nossa aplicação. Depois disso, testamos se o texto que aparece no navegador, ao digitar um caminho para uma página que não existe, é encontrado.
+
+Por último, vamos mostrar como testar um componente separadamente:
+
+Você verá que, ao copiar esse test, o Jest retornará um erro, dizendo que o componente About não foi definido. Isso é porque ele não foi importado nesse arquivo! Altere a linha de import do App.js para:
+
+import App, { About } from './App';
+
+Talvez você esteja se perguntando porque o App não foi importado com {} e o About foi. Isso aconteceu porque só pode haver um export default por arquivo (que faz o componente ser importável sem as chaves {} ) e o App tomou esse espaço, então os outros componentes exportados ficam em "segundo plano". Por isso, para serem importados corretamente, necessitam do {} .
+
+Para ver a diferença entre a renderização da aplicação inteira e de apenas um componente, cause um erro nos testes, alterando o que é esperado no getByText dos testes. Você verá que, ao importar apenas o componente, todo o resto ao redor dele não é renderizado. No nosso caso de exemplo, os links do topo não são renderizados.
