@@ -47,3 +47,17 @@ Outro ponto de atenção é que, quando utilizamos o export default e o export ,
 Ao terminar de instalar, vamos nos deparar com um problema! A nossa página dará o seguinte erro:
 
 You should not use <Link> outside a <Router>
+
+Esse erro acontece porque o BrowserRouter deve encapsular todos os itens chamados pelo react-router-dom e, no nosso caso, existem dois <Link> no App.js , o que nos leva a esse erro. Vamos resolver isso colocando a tag <BrowserRouter> no arquivo index.js , deixando ele da seguinte forma:
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
