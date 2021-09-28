@@ -94,3 +94,43 @@ Para fazermos isso, devemos colocá-lo no index.js . Isto é necessário porque 
 Uma outra característica dessa função é que ela retorna tanto o componente que passamos como parâmetro, já encapsulado no router, quanto o histórico que geramos em si, o que também serve para nos levar a outras páginas com facilidade.
 
 Agora que vimos o App que vamos testar e entendemos a função que vamos utilizar, iremos escrever os testes, dentro do arquivo src/App.test.js :
+
+import React from 'react';
+import renderWithRouter from './renderWithRouter';
+import App from './App';
+
+it('deve renderizar o componente App', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const home = getByText(/Você está na página Início/);
+  expect(home).toBeInTheDocument();
+});
+
+Aqui, fizemos os imports necessários: o próprio react , a helper e o componente que iremos testar.
+
+Importamos o teste em si, que chama a helper passando o componente a ser renderizado. Nesse primeiro caso, mostraremos como renderizar a aplicação toda, fazendo um teste geral, depois vamos ver como renderizar um componente específico.
+
+Continuando os testes, vamos clicar no link About em nossa aplicação e verificar se estamos na página correta.
+
+// import React from 'react';
+import { fireEvent } from '@testing-library/react';
+// import renderWithRouter from './renderWithRouter';
+// import App from './App';
+
+// it('deve renderizar o componente App', () => {
+//   const { getByText } = renderWithRouter(<App />);
+//   const home = getByText(/Você está na página Início/);
+//   expect(home).toBeInTheDocument();
+// });
+
+it('deve renderizar o componente Sobre', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText(/Sobre/i));
+  const pathname = history.location.pathname;
+  expect(pathname).toBe('/about');
+  const aboutAll = getByText(/Você está na página Sobre/);
+  expect(aboutAll).toBeInTheDocument();
+});
+
+Com o fireEvent (que deve ser importado da @testing-library/react ), podemos interagir com os elementos da tela (nesse caso, vamos clicar no link Sobre ). Depois disso, utilizaremos o history.location.pathname para verificar se estamos na página correta e, por último, verificamos se o texto que aparece quando clicamos nesse link no navegador foi encontrado.
+
+Agora que temos mais um caso de uso, é interessante colocar o describe, ele ajudará bastante na hora de separar os testes e numa eventual falha, saberemos qual teste falhou. Vamos colocá-lo abaixo:
