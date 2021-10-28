@@ -38,7 +38,8 @@ class App extends Component {
 
     return (
       <div>
-        <div>Counter: {counter}</div>
+        <div>Counter: {counter}</div>Visando um app do zero, como podemos mensurar a escabilidade da aplicação para definirmos a utilização de hooks ou redux se aparentemente hooks resolve tudo mais fácil?
+
         <button
           type="button"
           onClick={() =>
