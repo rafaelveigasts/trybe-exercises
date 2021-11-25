@@ -62,6 +62,6 @@ R: docker container rm id
 
 13) (Bônus) Crie e rode de modo interativo em modo 'Cleanup' , a imagem andrius/ascii-patrol ;
 
-R: docker container run --rm andrius/æscii-patrol
+R: docker container run -it --rm andrius/æscii-patrol
 
 14) (Bônus) Encerre o container utilizando os botões [ ctrl ] + [ c ].
