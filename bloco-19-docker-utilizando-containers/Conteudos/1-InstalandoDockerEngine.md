@@ -1,4 +1,4 @@
-Fazendo a instalação do Docker Engine
+## Fazendo a instalação do Docker Engine ##
 
 O primeiro passo para utilizar o Docker é realizar a instalação de seu motor , o que nos dará acesso a sua interface de linha de comando (CLI) *.
 
@@ -9,7 +9,7 @@ Vamos fazê-la através do apt-get considerando uma máquina com Ubuntu LTS http
 
 Caso ocorra algum problema ou comportamento diferente em algum dos passos, por favor consulte o guia oficial . https://docs.docker.com/engine/install/ubuntu/
 
-Desinstalando versões anteriores
+## Desinstalando versões anteriores ##
 
 Caso você já possua alguma versão instalada na sua máquina e queira refazer o processo de instalação desde o princípio por qualquer motivo, seja pra atualizar ou para corrigir algum problema, primeiro você deve remover os pacotes da versão que está na sua máquina. Para isso, utilize o seguinte comando no terminal:
 
@@ -20,7 +20,7 @@ Caso nenhum dos pacotes esteja instalado, esse comando retornará um erro E: Imp
 Detalhe, o Docker preserva informações sobre imagens, containers , volumes e redes na pasta /var/lib/docker/ . Nesse processo, esses arquivos não são apagados.
 Para remoção completa do motor do Docker no seu sistema, consulte a seção Desinstalando o Docker Engine ao final desse tópico
 
-Atualizando os índices dos pacotes do apt
+## Atualizando os índices dos pacotes do apt ##
 
 Na documentação https://docs.docker.com/engine/install/ubuntu/ de instalação do Docker no Ubuntu, é comentado que existem três formas de instalar o Docker : via repositórios, via pacotes .deb e via scripts específicos.
 No nosso contexto, faremos a instalação via configuração de repositórios, pois isso facilita posteriormente a atualização desses mesmos pacotes.
@@ -32,7 +32,7 @@ Opcionalmente , atualize seus pacotes antes de fazer uma nova instalação:
 
 sudo apt-get upgrade
 
-Habilitando HTTPS para o apt
+## Habilitando HTTPS para o apt ##
 
 Instale os seguintes pacotes, eles são recomendados pela documentação oficial para habilitar a utilização dos repositórios via HTTPS pelo apt-get , precisaremos disso para prosseguir a instalação:
 
@@ -43,7 +43,7 @@ sudo apt-get install \
     gnupg \
     lsb-release
 
-Adicionando uma chave de acesso ao repositório remoto
+## Adicionando uma chave de acesso ao repositório remoto ##
 
 Adicione a chave GPG* oficial do Docker:
 
@@ -53,7 +53,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 
 Se tudo correr bem, você não deve receber nenhum retorno visual.
 
-Adicionando o repositório
+## Adicionando o repositório ##
 Para adicionar o repositório oficial, execute o seguinte comando*:
 
 echo \
@@ -64,7 +64,7 @@ Perceba que adicionamos o repositório stable (em $(lsb_release -cs) stable ), i
 * Em distribuições baseadas no Ubuntu (como o Linux Mint ), talvez você precise alterar o comando $(lsb_release -cs) para uma versão do ubuntu que seja compatível com aquele sistema. Exemplo: Caso você utilize o Linux Mint Tessa , você deve alterar o valor para bionic .
 Atenção: O Docker não garante o funcionamento em sistemas fora do requisito de sistema operacional . https://docs.docker.com/engine/install/ubuntu/#os-requirements
 
-Instalando Docker Engine
+## Instalando Docker Engine ##
 Primeiro, vamos garantir que os índices dos pacotes do apt estão atualizados, já que adicionamos um novo repositório:
 
 sudo apt-get update
@@ -76,7 +76,7 @@ Para isso, execute no terminal:
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 
-Adicionando um usuário ao grupo de usuários docker
+## Adicionando um usuário ao grupo de usuários docker ##
 
 ⚠️ Atenção ⚠️: Esse procedimento faz com que seu usuário tenha os mesmos privilégios do usuário root (o superusuário no linux) na execução dos comandos Docker *, então use-o com moderação, apenas em ambiente de desenvolvimento.
 * Por padrão, o Docker faz a vinculação (bind) entre o sistema operacional hospedeiro e o cliente via socket Unix (um tipo de conexão que possui mais performance) e não via porta TCP (que possui menos performance) .
@@ -100,7 +100,7 @@ newgrp docker
 
 
 
-Iniciando o Daemon do Docker
+## Iniciando o Daemon do Docker ##
 Para consultar o status do daemon do Docker, execute:
 
 sudo systemctl status docker
@@ -125,7 +125,7 @@ Habilite o daemon do Docker para iniciar durante o boot :
 
 sudo systemctl enable docker
 
-Validando a instalação
+## Validando a instalação ##
 Para validar se tudo ocorreu como deveria na instalação, vamos executar um hello world * do Docker:
 
 docker run hello-world
