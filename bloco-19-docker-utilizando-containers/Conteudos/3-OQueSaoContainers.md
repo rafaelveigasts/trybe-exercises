@@ -32,7 +32,7 @@ O Docker Hub https://hub.docker.com/ é o principal repositório de imagens Dock
 
 Para explicar melhor a dinâmica entre containers e imagens, falaremos um pouco de como funciona o fluxo padrão do Docker :
 
-<img src="dockerflow.png" />
+<img src="docker-flow.png" />
 
 
 
