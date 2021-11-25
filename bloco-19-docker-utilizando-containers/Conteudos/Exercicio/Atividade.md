@@ -44,7 +44,7 @@ R: docker container ls -a
 docker container start id
 
 9) Retome o container que foi criado anteriormente nesse exercício ;
-R: á que o container foi inicializado anteriormente de modo interativo, pudemos retomar seu terminal. 
+R: Já que o container foi inicializado anteriormente de modo interativo, pudemos retomar seu terminal. 
   docker attach id
 
 
@@ -62,6 +62,6 @@ R: docker container rm id
 
 13) (Bônus) Crie e rode de modo interativo em modo 'Cleanup' , a imagem andrius/ascii-patrol ;
 
-R: docker container run --rm andrius/æscii-patrol
+R: docker run --rm andrius/ascii-patrol
 
 14) (Bônus) Encerre o container utilizando os botões [ ctrl ] + [ c ].
