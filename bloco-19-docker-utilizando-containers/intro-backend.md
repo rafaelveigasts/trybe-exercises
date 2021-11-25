@@ -16,3 +16,19 @@ Por último, com esses conceitos, vamos entrar de cabeça no mundo dos bancos de
 
 Bora começar com tudo? 🏁
 Vamos começar!
+
+O que vamos aprender?
+
+Hoje você vai aprender sobre uma ferramenta incrível: o Docker 🐋 !!! Vai entender como e para o quê utilizamos essa ferramenta, como fazer sua instalação , o conceito de imagens e containers , além de rodar seu primeiro container ** Docker!
+
+Você será capaz de:
+
+Entender o conceito de empacotamento de aplicações, assim como o conceito de escalonamento;
+
+Entender o que é o Docker e qual problema ele se dispõe a resolver;
+
+Entender o que é um processo Docker / container ;
+Entender como instalar a ferramenta e executar um container ;
+
+Entender quais são os principais comandos para utilização do Docker na interface de linha de comando (CLI);
+Rodar imagens do Docker Hub (repositório oficial de imagens do Docker).
