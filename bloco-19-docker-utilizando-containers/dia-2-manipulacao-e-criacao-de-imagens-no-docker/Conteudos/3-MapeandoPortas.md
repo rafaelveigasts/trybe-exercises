@@ -79,3 +79,4 @@ Nesse exemplo, mapeamos a porta 54321 do nosso computador à porta 80 do contain
 
   Em uma aplicação de React por outro lado, a imagem deveria expor a porta 3000 como padrão, então é importante saber qual porta sua aplicação vai usar antes de rodar o parâmetro -p .
 
+teste   
