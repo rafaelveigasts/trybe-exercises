@@ -54,3 +54,5 @@ Para resolver isso, existe a possibilidade de nomear seu container. Dessa forma,
 
 Para dar um nome ao container, basta utilizar a flag --name :
 
+  docker run -d -P --name site-trybe httpd:2.4  docker run -d -P --name site-trybe httpd:2.4
+
