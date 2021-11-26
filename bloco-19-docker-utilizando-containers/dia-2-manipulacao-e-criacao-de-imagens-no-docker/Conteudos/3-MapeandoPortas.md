@@ -54,5 +54,28 @@ Para resolver isso, existe a possibilidade de nomear seu container. Dessa forma,
 
 Para dar um nome ao container, basta utilizar a flag --name :
 
-  docker run -d -P --name site-trybe httpd:2.4  docker run -d -P --name site-trybe httpd:2.4
+  docker run -d -P --name site-trybe httpd:2.4
+
+
+Agora, o nome do container é site-trybe e para interromper seu funcionamento basta rodar o seguinte comando:
+
+  docker stop site-trybe
+
+Para colocar o container ativo basta rodar o seguinte comando:
+
+  docker start site-trybe
+
+
+Uma outra possibilidade importante ao criar um container é a possibilidade de linkar uma porta interna com uma porta do nosso computador.
+
+A atribuição aleatória das portas é feita pela flag -P e, para especificar a porta, utilizamos a flag -p . Desse modo, devemos seguir a sintaxe -p <PORTA-SO-HOSPEDEIRO>:<PORTA-SO-CONVIDADO> .
+
+  docker run -d -p 54321:80 httpd:2.4
+
+Nesse exemplo, mapeamos a porta 54321 do nosso computador à porta 80 do container. Agora podemos acessar o site estático mantido pelo servidor Apache acessando o endereço http://localhost:54321 no navegador.
+
+
+  Um detalhe importante é que a porta do container vai variar dependendo da aplicação que você está rodando . No caso do servidor http , a porta padrão de acesso para páginas web é a 80 .
+
+  Em uma aplicação de React por outro lado, a imagem deveria expor a porta 3000 como padrão, então é importante saber qual porta sua aplicação vai usar antes de rodar o parâmetro -p .
 
