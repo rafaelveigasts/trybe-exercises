@@ -1,5 +1,5 @@
 O que vamos aprender?
-Agora que já passamos pelo módulo de front-end e você desenvolveu vários projetos incríveis, vamos entrar de cabeça no desenvolvimento back-end para aprofundar em Docker , MySQL , NodeJS , TypeScript e MongoDB !
+Agora que já passamos pelo módulo de front-end e você desenvolveu vários projetos incríveis, vamos entrar de cabeça no desenvolvimento back-end para aprofundar em Docker , MySQL , NodeJS , TypeScript e MongoDB !!
 
 Desenvolvimento Back-end
 Primeiro você aprenderá a configurar e conteinerizar suas aplicações , utilizando uma ferramenta chamada Docker 🐋;
