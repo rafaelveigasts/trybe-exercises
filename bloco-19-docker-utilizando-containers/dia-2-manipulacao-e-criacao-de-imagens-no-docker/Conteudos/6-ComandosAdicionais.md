@@ -44,3 +44,32 @@ Ao rodar nossos containers, também podemos passar variáveis, basta utilizar a 
    --env myName=johnDoe \
    <IMAGE NAME>
 
+Essas sobrescreverão as definidas no Dockerfile caso possuam o mesmo nome.
+
+
+*USER*
+
+Com o comando USER , podemos definir qual o usuário que irá iniciar nosso app no container .
+
+Caso não seja definido nenhum usuário, o Docker irá utilizar o usuário root como padrão, o que não é recomendado por motivos de segurança.
+
+Abaixo temos um exemplo da criação de um usuário com apenas as permissões necessárias em uma imagem ubuntu :
+
+  FROM ubuntu:8
+  RUN mkdir /app
+  RUN groupadd -r node-user && useradd -r -s /bin/false -g node-user node-user
+  WORKDIR /app
+  COPY . /app
+  RUN chown -R node-user:node-user /app
+  USER node-user
+  CMD node index.js
+
+Normalmente as imagens já possuem um usuário criado para a execução de nossos apps .
+
+Por exemplo nas imagens node , já possuem um usuário genérico chamado "node" com os privilégios necessários, e para usá-lo, basta adicionarmos o usuário ao diretório de nosso projeto e utilizarmos a tag user :
+
+  FROM node:10-alpine
+  COPY . /app
+  RUN chown -R node:node /app
+  USER node
+  CMD [“node”, “index.js”]
