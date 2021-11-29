@@ -34,3 +34,12 @@ Agora, o container2 poderá se conectar no container1 . Para fazermos um teste s
 * É bom ressaltar que a opção --link não é necessária para permitir que os serviços se comuniquem, pois, por padrão, qualquer serviço pode alcançar qualquer outro serviço a partir de seu IP . Os links apenas permitem definir apelidos extras pelos quais um serviço pode ser acessado de outro serviço.
 
 ⚠️ Dica: Perceba que nos exemplos utilizamos uma imagem chamada busybox , ela é uma suite que possui vários utilitários Unix, dessa forma é muito útil quando queremos explorar comandos como o ping para testes.
+
+## Host ##
+
+Ao associarmos um container a essa rede, ela passa a compartilhar toda stack de rede do host , ou seja, da máquina que roda o ambiente Docker . O uso desta rede é recomendada apenas para alguns serviços específicos, normalmente de infra, em que o container precisa desse compartilhamento. Caso contrário, a recomendação é evitá-la.
+
+
+## None ##
+
+Essa é uma rede que não possui nenhum driver associado. Dessa maneira, ao atribuir um container a ela, o mesmo ficará isolado. Ela é útil quando temos containers que utilizam arquivos para a execução de comandos ou para se comunicar, por exemplo, um container de backup ou que rode apenas um script localmente.
