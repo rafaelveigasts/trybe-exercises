@@ -60,3 +60,38 @@ services:
     image: mjgargani/compose-example:database-trybe1.0
 
 Nosso arquivo irá funcionar como se estivéssemos executando três docker container run , um para cada serviço. Sendo assim, precisamos definir os demais parâmetros para os nossos containers .
+
+## Restart ##
+
+
+No Docker , existem as políticas de reinicialização, que servem para gerenciar se seus containers reiniciarão automaticamente quando o docker for reiniciado ou quando ocorrer algum erro, por exemplo.
+
+Este comando pode assumir quatro valores:
+
+no - Este é o valor padrão assumido pelo Docker e define que o container não irá restartar automaticamente;
+on-failure - Define que o container será reiniciado caso ocorra alguma falha, apontado pelo exit code diferente de zero;
+aways - Especifica que sempre que o serviço parar, seja por um falha ou porque ele finalizou sua execução, ele irá ser reiniciado; *
+unless-stopped - Define que o container sempre seja reiniciado, a menos que a menos que o Docker em si seja parado (manualmente ou não). No caso de ser interrompido, ele não reinicia nem depois que o daemon do Docker * seja reiniciado.
+
+* Caso o container seja interrompido manualmente, ele só será reiniciado depois que o daemon do Docker for reiniciado ou que o próprio container seja reiniciado manualmente. Esse é um mecanismo pra evitar loops .
+
+O daemon do Docker é um processo que contínuo e que roda em segundo plano, que gerencia os containers Docker em um host .
+
+É importante utilizarmos o parâmetro, principalmente quando utilizarmos o Docker Compose em ambiente de produção, conforme é recomendado pelas especificações da própria documentação.
+
+Com a adição dessa configuração, nosso exemplo ficará assim:
+
+version: '3'
+services:
+  frontend:
+    image: mjgargani/compose-example:frontend-trybe1.0
+    restart: always
+  backend:
+    image: mjgargani/compose-example:backend-trybe1.0
+    restart: always
+  database:
+    image: mjgargani/compose-example:database-trybe1.0
+    restart: always
+
+
+    
