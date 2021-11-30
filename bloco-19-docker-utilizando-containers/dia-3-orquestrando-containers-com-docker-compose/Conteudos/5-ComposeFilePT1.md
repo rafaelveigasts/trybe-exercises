@@ -118,3 +118,40 @@ services:
     restart: always
 
 Lembre-se sempre: o primeiro parâmetro é a porta do host e o segundo a porta exposta no container .
+
+## Environment ##
+
+Outro parâmetro importante é o environment . Com ele, conseguimos configurar as variáveis de ambiente de nossos containers .
+
+Imagine que em nosso exemplo, precisamos passar para nosso back-end uma parte da URL onde o banco de dados irá rodar, em uma variável chamada DB_HOST . Nosso exemplo ficaria assim:
+
+version: '3'
+services:
+  frontend:
+    image: mjgargani/compose-example:frontend-trybe1.0
+    restart: always
+    ports:
+      - 3000:3000
+  backend:
+    image: mjgargani/compose-example:backend-trybe1.0
+    restart: always
+    ports:
+      - 3001:3001
+    environment:
+      - DB_HOST=database
+  database:
+    image: mjgargani/compose-example:database-trybe1.0
+    restart: always
+
+Perceba que estamos passando a variável "DB HOST" que está em nosso _host , para a variável "DB HOST" do _container , onde o back-end está esperando pela variável. Lembre-se que mesmo tendo a env configurada em seu ambiente, ela só será passada ao container se especificada aqui, da mesma maneira como fazemos com o parâmetro -e ou --env no comando run .
+
+Simples não?
+
+Aqui também é possível utilizar variáveis de ambiente. Por exemplo, imagine que temos uma variável API_SECRET com uma secret . Por se tratar de um dado sensível, não podemos colocá-lo em um arquivo a ser versionado como parte de nossa aplicação, porém ainda temos que especificar ao Compose qual variável irá ser passada para qual container .
+
+* No contexto de Docker, secret é um dado que não deve ser transmitido por uma rede ou armazenado sem criptografia em um Dockerfile ou no código fonte de sua aplicação, como uma senha ou uma chave privada SSH, por exemplo.
+
+Vamos ver como ficaria esse exemplo:
+
+Você pode dar uma olhada mais detalhada em variáveis de ambiente usando docker-compose nesse link https://docs.docker.com/compose/environment-variables/
+
