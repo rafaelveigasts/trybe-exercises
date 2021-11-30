@@ -43,3 +43,37 @@ Ao associarmos um container a essa rede, ela passa a compartilhar toda stack de 
 ## None ##
 
 Essa é uma rede que não possui nenhum driver associado. Dessa maneira, ao atribuir um container a ela, o mesmo ficará isolado. Ela é útil quando temos containers que utilizam arquivos para a execução de comandos ou para se comunicar, por exemplo, um container de backup ou que rode apenas um script localmente.
+
+
+## Criando nossa rede ##
+
+A forma mais recomendada de comunicarmos nossos containers é criando nossa própria rede. Através dela conseguimos, por exemplo, referenciar um container a partir de outro, utilizando seu nome. Vamos ver um vídeo que exemplifica isso:
+
+
+Ou seja, conseguimos criar nossas próprias redes utilizando:
+
+
+  docker network create -d bridge minha-rede
+
+Para vincularmos nosso container à rede criada durante sua execução, basta utilizarmos o parâmetro --network :
+
+docker container run \
+    -itd \
+    --network minha-rede \
+     --name meu-container \
+     busybox
+
+
+Agora, note a rede minha-rede e o driver bridge :
+  docker network ls
+
+
+Para conectarmos um container já criado, basta utilizarmos o parâmetro connect :
+  docker network connect minha-rede meu-container
+
+E para desconectá-lo, basta utilizar o parâmetro disconnect :
+  docker network disconnect minha-rede meu-container
+
+Importante lembrarmos que drivers e networks são objetos diferentes. Uma rede é associada a um ou nenhum driver , as redes padrões que mencionamos acima, possuem o mesmo nome de seu driver, porém não confunda. Por exemplo, a rede bridge possui o driver bridge e, quando ao criarmos nossa própria rede, também utilizamos esse driver, porém não há relação com a rede padrão de nome bridge , no caso não estaremos utilizando ela.
+
+Da mesma forma acontece com a rede host , já a rede none não possui um driver e, por isso, ao associarmos um container a ela, ele fica isolado.
