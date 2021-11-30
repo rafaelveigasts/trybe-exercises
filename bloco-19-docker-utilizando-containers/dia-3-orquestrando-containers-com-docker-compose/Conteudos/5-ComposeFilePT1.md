@@ -94,4 +94,27 @@ services:
     restart: always
 
 
-    
+## Ports ##
+
+
+Uma configuração importante é a porta. Vimos nos conteúdos anteriores como expor e fazer bind delas em nossos containers . No docker-compose.yaml temos o parâmetro ports que se comporta da mesma maneira que o -p do docker container run .
+
+No nosso exemplo, queremos utilizar a porta 3000 para nosso front-end e a porta 3001 para nosso back-end, ambas fazendo bind para as respectivas portas no host . Dessa forma, nosso arquivo ficará assim:
+
+version: '3'
+services:
+  frontend:
+    image: mjgargani/compose-example:frontend-trybe1.0
+    restart: always
+    ports:
+      - 3000:3000
+  backend:
+    image: mjgargani/compose-example:backend-trybe1.0
+    restart: always
+    ports:
+      - 3001:3001
+  database:
+    image: mjgargani/compose-example:database-trybe1.0
+    restart: always
+
+Lembre-se sempre: o primeiro parâmetro é a porta do host e o segundo a porta exposta no container .
