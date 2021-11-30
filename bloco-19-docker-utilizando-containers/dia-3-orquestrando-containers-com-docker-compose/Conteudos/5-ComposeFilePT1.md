@@ -155,3 +155,33 @@ Vamos ver como ficaria esse exemplo:
 
 Você pode dar uma olhada mais detalhada em variáveis de ambiente usando docker-compose nesse link https://docs.docker.com/compose/environment-variables/
 
+
+## Depends on ##
+
+Outro parâmetro importante para garantir a ordem de inicialização e encerramento de services é o depends_on . Com ele, conseguimos estabelecer dependências entre os serviços.
+
+Para entendermos melhor os comportamentos dessa flag , vamos voltar para a aplicação que estamos construindo como exemplo:
+
+version: "3.8"
+services:
+  frontend:
+    image: mjgargani/compose-example:frontend-trybe1.0
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - "backend"
+  backend:
+    image: mjgargani/compose-example:backend-trybe1.0
+    restart: always
+    ports:
+      - 3001:3001
+    environment:
+      - DB_HOST=database
+    depends_on:
+      - "database"
+  database:
+    image: mjgargani/compose-example:database-trybe1.0
+    restart: always
+
+Nesse exemplo, os services serão iniciados respeitando a ordem das dependências, portanto, o database será iniciado antes do backend , que será startado antes do frontend .
