@@ -21,3 +21,12 @@ services: # Definição dos containers
 
 Vamos ver agora, detalhadamente, como utilizar os principais parâmetros e rodar nossas aplicações utilizando o Compose .
 
+## Version ##
+
+Todo arquivo docker-compose.yaml deve iniciar com a tag version , dessa maneira definimos qual a versão que deverá ser utilizada pelo compose para interpretar o arquivo, evitando assim que o docker-compose.yaml fique incompatível com versões mais recentes do compose .
+
+Você pode consultar as especificações de cada versão aqui https://docs.docker.com/compose/compose-file/compose-versioning/#versioning .
+
+Utilizaremos a versão 3 do compose , sendo assim, nosso yaml iniciará da seguinte maneira:
+version: '3'
+
