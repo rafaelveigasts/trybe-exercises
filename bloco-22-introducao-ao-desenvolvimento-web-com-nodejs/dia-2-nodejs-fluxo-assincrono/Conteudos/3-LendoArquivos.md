@@ -46,3 +46,6 @@ Nota : Antes de continuar, não se esqueça de criar um arquivo meu-arquivo.txt 
 Ao rodar o script readFileSync.js com o comando node readFileSync.js , você deverá ver o conteúdo do seu arquivo impresso no terminal.
 
 Mas e se tivéssemos outras partes do script que não deveriam esperar a leitura do arquivo ser feita? Por exemplo, e se tivéssemos que ler vários arquivos ao mesmo tempo? Para isso, utilizamos um método assíncrono , que veremos a seguir.
+
+Dessa forma, sempre que precisarmos ler arquivos de forma assíncrona, podemos utilizar o método readFile do módulo ('fs').promises .
+
