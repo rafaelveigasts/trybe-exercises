@@ -1,4 +1,1 @@
-segunda, 10 de janeiro de 2022
-
-A callback é uma função que recebe dois parâmetros: err e data . Caso ocorra um erro durante a leitura do arquivo, o parâmetro err virá preenchido com as informações referentes ao erro. Quando esse parâmetro vier vazio, significa que a leitura do conteúdo do arquivo ocorreu sem problemas. Nesse caso, o segundo parâmetro, data , virá preenchido com o conteúdo do arquivo.
-
+Meu textão
