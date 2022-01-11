@@ -38,7 +38,10 @@ class Form extends Component {
         <form className="form">
           <label>
             Diga qual o seu Estado favorito! De React ou do Brasil, você decide! =)
-              <textarea name="estadoFavorito" value={this.state.estadoFavorito} onChange={this.handleChange} />
+              <textarea 
+                name="estadoFavorito" 
+                value={this.state.estadoFavorito} 
+                onChange={this.handleChange} />
           </label>
           <input
             type="number"
