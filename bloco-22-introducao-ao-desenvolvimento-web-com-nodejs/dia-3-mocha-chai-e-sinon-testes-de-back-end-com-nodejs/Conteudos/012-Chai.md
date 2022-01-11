@@ -1,3 +1,7 @@
+## Chai
+Em seguida vamos adicionar as asserções com o chai:
+io-test/test.js
+
 const { expect } = require('chai');
 
 const leArquivo = require('./leArquivo');
@@ -27,3 +31,18 @@ describe('leArquivo', () => {
     });
   });
 });
+
+Aqui utilizamos uma nova asserção do chai , o a , que validará o "tipo" daquele retorno. Como se tivéssemos escrito: "espera a resposta ser uma string" (ou expect response to be a string ).
+
+Para que o teste seja executado, precisamos criar o arquivo que irá conter a função. Vamos começar com uma função vazia apenas para conseguir importá-la no arquivo de teste:
+io-test/leArquivo.js
+
+module.exports = () => {
+    //
+}
+
+Agora vamos rodar o teste e ver o resultado:
+
+npm test # ou npm run test
+
+<img src="io-test-i.png" />
