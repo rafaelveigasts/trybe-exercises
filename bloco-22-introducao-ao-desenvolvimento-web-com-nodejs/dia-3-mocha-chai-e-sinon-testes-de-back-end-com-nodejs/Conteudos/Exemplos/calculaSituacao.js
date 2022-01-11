@@ -7,9 +7,9 @@ function calculaSituacao(media) {
 }
 
 
-
 module.exports = calculaSituacao;
 
+/* 
 console.log('Quando a média for menor que 7, retorna "reprovado":');
 
 const respostaCenario1 = calculaSituacao(4);
@@ -35,4 +35,4 @@ if (respostaCenario3 === 'aprovado') {
   console.log(`Ok 🚀`);
 } else {
   console.error('Resposta não esperada 🚨');
-}
+} */
