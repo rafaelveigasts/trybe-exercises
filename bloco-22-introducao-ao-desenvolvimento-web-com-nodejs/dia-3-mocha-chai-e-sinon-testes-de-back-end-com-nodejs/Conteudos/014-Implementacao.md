@@ -1,3 +1,7 @@
+## Implementação
+
+io-test/leArquivo.js
+
 const fs = require('fs');
 
 function leArquivo(nomeDoArquivo) {
@@ -11,3 +15,8 @@ function leArquivo(nomeDoArquivo) {
 }
 
 module.exports = leArquivo;
+
+Após a implementação desse código um dos testes já passa ser executado com sucesso:
+
+
+<img src="io-test-ii.png" />
