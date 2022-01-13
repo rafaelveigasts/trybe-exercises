@@ -1,6 +1,9 @@
 /* index.js */
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+app.use(bodyParser.json());
+
 
 const drinks = [
   { id: 1, name: 'Refrigerante Lata', price: 5.0 },
@@ -41,3 +44,28 @@ app.get('/drinks/:id', function (req, res) {
 app.listen(3001, () => {
   console.log('Aplicação ouvindo na porta 3001');
 });
+
+app.post('/drinks', function (req, res) {
+  const {id, name, price, waitTime } = req.body;
+  drinks.push({ id, name, price, waitTime });
+res.status(201).json({message: 'Drink created successfully'})});
+
+/* fetch('http://localhost:3001/drinks', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    id: 7,
+    name: 'Caipirinha',
+    price: 50,
+  }),
+}) */
+
+app.get('/validateToken', function (req,res){
+  const token = req.headers.authorization;
+  if (token.lenght !==16) return res.status(401).json({message: 'Token inválido'});
+  res.status(200).json({message: 'Token válido'});
+});
+
