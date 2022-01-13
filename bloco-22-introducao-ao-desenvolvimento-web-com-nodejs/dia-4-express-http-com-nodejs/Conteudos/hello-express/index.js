@@ -69,3 +69,25 @@ app.get('/validateToken', function (req,res){
   res.status(200).json({message: 'Token válido'});
 });
 
+app.put('/drinks/:id', function(req,res){
+  const {id} = req.params;
+  const {name, price} = req.body;
+  const drinkIndex = drinks.findIndex((d) => d.id === parseInt(id));
+
+  if (drinkIndex === -1) return res.status(404).json({message: 'Drink not found!'});
+  drinks[drinkIndex] = {...drinks[drinkIndex], name, price};  
+  res.status(204).end();
+});
+
+app.delete('/drinks/:id', function(req,res) {
+  const {id} = req.params;
+  const drinksIndex = drinks.findIndex((d) => d.id === parseInt(id));
+  if (drinksIndex === -1) return res.status(404).json({message: 'Drink not found!'});
+  drinks.splice(drinksIndex, 1);
+  res.status(204).end();
+})
+
+app.all('*', function(req, res) {
+  return res.status(404).json({ message: `Rota '${req.path}' não existe!`});
+});
+
