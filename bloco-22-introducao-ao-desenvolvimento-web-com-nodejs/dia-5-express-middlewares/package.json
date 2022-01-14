@@ -1,0 +1,22 @@
+{
+  "name": "dia-5-express-middlewares",
+  "version": "1.0.0",
+  "description": "",
+  "main": "receitas.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express-rescue": "^1.1.31"
+  }
+}
