@@ -51,3 +51,304 @@ Assista o vídeo abaixo para ver como criar a conexão com o MySQL e como utiliz
 8- instanciar o objeto connection/cretePool com user, password, host, database
 9- exportar o objeto connection
 10- criar o arquivo relacionado as queries > author.js
+
+Caso prefira, leia os dois próximos tópicos para criar o começo da aplicação.
+
+### Estabelecendo uma conexão com o banco
+
+Com o banco criado e populado, vamos criar nosso projeto Node.js.
+
+Comece criando uma nova pasta para conter o projeto. Dê o nome que você quiser a ela, mas aqui vamos chamá-la de model-example :
+
+    mkdir model-example
+    cd model-example
+
+Agora, iniciamos um novo projeto Node.js, passando a flag -y para pular as perguntas e gerar um projeto com as opções padrão:
+
+    npm init -y
+
+Para que possamos dar continuidade, precisamos antes de mais nada, criar um servidor utilizando a biblioteca express , ela vai nos fornecer o que precisamos para rodar um servidor, criar rotas e utilizar nossa conexão com o banco. Instale o express rodando o comando abaixo:
+
+    npm install express
+
+Agora, na raiz do projeto, crie um arquivo chamado index.js e preencha-o com o código abaixo:
+
+    // index.js
+
+    const express = require('express');
+
+    const app = express();
+
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+        console.log(`Ouvindo a porta ${PORT}`);
+    });
+
+Em index.js , importamos o express e iniciamos uma nova aplicação. Porém, para que possamos nos comunicar com o MySQL, precisamos de um driver . Um driver é um software que permite que você se comunique com o banco de dados a partir de uma aplicação. Qual driver usar depende tanto da linguagem quanto do banco de dados que você está utilizando. Aqui na Trybe, você vai utilizar o drive chamado mysql2 . Instale-o executando o comando abaixo:
+
+    npm install mysql2
+
+Agora, na raiz do projeto crie uma pasta models e, dentro dela, crie um arquivo connection.js e preencha-o com o código abaixo. Lembre-se de substituir os campos user e password pelo usuário e senha que você utiliza para acessar o banco:
+
+    // models/connection.js
+
+    const mysql = require('mysql2/promise');
+
+    const connection = mysql.createPool({
+        host: 'localhost',
+        user: 'root',
+        password: 'senha123',
+        database: 'model_example' });
+
+    module.exports = connection;
+
+Primeiro, importamos o mysql do módulo mysql2/promise , assim utilizamos a versão mais atualizada do mysql2 em vez de usar a versão com callbacks.
+O método createPool cria uma pool de conexões com o banco de dados. Isso significa que a própria biblioteca irá gerenciar as múltiplas conexões que fizermos com o banco. O createPool recebe um objeto com as credenciais necessárias para estabelecer a conexão. Entre as opções possíveis, estão:
+
+host : local onde o servidor do MySQL está armazenado. Como estamos executando localmente, usamos localhost ;
+
+user : usuário que vamos utilizar para acessar o banco. Estamos usando o usuário root nesse exemplo;
+
+password : senha do usuário especificado. Coloque '' se não houver senha para o usuário;
+
+database : nome do banco com o qual queremos nos conectar;
+
+O método createPool retorna um objeto Pool representando uma sessão com o banco.
+
+Para não ser necessário criar uma sessão e selecionar o schema sempre que precisarmos acessar o banco, armazenamos nossa pool na variável connection .
+
+### Criando o model
+
+Agora, podemos de fato começar a escrever nossa aplicação. A primeira coisa que faremos é criar uma rota que retornará uma lista com os nomes de todas as pessoas autoras. Queremos também que seja exibido o nome completo da pessoa escritora, que será a concatenação do primeiro nome, nome do meio (se houver) e sobrenome .
+
+O model deverá expor alguma interface que seja capaz de buscar essa lista do banco de dados e retorná-la. Ele deverá se encarregar de todos os detalhes de baixo nível, como se conectar com o banco, montar e executar as queries necessárias para buscar e retornar os dados desejados. Ele também fará o mapeamento dos dados para um formato que seja mais adequado para o domínio da aplicação. Esse mapeamento pode envolver conversão de dados, renomear campos, esconder ou criar novos campos derivados dos dados existentes, por exemplo.
+
+A camada de modelo pode ser implementada de várias formas. Aqui, vamos seguir esta abordagem:
+
+Haverá uma entidade chamada Author na aplicação;
+
+A entidade vai conter os campos firstName , middleName e lastName . Note que os nomes estão em camelCase , enquanto as colunas do banco estão em snake_case ;
+
+No código, um objeto contendo os campos mencionados acima será utilizado para representar uma pessoa autora.
+
+Existirão funções para ler e criar pessoas escritoras do banco de dados;
+
+A rota só irá interagir com os dados através da interface do model Author .
+
+Dando continuidade à nossa aplicação, crie o arquivo Author.js , dentro da pasta models . Adicione o código abaixo ao arquivo criado:
+
+    // models/Author.js
+
+    const connection = require('./connection');
+
+    // Busca todas as pessoas autoras do banco.
+
+    const getAll = async () => {
+        const [authors] = await connection.execute(
+            'SELECT id, first_name, middle_name, last_name FROM model_example.authors;',
+        );
+        return authors;
+    };
+
+    module.exports = {
+        getAll,
+    };
+
+O model Author exporta uma função getAll . Essa função retornará todas as pessoas autoras cadastradas no banco de dados. Utilizamos o método execute para fazer uma query mysql como já estamos acostumados. Esse método retorna uma Promise que quando resolvida, nos fornece um array com 2 campos: [rows, fields] . O primeiro index é onde está a resposta que desejamos (no caso o Authors) e no segundo vêm algumas informações extras sobre a query que não iremos utilizar.
+
+No exemplo, desconstruímos essa resposta utilizando [authors] que chega para nós da seguinte forma:
+
+    // Conteúdo de authors
+    [
+        {
+            id: 1,
+            first_name: 'George',
+            middle_name: 'R. R.',
+            last_name: 'Martin'
+        },
+        {
+            id: 2,
+            first_name: 'J.',
+            middle_name: 'R. R.',
+            last_name: 'Tolkien'
+        },
+        {
+            id: 3,
+            first_name: 'Isaac',
+            middle_name: null,
+            last_name: 'Asimov'
+        },
+        {
+            id: 4,
+            first_name: 'Frank',
+            middle_name: null,
+            last_name: 'Herbert'
+        },
+        {
+            id: 5,
+            first_name: 'Júlio',
+            middle_name: null,
+            last_name: 'Verne'
+        }
+    ]
+
+Note que o retorno da consulta do banco não está no formato que desejamos ( camelCase ). Logo criaremos uma função para realizar essa conversão ( serialize ) e faremos a seguinte modificação no código para arrumar isso.
+
+    // models/Author.js
+
+    //  const connection = require('./connection');
+
+    // Converte o nome dos campos de snake_case para camelCase
+    const serialize = (authorData) => ({
+        id: authorData.id,
+        firstName: authorData.first_name,
+        middleName: authorData.middle_name,
+        lastName: authorData.last_name,
+    });
+
+    // Busca todos os autores do banco.
+    // const getAll = async () => {
+    //  const [authors] = await connection.execute(
+    //      'SELECT id, first_name, middle_name, last_name FROM model_example.authors;',
+    //  );
+            return authors.map(serialize);
+    // };
+
+    // module.exports = {
+    //  getAll,
+    // };
+
+Agora temos os campos no formato correto. E como mencionado anteriormente, queremos o nome completo de autores em um campo da resposta, então vamos implementar uma função com essa finalidade ( getNewAuthor ).
+
+    // models/Author.js
+
+    //  const connection = require('./connection');
+
+      // Cria uma string com o nome completo do autor
+        const getNewAuthor = ({id, firstName, middleName, lastName}) => {
+
+            // Note que `Boolean` é uma função que recebe um parâmetro e retorna true ou false
+            // nesse caso, se middle_name for `undefined` ou uma string vazia o retorno será `false`
+            const fullName = [first_name, middle_name, last_name]
+              .filter(Boolean)
+              .join(' ');
+
+            return {
+            id,
+            firstName,
+            middleName,
+            lastName,
+            fullName,
+           };
+      };
+
+    // Converte o nome dos campos de snake_case para camelCase
+    const serialize = (authorData) => ({
+            id: authorData.id,
+            firstName: authorData.first_name,
+            middleName: authorData.middle_name,
+            lastName: authorData.last_name,
+       });
+
+    //  // Busca todos os autores do banco.
+    //  const getAll = async () => {
+    //      const [authors] = await connection.execute(
+    //          'SELECT id, first_name, middle_name, last_name FROM model_example.authors;',
+    //      );
+                return authors.map(serialize).map(getNewAuthor);
+    //  };
+
+    //  module.exports = {
+    //      getAll,
+    //  };
+
+NOTE: Utilizaremos essas duas funções serialize e getNewAuthor nessa aplicação em todos os momentos que precisarmos gerar um objeto com propriedades em camelCase a partir de um objeto em snake_case , e para gerar uma string contendo o fullName da pessoa autora.
+
+A função getNewAuthor recebe os dados brutos e transforma na informação que queremos, o nome completo da pessoa autora! Com isso não modificamos em nada nosso getAll , assim desacoplando a necessidade dela conhecer outras funções além da serialize.
+Com o model criado devemos então criar a rota que o utilizará. Adicione ao conteúdo do index.js o seguinte:
+
+    // index.js
+
+    // const express = require('express');
+
+    const Author = require('./models/Author');
+
+    // const app = express();
+
+    app.get('/authors', async (_req, res) => {
+        const authors = await Author.getAll();
+
+        res.status(200).json(authors);
+    });
+
+    // const PORT = process.env.PORT || 3000;
+
+    // app.listen(PORT, () => {
+    //  console.log(`Ouvindo a porta ${PORT}`);
+    // });
+
+A essa aplicação, adicionamos uma nova rota GET /authors . E, como já havíamos aprendido anteriormente, passamos uma função que acessa os parâmetros req e res , que chama a função getAll do nosso model , aguarda sua execução e então retorna um JSON com os dados enviados pelo banco.
+
+### Vamos praticar
+
+Vamos colocar em prática tudo o que aprendemos até aqui. Primeiro, crie a tabela Books usando o SQL abaixo
+
+
+    CREATE TABLE books (
+        id INT NOT NULL AUTO_INCREMENT,
+        title VARCHAR(90) NOT NULL,
+        author_id INT(11) NOT NULL,
+        PRIMARY KEY(id),
+        FOREIGN KEY (author_id) REFERENCES authors (id)
+    );
+
+    INSERT INTO books (title, author_id)
+    VALUES
+        ('A Game of Thrones', 1),
+        ('A Clash of Kings', 1),
+        ('A Storm of Swords', 1),
+        ('The Lord of The Rings - The Fellowship of the Ring', 2),
+        ('The Lord of The Rings - The Two Towers', 2),
+        ('The Lord of The Rings - The Return of The King', 2),
+        ('Foundation', 3);
+
+Depois de criar a tabela no banco de dados, faça as seguintes implementações.
+
+1- Crie um modelo Book e defina o método getAll para retornar a lista de todos os livros.
+
+2- Crie uma rota /books para trazer a lista de todos os livros.
+Crie um método getByAuthorId no modelo Book , para retornar apenas livros associados com um determinado author_id . E altere o middleware da rota books criado no passo 2 para receber uma query string com a chave author_id , e retornar apenas os livros associados.
+
+3- Buscando pelos detalhes de uma pessoa escritora
+Veja o vídeo a seguir ou leia o conteúdo para aprender a implementar uma busca por id.
+
+### Buscando pelos detalhes de uma pessoa escritora
+
+Agora vamos criar um método e um endpoint para obter os detalhes de uma pessoa escritora. A rota do endpoint é /authors/:id , onde id corresponde ao id da pessoa escritora.
+No model Author crie o seguinte método.
+
+ const findById = async (id) => {
+        // Repare que substituímos o id por `?` na query.
+        // Depois, ao executá-la, informamos um array com o id para o método `execute`.
+        // O `mysql2` vai realizar, de forma segura, a substituição do `?` pelo id informado.
+        const query = 'SELECT first_name, middle_name, last_name FROM model_example.authors WHERE id = ?'
+        const [ authorData ] = await connection.execute(query, [id]);
+
+        if (authorData.length === 0) return null;
+
+        // Utilizamos [0] para buscar a primeira linha, que deve ser a única no array de resultados, pois estamos buscando por ID.
+        const { firstName, middleName, lastName } = authorData.map(serialize)[0];
+
+        return getNewAuthor({
+            id,
+            firstName,
+            middleName,
+            lastName,
+        });
+    };
+
+    // module.exports = {
+    //  getAll,
+        findById,
+    // };
