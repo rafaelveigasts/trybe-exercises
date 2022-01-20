@@ -128,3 +128,39 @@ Altere o arquivo services/Author.js
 Agora sim, nosso service está comunicando ao controller toda vez que algum erro de domínio acontece. A seguir, vamos ver como esse erro é recebido e tratado pelo controller.
 
 Crie a pasta controllers e, dentro dela, o arquivo Author.js . Nesse arquivo, vamos implementar lógica para realizar todas as operações que nossa aplicação realiza até agora, começando por buscar todos os autores:
+
+Repare que o código aqui é precisamente o mesmo que passamos ao registrar o endpoint GET /authors no index.js , e essa é a grande jogada!
+
+A camada de controllers é responsável por receber e tratar as requests, e, no express, é composta majoritariamente de middlewares. Sendo assim, para construir nosso controller, só precisamos trazer os middlewares do index.js para o controller, alterando-os para que utilizem o service ao invés do model. Parece bastante coisa? Não se preocupe, vamos fazer middleware a middleware.
+
+Já trouxemos o endpoint GET /authors , então vamos para o próximo: GET /authors/:id :
+
+// hello-msc/controllers/Author.js
+
+// const Author = require('../services/Author');
+
+// const getAll = async (req, res) => {
+//   const authors = await Author.getAll();
+
+//   return res.status(200).json(authors);
+// });
+
+const findById = async (req, res, next) => {
+  // Extraímos o id da request
+  const { id } = req.params;
+
+  // Pedimos para o service buscar o autor
+  const author = await Author.findById(id);
+
+  // Caso o service retorne um erro, interrompemos o processamento
+  // e inicializamos o fluxo de erro
+  if (author.error) return next(author.error);
+
+  // Caso não haja nenhum erro, retornamos o author encontrado
+  return res.status(200).json(author);
+};
+
+// module.exports = {
+//   getAll,
+    findById,
+// };

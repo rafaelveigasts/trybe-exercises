@@ -1,36 +1,30 @@
-// controllers/Authors.js
+// hello-msc/controllers/Author.js
 
-const Author = require('../services/Authors');
+const Author = require('../services/Author');
 
-const getAll = async (_req, res) => {
+const getAll = async (req, res) => {
   const authors = await Author.getAll();
 
-  res.status(200).json(authors);
+  return res.status(200).json(authors);
 };
 
-const findById = async (req, res) => {
+
+const findById = async (req, res, next) => {
+  // Extraímos o id da request
   const { id } = req.params;
 
+  // Pedimos para o service buscar o autor
   const author = await Author.findById(id);
 
-  if (!author) return res.status(404).json({ message: 'Author not found' });
+  // Caso o service retorne um erro, interrompemos o processamento
+  // e inicializamos o fluxo de erro
+  if (author.error) return next(author.error);
 
-  res.status(200).json(author);
-}
-
-const createAuthor = async (req, res) => {
-  const { first_name, middle_name, last_name } = req.body;
-
-
-  const author = await Author.createAuthor(first_name, middle_name, last_name);
-
-  if (!author) return res.status(400).json({ message: 'Dados inválidos' });
-
-  res.status(201).json(author);
+  // Caso não haja nenhum erro, retornamos o author encontrado
+  return res.status(200).json(author);
 };
 
 module.exports = {
   getAll,
   findById,
-  createAuthor,
-}
+};
