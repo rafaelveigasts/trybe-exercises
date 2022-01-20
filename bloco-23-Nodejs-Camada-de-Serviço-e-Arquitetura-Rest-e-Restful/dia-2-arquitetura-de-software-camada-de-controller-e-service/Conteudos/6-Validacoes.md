@@ -233,3 +233,73 @@ const createAuthor = async (req, res, next) => {
     createAuthor,
 // };
 
+Agora que nosso controller está pronto, só falta "plugá-lo" no nosso app do express, no arquivo index.js . Bora lá?
+
+Altere o arquivo index.js
+
+// hello-msc/index.js
+
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const rescue = require('express-rescue');
+
+const Author = require('./controllers/Author');
+
+// const app = express();
+
+// app.use(bodyParser.json());
+
+app.get('/authors', rescue(Author.getAll));
+app.get('/authors/:id', rescue(Author.findById));
+app.post('/authors', rescue(Author.createAuthor));
+
+// const PORT = 3000;
+
+// app.listen(PORT, () => {
+//   console.log(`Ouvindo a porta ${PORT}`);
+// });
+
+
+A essa altura, você já pode executar a aplicação e ver que tudo funciona! Uhuuu 🥳 !
+
+No entanto, ainda falta um detalhe importante: O tratamento de erros! 😬 Afinal, nem tudo são flores, certo? 🌹😖
+
+No nosso controller, existem alguns momentos em que interrompemos o fluxo comum do middleware, e iniciamos o fluxo de erro. Esse fluxo de erro é também responsabilidade da camada de controller, que deve converter o erro em um formato padronizado e enviá-lo, junto com o status code adequado, para o client que realizou a requisição.
+
+Para implementar esse comportamento, vamos criar um middleware de erro . Para esse exemplo, vamos criá-lo numa pasta middlewares , mas é comum que o middleware de erro seja criado como um ErrorController , dentro da pasta controllers . Não há nada de errado com essa abordagem, e as duas são formas válidas de implementar.
+Crie a pasta middlewares e, dentro dela, o arquivo error.js :
+
+
+// hello-msc/middlewares/error.js
+module.exports = (err, req, res, _next) => {
+  // Qualquer erro será recebido sempre por esse middleware, então a primeira coisa que fazemos
+  // é identificar qual o tipo do erro.
+
+  // Se for um erro do Joi, sabemos que trata-se de um erro de validação
+  if (err.isJoi) {
+    // Logo, respondemos com o status 400 Bad Request
+    return res.status(400)
+      // E com a mensagem gerada pelo Joi
+      .json({ error: { message: err.details[0].message } });
+  }
+
+  // Caso não seja um erro do Joi, pode ser um erro de domínio ou um erro inesperado.
+  // Construímos, então, um mapa que conecta um erro de domínio a um status HTTP.
+  const statusByErrorCode = {
+    notFound: 404, // Erros do tipo `notFound` retornam status 404 Not Found
+    alreadyExists: 409, // Erros do tipo `alreadyExists` retornam status 409 Conflict
+    // Podemos adicionar quantos códigos novos desejarmos
+  };
+
+  // Buscamos o status adequado para o erro que estamos tratando.
+  // Caso não haja um status para esse código, assumimos que é
+  // um erro desconhecido e utilizamos o status 500 Internal Server Error
+  const status = statusByErrorCode[err.code] || 500;
+
+  // Por último, retornamos o status e a mensagem de erro para o client
+  res.status(status).json({ error: { message: err.message } });
+};
+
+Agora, é só "plugar" nosso middleware de erro na aplicação do express e pronto!
+
+Volte no index.js e faça as seguintes adições.
