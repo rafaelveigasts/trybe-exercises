@@ -3,10 +3,10 @@
 const mysql = require('mysql2/promise');
 
 const connection = mysql.createPool({
-  host: 'localhost',
+  host: process.env.MYSQL_HOST,
   user: 'rafael',
   password: '11463250',
-  database: 'model_example'
+  database: process.env.MYSQL_model_example
 });
 
 module.exports = connection;

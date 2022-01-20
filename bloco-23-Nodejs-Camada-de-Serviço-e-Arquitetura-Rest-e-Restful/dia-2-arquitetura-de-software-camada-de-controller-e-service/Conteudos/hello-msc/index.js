@@ -6,6 +6,11 @@
 
 const Author = require('./controllers/Author');
 const errorMiddleware = require('./middlewares/error');
+require('dotenv').config();
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+})
 
 // const app = express();
 

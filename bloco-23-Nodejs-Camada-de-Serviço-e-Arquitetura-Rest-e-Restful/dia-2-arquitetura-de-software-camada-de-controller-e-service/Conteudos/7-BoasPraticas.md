@@ -28,7 +28,7 @@ Dentro das suas camadas, mantenha cada controller, cada model e cada serviço pe
 
 Existem algumas maneiras de organizar as pastas em um projeto, mas vamos citar duas: por domínio/correlação e por papel técnico .
 
-Por domínio/correlação , nós mantemos todos os arquivos que têm relação com um Author , por exemplo, na mesma pasta, independente da responsabilidade de cada arquivo:
+*Por domínio/correlação* , nós mantemos todos os arquivos que têm relação com um Author , por exemplo, na mesma pasta, independente da responsabilidade de cada arquivo:
 
 └── author
 │   ├── authorController.js
