@@ -164,3 +164,72 @@ const findById = async (req, res, next) => {
 //   getAll,
     findById,
 // };
+
+Repare que o controller verifica se existe um erro e, se existir, chama next(author.error) . Isso faz com que esse objeto de erro vá parar no próximo middleware de erro registrado. Isso quer dizer que podemos utilizar um middleware de erro centralizado também para nossos erros de domínio. Vamos ver como fazer isso logo mais. Por hora, vamos trazer a terceira e última função: a criação de uma nova pessoa autora. Aqui veremos mais uma funcionalidade do controller em ação: a validação dos dados da request.
+
+Você pode estar se perguntando "Ué, mas por que não validar no model?". O fato é que a validação no model pode trazer algumas dificuldades à medida que nossa aplicação escala, por exemplo:
+
+Nem sempre queremos validar os mesmos campos (uma request de edição pode pedir dados diferentes de uma request de criação, por exemplo);
+
+Estamos delegando mais uma responsabilidade para o model: além de se comunicar com o banco, ele também faz validação de requests
+
+Ao validar no model, estamos validando os dados no final da request, ou seja, na saída . Ao validar no controller, estamos validando esses dados na entrada , garantindo que não vamos realizar nenhum processamento desnecessário utilizando dados que não são válidos, e que os dados vão trafegar limpinhos por todas as camadas da aplicação.
+
+Um ponto que talvez você tenha notado é que nosso service possui um método getAll que não faz nenhuma validação ou geração de erro, apenas realiza a chamada do model e envia essa resposta para a controller . Provavelmente você deve estar se perguntando "Por que fazer isso, sendo que podemos chamar o método da getAll da camada model na camada controller e resolver o problema com um passo a menos?". Isso é verdade, porém, além de estarmos violando o modelo de arquitetura, imagine que agora, somente é possível buscar todas as pessoas autoras se o request for feito por uma pessoa administradora. Nesse caso, precisaríamos criar o método getAll na service , criar a regra lá dentro assim como aprendemos. Se nosso método já está implementado, igual em nossos exemplos acima, apenas precisamos inserir as verificações, poupando o passo de criação 😀.
+
+Voltando um pouco a falar sobre geração de erros e validações, existe uma biblioteca muito legal que irá facilitar nossas vidas: o Joi. Dá uma olhada:
+
+Primeiro, vamos instalar o joi . Execute no terminal:
+
+npm i joi
+
+Agora, vamos adicioná-lo ao controller:
+
+// hello-mvc/controllers/Author.js
+
+const Joi = require('joi');
+
+/* ... */
+
+// const findById = async (req, res, next) => { /* ... */ }
+
+const createAuthor = async (req, res, next) => {
+  const { firstName, middleName, lastName } = req.body;
+  // Utilizamos o Joi para descrever o objeto que esperamos
+  // receber na requisição. Para isso, chamamos Joi.object()
+  // passando um objeto com os campos da requisição e suas descrições
+  const { error } = Joi.object({
+    // Deve ser uma string (.string()) não vazia (.not().empty()) e é obrigatório (.required())
+    firstName: Joi.string().not().empty().required(),
+    // Deve ser uma string não vazia e é obrigatório
+    lastName: Joi.string().not().empty().required(),
+  })
+    // Por fim, pedimos que o Joi verifique se o corpo da requisição se adequa a essas regras
+    .validate({ firstName, lastName });
+
+  // Caso exista algum problema com a validação, iniciamos o fluxo de erro e interrompemos o middleware.
+  if (error) {
+    return next(error);
+  }
+
+  // Caso não haja erro de validação, prosseguimos com a criação do usuário
+  const newAuthor = await Author.createAuthor(firstName, middleName, lastName);
+
+  // Caso haja erro na criação da pessoa autora, iniciamos o fluxo de erro
+  if (newAuthor.error) return next(newAuthor.error);
+
+  // Caso esteja tudo certo, retornamos o status 201 Created, junto com as informações
+  // da nova pessoa autora
+  return res.status(201).json(newAuthor);
+};
+
+// const findById = rescue(async (req, res, next) => { /* ... */ }
+
+/* ... */
+
+// module.exports = {
+//   getAll,
+//   findById,
+    createAuthor,
+// };
+
