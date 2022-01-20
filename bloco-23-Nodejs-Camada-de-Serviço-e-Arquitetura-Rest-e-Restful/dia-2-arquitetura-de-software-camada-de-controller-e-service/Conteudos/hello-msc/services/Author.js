@@ -3,7 +3,6 @@ const Author = require('../models/Author');
 const create = async (firstName, middleName, lastName) =>
   Author.create(firstName, middleName, lastName);
 
-const findById = async (id) => Author.findById(id);
 
 const createAuthor = async (firstName, middleName, lastName) => {
   // Buscamos um autor com o mesmo nome completo que desejamos criar
@@ -23,6 +22,25 @@ const createAuthor = async (firstName, middleName, lastName) => {
   // Caso a pessoa autora não exista e, portanto, possa ser criado
   // chamamos o model e retornamos o resultado
   return Author.createAuthor(firstName, middleName, lastName);
+};
+
+
+const findById = async (id) => {
+  // Solicitamos que o model realize a busca no banco
+  const author = await Author.findById(id);
+
+  // Caso nenhuma pessoa autora seja encontrada, retornamos um objeto de erro.
+  if (!author) {
+    return {
+      error: {
+        code: 'notFound',
+        message: `Não foi possível encontrar uma pessoa autora com o id ${id}`,
+      },
+    };
+  }
+
+  // Caso haja uma pessoa autora com o ID informado, retornamos essa pessoa
+  return author;
 };
 
 module.exports = {

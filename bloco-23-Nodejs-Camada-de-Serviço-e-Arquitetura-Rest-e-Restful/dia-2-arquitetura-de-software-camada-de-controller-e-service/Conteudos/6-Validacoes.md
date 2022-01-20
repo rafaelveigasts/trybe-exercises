@@ -111,3 +111,20 @@ const createAuthor = async (firstName, middleName, lastName) => {
 // };
 
 
+Agora, nosso service implementa a regra de negócio mais complexa que temos. Isso até poderia acontecer no model mas, com o tempo, o model começaria a acumular várias funções, indo desde validar dados e regras de negócio até montar queries complexas e comunicar com o banco. Deixando as duas coisas em camadas separadas é como se tanto model quanto service tivessem "espaço para crescer" sem ficarem "apertados".
+
+Existe ainda uma outra regra que é responsabilidade do service e que, até o momento, tem ficado no middleware: identificar e gerar erros.
+
+Mas pera lá ... Gerar erros ? A ideia não é evitá-los?
+
+Bom, de um certo ponto de vista, sim. 😅
+
+Devemos codificar nossas aplicações de forma que erros não previstos sejam evitados ou contornados. No entanto, existem erros que derivam de regras de negócio que não foram atendidas. Vamos chamar esses erros de Erros de domínio . Numa aplicação em camadas, eles servem principalmente para que camadas inferiores possam informar camadas superiores sobre erros ou falhas que, por sua vez, devem ser retornadas a quem fez a chamada.
+
+No nosso caso, temos um exemplo de erro de domínio, com o código alreadyExists . O service retorna esse objeto de erro para que o controller saiba que ocorreu um erro e que a pessoa autora *não foi criada com sucesso*. Com esse objeto de erro, o controller saberá também que não deve enviar código 200 na resposta da requisição. Outro tipo de situação conhecida que deve ser notificada pelo service é quando um item buscado não é encontrado. Note, na linha 23 do index.js , que quem faz esse tratamento até agora é o middleware . Vamos mudar isso!
+
+Altere o arquivo services/Author.js
+
+Agora sim, nosso service está comunicando ao controller toda vez que algum erro de domínio acontece. A seguir, vamos ver como esse erro é recebido e tratado pelo controller.
+
+Crie a pasta controllers e, dentro dela, o arquivo Author.js . Nesse arquivo, vamos implementar lógica para realizar todas as operações que nossa aplicação realiza até agora, começando por buscar todos os autores:
