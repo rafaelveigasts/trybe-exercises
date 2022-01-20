@@ -303,3 +303,11 @@ module.exports = (err, req, res, _next) => {
 Agora, é só "plugar" nosso middleware de erro na aplicação do express e pronto!
 
 Volte no index.js e faça as seguintes adições.
+
+### Vamos praticar
+
+Ontem, criamos um CRUD para a entidade Books . Vamos refatorar o código da aula de ontem aplicando a arquitetura MSC. Para isso:
+
+Crie um arquivo services/Book.js e aplique as regras de negócio definidos no modelo Book para dentro do service. (lembre-se de remover de models/Book.js o que não vai ser mais utilizado na camada de modelo).
+
+Crie um arquivo controllers/BooksController.js e transfira os middlewares relacionados ao nosso CRUD de livros para esse controller, aproveite também para criar o middleware de erro que foi ensinado no conteúdo de hoje.
