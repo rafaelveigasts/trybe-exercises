@@ -7,7 +7,7 @@ const headers = new fetch.Headers({
 });
 
 // Para aquecer, vamos começar com uma requisição do tipo `GET`
-fetch("https://postman-echo.com/get?param1=teste", { headers })
+fetch("https://postman-echo.com/post?param1=teste", { headers, method: 'POST', })
   .then((response) => {
     // Ao receber a resposta, verificamos se correu tudo bem
     if (!response.ok) {
