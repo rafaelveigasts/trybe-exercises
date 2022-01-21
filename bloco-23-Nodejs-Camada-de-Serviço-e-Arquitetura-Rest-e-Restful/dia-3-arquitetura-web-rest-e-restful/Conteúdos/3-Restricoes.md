@@ -89,3 +89,19 @@ Esse ponto é importante, pois nos dá alguns benefícios:
   Escalabilidade : sem precisar manter estado, nosso servidor pode desalocar recursos que foram alocados para realizar uma ação específica e alocá-los apenas quando necessário.
 
 Obs: No próximo bloco, vamos aprender sobre JWT, um padrão de autenticação sem estado, e veremos como o conceito Stateless funciona na prática.
+
+
+### *Cacheable*
+
+Primeiro, precisamos saber o que é cache . Cache é simplesmente um "depósito de informações". O exemplo mais próximo disso é quando seu navegador armazena imagens e arquivos para não precisar pedi-los para o servidor novamente toda vez que você revisitar uma página.
+
+Esse cache é feito no lado do cliente, no browser.
+
+O princípio aqui é que *as respostas dadas pela nossa API devem dizer, explicitamente, se podem ou não ser cacheadas e por quanto tempo .* Com isso, evita-se que clientes forneçam respostas "velhas" ou inapropriadas.
+
+Vale ressaltar que o cache deve ser usado sabiamente. Usá-lo demais faz sua API perder a confiabilidade, e usá-lo de menos pode sobrecarregar seu servidor desnecessariamente.
+
+Uma camada de cache bem gerenciada pode reduzir ou eliminar iterações do lado do cliente, aumentando a escalabilidade e a performance da nossa API.
+
+No HTTP, o cache é definido pelo header *Cache-Control: max-age=120* . Nesse caso, o cliente "cacheia" a resposta da requisição por 120 segundos. Durante esse tempo, o cliente fornecerá a resposta cacheada, sem precisar consultar o servidor.
+
