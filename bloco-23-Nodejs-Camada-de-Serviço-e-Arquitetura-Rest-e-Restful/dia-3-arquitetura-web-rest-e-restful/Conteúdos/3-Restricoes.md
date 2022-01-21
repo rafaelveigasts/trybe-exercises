@@ -68,3 +68,24 @@ Isso permite que as duas partes se desenvolvam de forma independente. Você pode
 
 <img src='client-server.png' />
 
+
+### *Sem estado (Stateless)*
+
+Essa constraint é um pouco mais complicada, mas nós temos um bom exemplo no React! Lembra-se quando criamos componentes que não tinham estado, e apenas recebiam props?
+
+Esse é um dos conceitos mais importantes do REST. Ele que vai tornar possível nossa API responder a múltiplos clientes.
+
+Não manter estado significa que toda requisição deve conter todas as informações necessárias (ser autossuficiente) para nossa API realizar uma ação . Desse jeito, não podemos reutilizar nenhum contexto que está armazenado no servidor (uma variável, por exemplo).
+
+Exemplo :
+
+Em um app em que você faz uma requisição para se logar, o servidor inicia sua sessão e te retorna um token.
+Na próxima requisição, você precisa enviar o token novamente, pois o servidor "não se lembra" de você.
+
+Esse ponto é importante, pois nos dá alguns benefícios:
+
+  Transparência : facilita o trabalho do lado do servidor, pois todas as informações necessárias já estão na requisição;
+
+  Escalabilidade : sem precisar manter estado, nosso servidor pode desalocar recursos que foram alocados para realizar uma ação específica e alocá-los apenas quando necessário.
+
+Obs: No próximo bloco, vamos aprender sobre JWT, um padrão de autenticação sem estado, e veremos como o conceito Stateless funciona na prática.
