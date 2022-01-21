@@ -120,3 +120,9 @@ Esse princípio consiste em dar a possibilidade de o nosso servidor enviar códi
 Um exemplo prático: enviar um "widget" para colocar na página um chat para que o cliente possa conversar com alguém.
 
 Você não precisa implementar código sob demanda para ser RESTful, logo esse item é considerado opcional.
+
+### Ser ou não ser, eis a questão
+
+Agora que vimos as restrições do REST, vale ressaltar: *Você não precisa aplicar todas elas, a não ser que você realmente queira ser RESTful!*
+
+Cenários diferentes exigem soluções diferentes. Em Software, nada é escrito em pedra. Os princípios podem ser quebrados, desde que a justificativa para tal seja plausível.
