@@ -1,9 +1,13 @@
 // index.js
 
-import fetch from 'node-fetch';
+const fetch = require('node-fetch')
+const API_TOKEN = "2d635ea9b637ea0f27d58985cc161d64";
+const headers = new fetch.Headers({
+  Authorization: API_TOKEN,
+});
 
 // Para aquecer, vamos começar com uma requisição do tipo `GET`
-fetch('https://postman-echo.com/get?param1=teste')
+fetch("https://postman-echo.com/get?param1=teste", { headers })
   .then((response) => {
     // Ao receber a resposta, verificamos se correu tudo bem
     if (!response.ok) {
@@ -22,7 +26,9 @@ fetch('https://postman-echo.com/get?param1=teste')
     // Em caso de falha simples (a request completou com um status diferente de 2xx)
     // simplesmente logamos o status no console
     if (errorOrResponse.status) {
-      return console.error(`Request failed with status ${errorOrResponse.status}`);
+      return console.error(
+        `Request failed with status ${errorOrResponse.status}`
+      );
     }
 
     // Caso tenha acontecido um erro de rede (não foi possível completar a request)
