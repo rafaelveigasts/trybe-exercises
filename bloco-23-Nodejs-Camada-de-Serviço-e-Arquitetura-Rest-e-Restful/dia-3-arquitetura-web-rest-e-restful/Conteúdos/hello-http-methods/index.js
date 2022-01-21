@@ -4,10 +4,15 @@ const fetch = require('node-fetch')
 const API_TOKEN = "2d635ea9b637ea0f27d58985cc161d64";
 const headers = new fetch.Headers({
   Authorization: API_TOKEN,
+  'Content-Type': 'application/json',
 });
-
+const body = JSON.stringify({
+  name: "Teste",
+  email: "teste@deemail.com",
+  password: "123456",
+});
 // Para aquecer, vamos começar com uma requisição do tipo `GET`
-fetch("https://postman-echo.com/post?param1=teste", { headers, method: 'POST', })
+fetch("https://postman-echo.com/post?param1=teste", { headers, method: 'POST', body })
   .then((response) => {
     // Ao receber a resposta, verificamos se correu tudo bem
     if (!response.ok) {
