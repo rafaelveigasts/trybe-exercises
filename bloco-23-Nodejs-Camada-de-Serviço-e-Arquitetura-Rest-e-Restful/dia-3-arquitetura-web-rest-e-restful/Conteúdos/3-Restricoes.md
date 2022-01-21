@@ -69,7 +69,7 @@ Isso permite que as duas partes se desenvolvam de forma independente. Você pode
 <img src='client-server.png' />
 
 
-### *Sem estado (Stateless)*
+### *3 - Sem estado (Stateless)*
 
 Essa constraint é um pouco mais complicada, mas nós temos um bom exemplo no React! Lembra-se quando criamos componentes que não tinham estado, e apenas recebiam props?
 
@@ -91,7 +91,7 @@ Esse ponto é importante, pois nos dá alguns benefícios:
 Obs: No próximo bloco, vamos aprender sobre JWT, um padrão de autenticação sem estado, e veremos como o conceito Stateless funciona na prática.
 
 
-### *Cacheable*
+### *4 - Cacheable*
 
 Primeiro, precisamos saber o que é cache . Cache é simplesmente um "depósito de informações". O exemplo mais próximo disso é quando seu navegador armazena imagens e arquivos para não precisar pedi-los para o servidor novamente toda vez que você revisitar uma página.
 
@@ -105,3 +105,9 @@ Uma camada de cache bem gerenciada pode reduzir ou eliminar iterações do lado 
 
 No HTTP, o cache é definido pelo header *Cache-Control: max-age=120* . Nesse caso, o cliente "cacheia" a resposta da requisição por 120 segundos. Durante esse tempo, o cliente fornecerá a resposta cacheada, sem precisar consultar o servidor.
 
+
+### *5 - Sistema em Camadas (Layered System)*
+
+No caso do REST, essa divisão em camadas não tem nada a ver com a organização do nosso código diretamente. Esse princípio é sobre abstrair do cliente as camadas necessárias para responder a uma requisição .
+
+Não importa se você tem uma "API A" que se comunica com a "API B" que se comunica com uma fila ou um arquivo num "local C", ou se consulta um banco de dados, ou se esse banco de dados é local ou está armazenado em outro lugar. Quem consome a API não precisa saber de onde essas coisas estão vindo. Só precisa receber a resposta esperada.
