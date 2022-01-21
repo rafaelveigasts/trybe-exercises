@@ -111,3 +111,12 @@ No HTTP, o cache é definido pelo header *Cache-Control: max-age=120* . Nesse ca
 No caso do REST, essa divisão em camadas não tem nada a ver com a organização do nosso código diretamente. Esse princípio é sobre abstrair do cliente as camadas necessárias para responder a uma requisição .
 
 Não importa se você tem uma "API A" que se comunica com a "API B" que se comunica com uma fila ou um arquivo num "local C", ou se consulta um banco de dados, ou se esse banco de dados é local ou está armazenado em outro lugar. Quem consome a API não precisa saber de onde essas coisas estão vindo. Só precisa receber a resposta esperada.
+
+
+### *6 - Código sob demanda (Code on Demand)*
+
+Esse princípio consiste em dar a possibilidade de o nosso servidor enviar código (JavaScript, por exemplo) ao nosso cliente, onde será executado. Assim, você consegue customizar o comportamento do cliente.
+
+Um exemplo prático: enviar um "widget" para colocar na página um chat para que o cliente possa conversar com alguém.
+
+Você não precisa implementar código sob demanda para ser RESTful, logo esse item é considerado opcional.
