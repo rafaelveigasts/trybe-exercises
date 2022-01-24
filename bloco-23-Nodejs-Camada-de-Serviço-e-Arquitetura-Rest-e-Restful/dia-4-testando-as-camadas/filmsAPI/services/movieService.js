@@ -28,3 +28,8 @@ const create = async ({ title, directedBy, releaseYear }) => {
 module.exports = {
   create,
 };
+
+module.exports={
+  isValid,
+  create,
+}
