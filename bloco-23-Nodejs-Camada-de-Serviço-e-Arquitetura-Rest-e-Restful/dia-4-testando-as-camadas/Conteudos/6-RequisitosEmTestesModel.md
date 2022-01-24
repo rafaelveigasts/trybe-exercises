@@ -68,4 +68,8 @@ O segundo passo é de fato implementarmos nossa camada de model de acordo com os
 
 Vamos começar criando o arquivo de conexão com o banco de dados, utilizaremos o MySQL:
 
-models/connection.js
+  models/connection.js
+
+E então, iniciaremos nosso model de movies importando tal conexão e então criando o método para criação de filmes:
+
+  models/movieModel.js
