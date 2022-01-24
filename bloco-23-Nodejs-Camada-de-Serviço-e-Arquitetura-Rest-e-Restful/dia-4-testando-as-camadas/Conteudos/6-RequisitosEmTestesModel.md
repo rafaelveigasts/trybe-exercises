@@ -58,3 +58,14 @@ describe('Insere um novo filme no BD', () => {
   });
 });
 
+Agora, como só temos esse teste a princípio, vamos executá-lo com npm test ou, específicamente, com NAME=movieModel npm test , e a saída no terminal será semelhante a essa:
+
+<img src='model-test-i.png' />
+
+### Implementação
+
+O segundo passo é de fato implementarmos nossa camada de model de acordo com os testes escritos.
+
+Vamos começar criando o arquivo de conexão com o banco de dados, utilizaremos o MySQL:
+
+models/connection.js
