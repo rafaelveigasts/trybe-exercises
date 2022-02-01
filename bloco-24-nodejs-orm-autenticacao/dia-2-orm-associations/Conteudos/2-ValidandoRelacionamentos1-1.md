@@ -4,8 +4,8 @@ Agora, vamos validar o relacionamento, para isso precisaremos criar seeders para
 
 Para criar os dois seeders, utilize os comandos abaixo:
 
-npx sequelize seed:generate --name employees
-npx sequelize seed:generate --name addresses
+**npx sequelize seed:generate --name employees**
+**npx sequelize seed:generate --name addresses**
 
 Depois, abra o arquivo employees dentro da pasta seeders e copie o código abaixo. Todas as seeds quando criadas, tem um timestamp antes do nome do arquivo, lembre-se disso ao procurá-lo:
 
@@ -88,3 +88,34 @@ module.exports = {
     return queryInterface.bulkDelete('Addresses', null, {});
   },
 };
+
+Depois, utilize o comando abaixo para executar os seeders:
+
+**npx sequelize db:seed:all**
+
+Por último, vamos criar o servidor para testarmos nossas associations . Para diminuirmos a complexidade do exercício, não seguiremos a arquitetura MSC, lembrando que isso não é uma boa prática e deve ser evitada .
+
+
+// index.js
+const express = require('express');
+const { Address, Employee } = require('./models');
+
+const app = express();
+
+app.get('/employees', async (_req, res) => {
+  try {
+    const employees = await Employee.findAll({
+      include: { model: Address, as: 'addresses' },
+    });
+
+    return res.status(200).json(employees);
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: 'Ocorreu um erro' });
+  };
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
+
+module.exports = app;
