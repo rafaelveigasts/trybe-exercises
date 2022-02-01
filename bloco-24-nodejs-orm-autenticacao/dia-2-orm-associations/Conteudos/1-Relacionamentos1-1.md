@@ -70,3 +70,49 @@ module.exports = {
     return queryInterface.dropTable('Employees');
   },
 };
+
+Agora vamos criar a migration responsável pela tabela Addresses utilizando o comando:
+
+**npx sequelize migration:generate --name create-addresses**
+
+Abra a migration e adicione o seguinte código:
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Addresses', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      city: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      street: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      number: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      employeeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        field: 'employee_id',
+        references: {
+          model: 'Employees',
+          key: 'id',
+        },
+      },
+    });
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    return queryInterface.dropTable('Addresses');
+  },
+};
