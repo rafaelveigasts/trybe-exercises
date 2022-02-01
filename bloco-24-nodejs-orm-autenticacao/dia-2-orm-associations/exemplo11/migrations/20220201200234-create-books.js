@@ -1,21 +1,33 @@
-'use strict';
+// cole esse código dentro do arquivo da migration "books"
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Books', {
+      bookId: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        field: 'book_id',
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      releaseYear: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'release_year',
+      },
+      numberPages: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'number_pages',
+      },
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('Books');
+  },
 };
