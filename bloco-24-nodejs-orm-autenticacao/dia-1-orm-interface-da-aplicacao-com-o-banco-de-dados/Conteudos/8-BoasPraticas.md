@@ -37,12 +37,14 @@ module.exports = {
 };
 
 Note que, como estamos em um exercício de desenvolvimento, estamos assumindo que os três ambientes vão utilizar o banco de dados local do seu computador; Em aplicações mais complexas, no entanto, é importante que você utilize bancos de dados e configurações diferentes para cada ambiente.
+
 Crie o arquivo .env na raiz da sua aplicação e preencha as variáveis com as suas credenciais para acessar o MySQL.
 
 MYSQL_USER=root
 MYSQL_PASSWORD=senha_mysql
 MYSQL_DATABASE=orm_example
 HOSTNAME=localhost
+
 Modifique a linha 8 do arquivo models/index.js para apontar para o arquivo config.js :
 
 const config = require(__dirname + '/../config/config.json')[env]; // configuração antiga
