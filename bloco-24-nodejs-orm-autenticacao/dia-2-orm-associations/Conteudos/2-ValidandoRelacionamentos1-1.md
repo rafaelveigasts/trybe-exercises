@@ -119,3 +119,11 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
 
 module.exports = app;
+
+A grande diferença quando vamos fazer uma requisição que necessite da utilização de uma association com o Sequelize, é o campo include . Esse campo diz ao Sequelize quais serão as configurações da requisição. A propriedade model se refere a qual tabela será utilizada. Já a propriedade as deve ser igual ao que declaramos no momento da criação da associação no respectivo model.
+
+Agora inicie o servidor, como instalamos o nodemon anteriormente, iremos utilizar o npx para executá-lo agora, para isso utilize o comando:
+
+**npx nodemon index.js**
+
+Por último, faça uma requisição do tipo GET para o endpoint localhost:3000/employees e verifique a resposta, onde em cada um dos empregados (employees), aparecerá o respectivo endereço (address).
