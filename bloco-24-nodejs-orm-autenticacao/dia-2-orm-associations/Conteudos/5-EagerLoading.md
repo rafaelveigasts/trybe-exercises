@@ -84,3 +84,91 @@ Por último, utilize o comando abaixo para remover as tabelas antigas, depois re
 **npx sequelize db:migrate**
 **npx sequelize db:seed:all**
 
+Vamos ver agora, como utilizar o Eager loading na prática. Voltaremos no arquivo index.js e criaremos mais uma rota:
+
+// const express = require('express');
+// const { Address, Employee } = require('./models');
+
+// const app = express();
+
+// app.get('/employees', async (_req, res) => {
+//   try {
+//    const employees = await Employee.findAll({
+//      include: { model: Address, as: 'addresses' },
+//    });
+
+//     return res.status(200).json(employees);
+//   } catch (e) {
+//     console.log(e.message);
+//     res.status(500).json({ message: 'Ocorreu um erro' });
+//   };
+// });
+
+app.get('/employees/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const employee = await Employee.findOne({
+        where: { id },
+        include: [{ model: Address, as: 'addresses' }],
+      });
+
+    if (!employee)
+      return res.status(404).json({ message: 'Funcionário não encontrado' });
+
+    return res.status(200).json(employee);
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: 'Algo deu errado' });
+  };
+});
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
+
+
+Agora, faça uma requisição do tipo GET para o endpoint http://localhost:3000/employees/1 e veja como o resultado é retornado.
+
+Além das propriedades que já citamos, o campo include pode manipular os dados que serão retornados. Por exemplo, se não quisermos o acesso ao número do endereço, bastaria alterar o código, adicionando a propriedade attributes e dentro dela o que queremos fazer:
+
+// const express = require('express');
+// const { Address, Employee } = require('./models');
+
+// const app = express();
+
+// app.get('/employees', async (_req, res) => {
+//   try {
+//    const employees = await Employee.findAll({
+//      include: { model: Address, as: 'addresses' },
+//    });
+
+//     return res.status(200).json(employees);
+//   } catch (e) {
+//     console.log(e.message);
+//     res.status(500).json({ message: 'Ocorreu um erro' });
+//   };
+// });
+
+// app.get('/employees/:id', async (req, res) =>  {
+//   try {
+//     const { id } = req.params;
+//     const employee = await Employee.findOne({
+//         where: { id },
+           include: [{
+             model: Address, as: 'addresses', attributes: { exclude: ['number'] },
+           }],
+//       });
+
+//     if (!employee)
+//       return res.status(404).json({ message: 'Funcionário não encontrado' });
+
+//     return res.status(200).json(employee);
+//   } catch (e) {
+//     console.log(e.message);
+//     res.status(500).json({ message: 'Algo deu errado' });
+//   };
+// });
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => console.log(`Ouvindo na porta ${PORT}`));
+
+Dessa maneira, o campo number será excluído do retorno da requisição.
