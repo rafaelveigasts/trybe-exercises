@@ -1,24 +1,19 @@
-'use strict';
+// cole esse código dentro do arquivo da seed "books"
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Books',
+      [
+        { name: 'Livro A', release_year: 2020, number_pages: 111 },
+        { name: 'Livro B', release_year: 2019, number_pages: 222 },
+        { name: 'Livro C', release_year: 2018, number_pages: 333 },
+        { name: 'Livro D', release_year: 2017, number_pages: 444 },
+      ],
+      {},
+    );
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.bulkDelete('Books', null, {});
+  },
 };

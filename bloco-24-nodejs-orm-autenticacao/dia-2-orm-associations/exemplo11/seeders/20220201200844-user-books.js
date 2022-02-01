@@ -1,24 +1,22 @@
-'use strict';
+// cole esse código dentro do arquivo da seed "user-books"
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  up: async (queryInterface, _Sequelize) => {
+    return queryInterface.bulkInsert('UserBooks',
+      [
+        { user_id: 1, book_id: 1 },
+        { user_id: 1, book_id: 3 },
+        { user_id: 2, book_id: 1 },
+        { user_id: 2, book_id: 2 },
+        { user_id: 3, book_id: 1 },
+        { user_id: 3, book_id: 2 },
+        { user_id: 3, book_id: 3 },
+      ],
+      {},
+    );
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.bulkDelete('UserBooks', null, {});
+  },
 };
