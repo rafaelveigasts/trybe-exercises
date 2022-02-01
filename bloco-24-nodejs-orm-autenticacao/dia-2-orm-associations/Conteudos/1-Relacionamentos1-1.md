@@ -116,3 +116,43 @@ module.exports = {
     return queryInterface.dropTable('Addresses');
   },
 };
+
+Repare que, agora, temos algumas informações novas sendo passadas para o sequelize no momento de adicionar a coluna. Essas informações informam ao Sequelize que aquele campo deve ser uma foreign key . Vamos passar por cada um deles:
+
+*references.model :* Indica qual tabela nossa FK está referenciando.
+
+*references.key :* Indica qual coluna da tabela estrangeira deve ser utilizada para nossa foreign key .
+
+*onUpdate e onDelete :* Configura o que deve acontecer ao atualizar ou excluir um usuário. Nesse caso, todos os produtos daquele usuário serão alterados ou excluídos.
+
+Essa migration cria uma FK na tabela Addresses , que relaciona o campo employee_id dessa tabela ao campo id da tabela Employees .
+
+Vamos executar o comando para gerar as migrations:
+
+**npx sequelize db:migrate**
+  Ok, mas como criamos essa associação no sequelize?
+
+Com as migrations criadas, vamos para os models !
+O model de Employee será da seguinte maneira:
+
+// models/Employee.js
+module.exports = (sequelize, DataTypes) => {
+  const Employee = sequelize.define('Employee', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    age: DataTypes.INTEGER,
+  },
+  {
+    timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`
+    tableName: 'Employees',
+    underscored: true,
+  });
+
+  Employee.associate = (models) => {
+    Employee.hasOne(models.Address,
+      { foreignKey: 'employee_id', as: 'addresses' });
+  };
+
+  return Employee;
+};

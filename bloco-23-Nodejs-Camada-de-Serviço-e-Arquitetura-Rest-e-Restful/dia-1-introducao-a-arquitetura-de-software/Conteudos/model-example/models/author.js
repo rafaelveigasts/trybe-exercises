@@ -29,7 +29,6 @@ const findById = async (id) => {
   // O `mysql2` vai realizar, de forma segura, a substituição do `?` pelo id informado.
   const query = 'SELECT id, first_name, middle_name, last_name FROM model_example.authors WHERE id = ?'
   const [ authorData ] = await connection.execute(query, [id]);
-  console.log(authorData);
 
   if (authorData.length === 0) return null;
 
@@ -45,9 +44,26 @@ const findById = async (id) => {
 };
 
 
+const isValid = (firstName, middleName, lastName) => {
+  if (!firstName || typeof firstName !== 'string') return false;
+  if (!lastName || typeof lastName !== 'string') return false;
+  if (middleName && typeof middleName !== 'string') return false;
+
+  return true;
+};
+
+const createAuthor = async (firstName, middleName, lastName) => connection.execute(
+  'INSERT INTO model_example.authors (first_name, middle_name, last_name) VALUES (?,?,?)',
+  [firstName, middleName, lastName],
+);
+
+
 module.exports = {
   getAllAuthors,
   findById,
+  serialize,
+  createAuthor,
+  isValid,
 };
 
 // quando desestruturamos o array [authors] pegamos apenas o primeiro elemento e jogamos na variavel authors.
