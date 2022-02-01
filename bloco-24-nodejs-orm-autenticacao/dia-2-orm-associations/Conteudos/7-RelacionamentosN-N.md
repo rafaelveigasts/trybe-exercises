@@ -96,3 +96,224 @@ npx sequelize migration:generate --name create-books
 npx sequelize migration:generate --name create-users
 npx sequelize migration:generate --name create-user-books
 
+E copie o conteúdo abaixo para seus respectivos arquivos de migration, create-books , create-users e create-user-books :
+
+// cole esse código dentro do arquivo da migration "books"
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Books', {
+      bookId: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        field: 'book_id',
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      releaseYear: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'release_year',
+      },
+      numberPages: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'number_pages',
+      },
+    });
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('Books');
+  },
+};
+
+Cole esse código dentro do arquivo da migration "users"
+
+// cole esse código dentro do arquivo da migration "users"
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Users', {
+      userId: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        field: 'user_id',
+      },
+      firstName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        field: 'first_name',
+      },
+      lastName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        field: 'last_name',
+      },
+      age: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+    });
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('Users');
+  },
+};
+
+// cole esse código dentro do arquivo da migration "user-books"
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('UserBooks', {
+      userId: {
+        type: Sequelize.INTEGER,
+        field: 'user_id',
+        references: {
+          model: 'Users',
+          key: 'user_id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        primaryKey: true,
+      },
+      bookId: {
+        type: Sequelize.INTEGER,
+        field: 'book_id',
+        references: {
+          model: 'Books',
+          key: 'book_id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        primaryKey: true,
+      },
+    });
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('UserBooks');
+  },
+};
+
+Depois disso, teremos que criar as seeds com informações para podermos enfim, testar nossa nova association:
+
+**npx sequelize seed:generate --name books**
+**npx sequelize seed:generate --name users**
+**npx sequelize seed:generate --name user-books**
+
+Copie os códigos abaixo para seus respectivos arquivos dentro da pasta seeders :
+
+// cole esse código dentro do arquivo da seed "books"
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Books',
+      [
+        { name: 'Livro A', release_year: 2020, number_pages: 111 },
+        { name: 'Livro B', release_year: 2019, number_pages: 222 },
+        { name: 'Livro C', release_year: 2018, number_pages: 333 },
+        { name: 'Livro D', release_year: 2017, number_pages: 444 },
+      ],
+      {},
+    );
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.bulkDelete('Books', null, {});
+  },
+};
+
+// cole esse código dentro do arquivo da seed "users"
+
+module.exports = {
+  up: async (queryInterface, _Sequelize) => {
+    return queryInterface.bulkInsert('Users',
+      [
+        {
+          first_name: 'Bárbara',
+          last_name: 'Silva',
+          age: 16,
+        },
+        {
+          first_name: 'Carlos',
+          last_name: 'Santos',
+          age: 24,
+        },
+        {
+          first_name: 'Danilo',
+          last_name: 'Henrique',
+          age: 32,
+        },
+      ],
+      {},
+    );
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.bulkDelete('Users', null, {});
+  },
+};
+
+
+// cole esse código dentro do arquivo da seed "user-books"
+
+module.exports = {
+  up: async (queryInterface, _Sequelize) => {
+    return queryInterface.bulkInsert('UserBooks',
+      [
+        { user_id: 1, book_id: 1 },
+        { user_id: 1, book_id: 3 },
+        { user_id: 2, book_id: 1 },
+        { user_id: 2, book_id: 2 },
+        { user_id: 3, book_id: 1 },
+        { user_id: 3, book_id: 2 },
+        { user_id: 3, book_id: 3 },
+      ],
+      {},
+    );
+  },
+
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.bulkDelete('UserBooks', null, {});
+  },
+};
+
+Depois, utilize o comando abaixo para executar as migrations e as seeds:
+
+**npx sequelize db:migrate**
+**npx sequelize db:seed:all**
+
+Para fazer a requisição, bastaria acrescentar ao index.js as seguintes linhas:
+
+const { Book, User } = require('./models');
+// ...
+app.get('/usersbooks/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findOne({
+      where: { userId: id },
+      include: [{ model: Book, as: 'books', through: { attributes: [] } }],
+    });
+
+    if (!user)
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+
+    return res.status(200).json(user);
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: 'Algo deu errado' });
+  };
+});
+// ...
+
+Agora, faça uma requisição do tipo GET para o endpoint localhost:3000/usersbooks/1 e verifique a resposta para o usuário.
+
+Nota: a propriedade through: { attributes: [] } deve estar presente, pois sem ela, em cada book , apareceriam todos seus respectivos users . Tente fazê-lo sem e veja a diferença no resultado!
