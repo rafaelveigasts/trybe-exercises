@@ -20,12 +20,12 @@ app.get('/employees', async (_req, res) => {
 app.get('/employees/:id', async (req, res) => {
   try {
     const { id } = req.params;
-   const employee = await Employee.findOne({ where: { id } });
+    const employee = await Employee.findOne({ where: { id } });
 
-   if (req.query.includeAddresses === 'true') {
-     const addresses = await Address.findAll({ where: { employeeId: id } });
-     return res.status(200).json(employee);
-   }
+    if (req.query.includeAddresses === 'true') {
+      const addresses = await Address.findAll({ where: { employeeId: id } });
+      return res.status(200).json({ employee, addresses });
+    }
 
   } catch (e) {
     console.log(e.message);
