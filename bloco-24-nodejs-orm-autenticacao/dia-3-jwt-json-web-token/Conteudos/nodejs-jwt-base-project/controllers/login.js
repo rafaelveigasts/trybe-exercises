@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const jwt = require('jsonwebtoken');
 
-const secret = 'mysecretsshhh';
+const secret = 'meusupersegredo';
 
 module.exports = async (req, res) => {
   try {
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
 
     const jwtConfig = {
       expiresIn: '7d',
-      algotithm: 'HS256'
+      algorithm: 'HS256',
     };
 
     const token = jwt.sign({ data: user }, secret, jwtConfig);

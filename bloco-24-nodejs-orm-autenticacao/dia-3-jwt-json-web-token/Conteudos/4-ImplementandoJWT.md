@@ -50,3 +50,84 @@ const secret = 'seusecretdetoken';
 //     return res.status(500).json({ message: 'Erro interno', error: err.message });
 //   }
 // };
+
+Feito isso, nós já podemos nos autenticar de verdade, não é mesmo? Ao fazer uma nova requisição POST para /api/login , passando nome de usuário e senha corretos, obtemos um resultado semelhante ao seguinte:
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjozLCJ1c2VybmFtZSI6Iml0YWxzc29kaiIsInBhc3N3b3JkIjoic2VuaGExMjMifSwiaWF0IjoxNjM4OTc1MTMyLCJleHAiOjE2Mzk1Nzk5MzJ9.hnpmu2p61Il8wdQfmUiJ7wiWXgw8UuioOU_D2RnB9kY"
+}
+
+Eis o nosso token! É ele que vamos ficar transitando pra lá e pra cá, então ele precisa ser guardado! Mas caso ele seja perdido, não se preocupe; é só gerar outro token. 🙂
+
+Agora temos que usar esse token de alguma forma, não é mesmo? 
+
+Para isso, vamos criar uma pasta chamada auth dentro do diretório api ; e, dentro dela, um arquivo chamado validateJWT.js .
+
+Esse arquivo conterá uma função que será usada como middleware para as nossas requisições, validando todas as rotas em que nós solicitarmos autenticação.
+
+// ./auth/validateJWT.js
+const jwt = require('jsonwebtoken');
+
+const { User } = require('../../models');
+
+/* Mesma chave privada que usamos para criptografar o token.
+   Agora, vamos usá-la para descriptografá-lo.
+   Numa aplicação real, essa chave jamais ficaria hardcoded no código assim,
+   e muitos menos de forma duplicada, mas aqui só estamos interessados em
+   ilustrar seu uso ;) */
+const segredo = 'seusecretdetoken';
+
+module.exports = async (req, res, next) => {
+  /* Aquele token gerado anteriormente virá na requisição através do
+     header Authorization em todas as rotas que queremos que
+     sejam autenticadas. */
+  const token = req.headers['authorization'];
+
+  /* Caso o token não seja informado, simplesmente retornamos
+     o código de status 401 - não autorizado. */
+  if (!token) {
+    return res.status(401).json({ error: 'Token não encontrado' });
+  }
+
+  try {
+    /* Através o método verify, podemos validar e decodificar o nosso JWT. */
+    const decoded = jwt.verify(token, segredo);
+    /*
+      A variável decoded será um objeto equivalente ao seguinte:
+      {
+        data: {
+          id: '3',
+          username: 'italssodj',
+          password: 'senha123'
+        },
+        iat: 1582587327,
+        exp: 1584774714908
+      }
+    */
+
+    /* Caso o token esteja expirado, a própria biblioteca irá retornar um erro,
+       por isso não é necessário fazer validação do tempo.
+       Caso esteja tudo certo, nós então buscamos o usuário na base para obter seus dados atualizados */
+
+    const user = await User.findOne({ where: { username: decoded.data.username } });
+
+    /* Não existe um usuário na nossa base com o id informado no token. */
+    if (!user) {
+      return res
+        .status(401)
+        .json({ message: 'Erro ao procurar usuário do token.' });
+    }
+
+    /* O usuário existe! Colocamos ele em um campo no objeto req.
+       Dessa forma, o usuário estará disponível para outros middlewares que
+       executem em sequência */
+    req.user = user;
+
+    /* Por fim, chamamos o próximo middleware que, no nosso caso,
+       é a própria callback da rota. */
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: err.message });
+  }
+};
+
