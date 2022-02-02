@@ -158,3 +158,56 @@ apiRoutes.get('/api/posts', validateJWT, routes.getPosts);
 // app.use(apiRoutes);
 
 // app.listen(PORT, () => console.log(`Conectado na porta ${PORT}`));
+
+Note que não queremos autenticar o login e nem criação de usuários, pois precisamos deles para o processo de autenticação! Se houvesse outras rotas protegidas na nossa aplicação, usaríamos o middleware nelas também!
+
+Agora que já estamos logados, vamos requisitar nossos posts!
+
+<img src='postResDemoUnauthenticated.png'/>
+
+Você deve estar pensando: ué! Já fizemos o login, então, por que não podemos pegar os posts? Olhe com mais atenção para a resposta da API. Ela está dizendo que o token não foi informado. Nós conseguimos um token através do endpoint de login, mas não fizemos nada com ele. Nesse caso, vamos mandar o token para a API via Headers , que são informações extras que podemos passar em uma requisição.
+
+<img src="postHeaders.png"/>
+
+Adicionamos um header chamado Authorization porque é o que nosso middleware espera. Se não se lembra, dê uma olhada de novo no arquivo ./auth/validateJWT.js .
+
+Feito isso, é só mandar bala na requisição e ser feliz!
+
+{
+  "mockPosts": [
+    {
+      "title": "titulo fake",
+      "content": "conteudo conteudo conteudo conteudo conteudo "
+    },
+    {
+      "title": "titulo fake",
+      "content": "conteudo conteudo conteudo conteudo conteudo "
+    },
+    {
+      "title": "titulo fake",
+      "content": "conteudo conteudo conteudo conteudo conteudo "
+    },
+    {
+      "title": "titulo fake",
+      "content": "conteudo conteudo conteudo conteudo conteudo "
+    }
+  ]
+}
+
+Voltamos a conseguir recuperar nossos posts. Mas, antes de terminarmos, um último comentário sobre nossa API. Você notou que nossos posts são fake e são sempre os mesmos, independente do usuário logado, certo? Numa API real, buscaríamos esses posts de um banco de dados, por exemplo. Mas como faríamos para recuperar apenas os posts do usuário logado?
+
+Lembra-se de que o middleware de autenticação recupera o usuário do banco de dados e o coloca no req ? Esse objeto é o mesmo que é passado para todos os middlewares e para a callback da rota. Como o middleware de autenticação é executado antes das funções dos controllers, req conterá o usuário logado quando o controller em /controllers/posts for executado, e poderíamos utilizá-lo para fazer uma consulta ao banco de dados que trouxesse somente seus posts. Para confirmar isso, basta colocar um console.log dentro do controller:
+
+module.exports = async (req, res) => {
+  console.log(req.user.dataValues);
+  const posts = await Post.findAll({ attributes: { exclude: 'id' } });
+  res.status(200).json({ mockPosts: posts });
+};
+
+Você deverá ver algo assim, no terminal onde executou a API:
+
+{
+  id: 3,
+  username: 'italssodj',
+  password: 'senha123'
+}
