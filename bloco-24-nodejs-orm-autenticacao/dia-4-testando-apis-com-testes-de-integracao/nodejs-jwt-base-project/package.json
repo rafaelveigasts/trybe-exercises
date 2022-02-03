@@ -4,9 +4,8 @@
   "main": "./api/server.js",
   "scripts": {
     "prestart": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
-    "start": "nodemon .",
+    "start": "nodemon ./api/server.js",
     "test": "mocha ./tests/**/*$NAME*.test.js --exit"
-
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
@@ -22,7 +21,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
-    "chai-http": "4.3.0",
+    "chai-http": "^4.3.0",
     "mocha": "^9.2.0",
     "nyc": "15.1.0",
     "sinon": "^12.0.1"
