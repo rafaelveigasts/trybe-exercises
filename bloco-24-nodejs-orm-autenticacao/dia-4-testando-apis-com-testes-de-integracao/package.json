@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "chai-http": "^4.3.0"
+  }
+}
