@@ -92,3 +92,20 @@ Caso decida mudar o banco de dados de uma plataforma para outra, nesse caso, nã
 Importante ressaltar que o Heroku disponibiliza uma porta "aleatória" para a aplicação deployada rodar. Por isso, ao usar essa ferramenta para deploy de uma aplicação node, é necessário usar a variável process.env.PORT como porta ouvida no método listen do app. Ou no caso do React, usar um buildpack.
 
 Nota : Por se tratar de dados sensíveis, sempre adicionamos o arquivo .env ao .gitignore , pois ele não deve ser compartilhado com outras pessoas.
+
+## Dynos
+
+O Heroku utiliza o conceito de container , em que as responsabilidades de gerenciar máquinas virtuais ou físicas são abstraídas. Isso significa que, em vez de se preocupar com a máquina onde você irá rodar seu código, você pode focar em desenvolver aplicações mais poderosas.
+
+Ao fazer o deploy no Heroku, você estará colocando sua aplicação dentro de um "container". O container é um ambiente isolado e leve que provê os recursos necessário de CPU, memória RAM, um sistema operacional (Linux, no caso do Heroku) e um sistema temporário de arquivos para rodar seu código. No Heroku, os "containers" são chamados de "dynos" .
+
+Os containers normalmente rodam em ambientes compartilhados, porém isolados um dos outros.
+
+O conceito de containers não é exclusivo do Heroku. Na verdade, esse conceito é utilizado por diversas soluções e possui várias vantagens. Entre elas, estão a possibilidade maior de uma abstração da infraestrutura e facilidade para escalar seus projetos.
+
+No Heroku, por exemplo, é possível escalar sua aplicação facilmente. Para escalá-lo verticalmente, basta alterar o tipo do dyno para um que possua mais recursos. Para fazer um " scaling " horizontal, você pode aumentar o número de dynos.
+
+<img src='heroku-scaling.svg' />
+
+
+O scaling pode ser feito via linha de comando ou pelo dashboard do Heroku. Esse processo possibilita a configuração do autoscaling , em que você consegue escalar seus dynos , para mais ou para menos, automaticamente, baseando-se em alguns parâmetros, como, por exemplo, tempo de resposta de sua API.
