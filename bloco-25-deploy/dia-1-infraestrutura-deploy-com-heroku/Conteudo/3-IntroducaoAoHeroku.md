@@ -109,3 +109,51 @@ No Heroku, por exemplo, é possível escalar sua aplicação facilmente. Para es
 
 
 O scaling pode ser feito via linha de comando ou pelo dashboard do Heroku. Esse processo possibilita a configuração do autoscaling , em que você consegue escalar seus dynos , para mais ou para menos, automaticamente, baseando-se em alguns parâmetros, como, por exemplo, tempo de resposta de sua API.
+
+## Criando uma conta
+
+Para utilizarmos os serviços do Heroku, é necessário criar uma conta na plataforma. Se ainda não possui uma conta, acesse o site oficial e se cadastre. https://heroku.com/
+
+## Instalação do CLI
+
+Para começar, vamos instalar o Heroku CLI (Command Line Interface). Com ele, conseguiremos gerenciar e escalar nossas aplicações, prover add-ons , observar logs e rodar nossos projetos localmente, simulando o servidor (se você não entendeu alguma dessas funções, calma, veremos cada uma adiante).
+
+Para a instalação no Linux, o CLI está disponível como Snap para diversas distros. Para utilizá-la, seguiremos os seguintes passos:
+
+1. Instalando o Snapd.
+Abra o terminal e execute o seguinte comando:
+
+**sudo snap install hello-world**
+
+O comando deverá responder da seguinte maneira:
+hello-world 6.3 from Canonical✓ installed
+
+Caso o comando retorne sucesso, siga para o próximo passo.
+Caso retorne que o comando snap não é conhecido, instale-o 
+utilizando o apt :
+
+**apt-get update && apt-get install snapd**
+
+Após a instalação, execute novamente o comando snap install acima para validar se a instalação foi concluída com sucesso.
+
+2. Instalando o CLI
+
+Para sistemas Linux , instale o snap do Heroku CLI, executando o seguinte comando:
+
+**sudo snap install heroku --classic**
+
+Para sistemas macOS , instale o Heroku CLI, executando o seguinte comando:
+
+**brew tap heroku/brew && brew install heroku**
+
+3. Logando no Heroku
+
+⚠️ Atenção: é necessário autenticar o CLI para que os comandos funcionem corretamente.
+
+Após a instalação ser concluída, você poderá acessar o Heroku por meio do seu terminal.
+Use o seguinte comando para logar com a sua conta:
+
+heroku login
+A seguir, o console solicitará que você pressione qualquer tecla para abrir o navegador e prosseguir com o login nele. Feito isso, será exibida no terminal a mensagem de sucesso conforme abaixo:
+
+<img src='heroku-cli-login.gif' />
