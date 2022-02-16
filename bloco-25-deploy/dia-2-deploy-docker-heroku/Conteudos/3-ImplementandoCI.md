@@ -34,7 +34,7 @@ jobs : com base na regra definida acima, os jobs descritos serão executados, em
 
 name : define o nome da ação.
 
-runs-on : especifica qual a versão da máquina a ser utilizada na action, saiba mais .
+runs-on : especifica qual a versão da máquina a ser utilizada na action, saiba mais https://docs.github.com/pt/actions/using-github-hosted-runners/about-github-hosted-runners .
 
 steps : podem executar comandos, trabalhos de configurações ou executar ações no repositório.
 
