@@ -42,6 +42,13 @@ enum Days {
   Sunday
 }
 
+const Monday = Days.Monday;
+const Tuesday = Days.Tuesday;
+const Wednesday = Days.Wednesday;
+console.log(Monday); 
+console.log(Tuesday);
+console.log(Wednesday);
+
 enum Colors {
   Red = "Red",
   Blue = "Blue",
