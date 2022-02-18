@@ -69,3 +69,45 @@ enum CompassPoints {
   South = "S",
   West = "W"
 }
+
+
+type Point = {
+  x: number;
+  y: number;
+};
+
+
+function printCoord(pt: Point) {
+  console.log("O valor da cordenada x é: " + pt.x);
+  console.log("O valor da coordenada y é: " + pt.y);
+}
+
+printCoord({ x: 100, y: 100 });
+//saída:
+//O valor da cordenada x é: 100
+//O valor da cordenada y é: 100
+
+
+/* Exercícios
+Crie um type para um objeto que represente um pássaro.
+Crie um type que represente uma função que recebe 2 valores numéricos e retorna a soma dos dois.
+Crie um type para um objeto que represente um endereço.
+ */
+
+type Bird = {
+  name: string;
+  fly: boolean;
+  wings: number;
+  beaks: number;
+  biped: boolean;
+};
+
+type Sum = (a: number, b: number) => number;
+
+type Address = {
+  street: string;
+  number: number;
+  city: string;
+  state: string;
+  country: string;
+};
