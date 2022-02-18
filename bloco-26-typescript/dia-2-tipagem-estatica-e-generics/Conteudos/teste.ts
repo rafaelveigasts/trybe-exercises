@@ -174,3 +174,49 @@ class Flight {
     this.arrival = arrival;
   }
 }
+
+/* 
+Crie uma interface cujo objeto represente um Automóvel.
+Crie uma interface cujo objeto represente um Felino.
+Crie uma interface cujo objeto represente uma Aeronave.
+ */
+
+interface Car {
+  brand: string;
+  model: string;
+  year: number;
+  color: string;
+}
+
+let car: Car = {
+  brand: "Ford",
+  model: "Fusion",
+  year: 2018,
+  color: "Black"
+};
+
+interface Cat {
+  name: string;
+  age: number;
+  breed: string;
+}
+
+let cat: Cat = {
+  name: "Garfield",
+  age: 10,
+  breed: "Tabby"
+};
+
+interface Airplane {
+  model: string;
+  year: number;
+  maxSpeed: number;
+  minSpeed: number;
+}
+
+let airplane: Airplane = {
+  model: "Airbus A380",
+  year: 2018,
+  maxSpeed: 805,
+  minSpeed: 0
+};
