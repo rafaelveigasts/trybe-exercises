@@ -123,3 +123,54 @@ type PhysicalState = "liquid" | "solid" | "gas";
 type Id = number | string;
 type OperatingSystem = "linux" | "mac os" | "windows";
 type Vowel = "a" | "e" | "i" | "o" | "u";
+
+
+/* Exercícios
+Crie uma classe cujo objeto represente um Cachorro.
+Crie uma classe cujo objeto represente uma Casa.
+Crie uma classe cujo objeto represente um Voo.
+ */
+
+class Dog {
+  name: string;
+  age: number;
+  breed: string;
+  
+  constructor(name: string, age: number, breed: string) {
+    this.name = name;
+    this.age = age;
+    this.breed = breed;
+  }
+}
+
+class House {
+  room: number;
+  area: number;
+  floors: number;
+  kitchen: boolean;
+  garage: boolean;
+  address: string;
+  
+  constructor(room: number, area: number, floors: number, kitchen: boolean, garage: boolean, address: string) {
+    this.room = room;
+    this.area = area;
+    this.floors = floors;
+    this.kitchen = kitchen;
+    this.garage = garage;
+    this.address = address;
+  }
+}
+
+class Flight {
+  origin: string;
+  destination: string;
+  departure: Date;
+  arrival: Date;
+  
+  constructor(origin: string, destination: string, departure: Date, arrival: Date) {
+    this.origin = origin;
+    this.destination = destination;
+    this.departure = departure;
+    this.arrival = arrival;
+  }
+}
