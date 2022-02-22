@@ -59,8 +59,22 @@ router.put("/books/:isbn", validationBook, async (req: Request, res: Response) =
   return res.status(StatusCode.OK).json(editedBook);
 });
 
-router.delete("/books/:isbn", (req: Request, res: Response) => {
 
+router.delete("/books/:isbn", async (req: Request, res: Response) => {
+  const { isbn } = req.params;
+
+  const books = await read();
+
+  const index = books.findIndex(book => book.isbn === isbn);
+
+  if (index === -1) return res.status(StatusCode.NOT_FOUND).send(NotFoundMessage);
+
+  books.slice(index, 1);
+
+  await write(books);
+
+  return res.status(StatusCode.NO_CONTENT).send();
 });
+
 
 export default router;
