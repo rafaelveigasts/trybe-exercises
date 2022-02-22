@@ -1,34 +1,28 @@
 // ./routes/books.ts
 
 import { Router, Request, Response } from "express";
-import fs from 'fs/promises';
-import Book from "../interfaces/Book";
+import { read } from "../functions";
+import StatusCode from "../enums/StatusCode";
 
 const router = Router();
 
-const notFound = 'Livro não encontrados';
+const NotFoundMessage = "Livro não encontrado."
 
 router.get("/books", async (req: Request, res: Response) => {
-    const data = await fs.readFile("./books.json", "utf8");
-
-    const books: Book[] = JSON.parse(data);
-
-    return res.status(200).json(books);
+    const books = await read();
+    return res.status(StatusCode.OK).json(books);
 });
 
-
 router.get("/books/:isbn", async (req: Request, res: Response) => {
-  const { isbn } = req.params;
+    const { isbn } = req.params;
 
-  const data = await fs.readFile("./books.json", "utf8");
+    const books = await read();
 
-  const books: Book[] = JSON.parse(data);
+    const book = books.find(book => book.isbn === isbn);
 
-  const book = books.find(book => book.isbn === isbn);
+    if (!book) return res.status(StatusCode.NOT_FOUND).send(NotFoundMessage);
 
-  if (!book) return res.status(404).send(notFound);
-
-  return res.status(200).json(book);
+    return res.status(StatusCode.OK).json(book);
 });
 
 router.post("/books", (req: Request, res: Response) => {
