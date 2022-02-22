@@ -33,7 +33,7 @@ O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda i
 - [x] 4-2: _JavaScript - Array e loop For_
 - [x] 4-3: _JavaScript - Lógica de Programação e Algoritmos_
 - [x] 4-4: _JavaScript - Objetos e funções_
-- [ ] 4-5: _[Projeto - Playground Functions]()_
+- [x] 4-5: _[Projeto - Playground Functions]()_
 
 ##### Bloco 5: Introdução - JavaScript - Projetos
 
@@ -41,11 +41,11 @@ O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda i
 - [x] 5-2: _JavaScript - Trabalhando com elementos_
 - [x] 5-3: _JavaScript - Eventos_
 - [x] 5-4: _JavaScript - Web Storage_
-- [ ] 5-5: _[Projeto - Meme Generator]()_
-- [ ] 5-6: _[Projeto - Arte com Pixels]()_
-- [ ] 5-7: _[Projeto - Lista de tarefas]()_
-- [ ] 5-7: _[Projeto - Adivinhe a Cor]()_
-- [ ] 5-7: _[Projeto - Carta Misteriosa]()_
+- [x] 5-5: _[Projeto - Meme Generator]()_
+- [x] 5-6: _[Projeto - Arte com Pixels]()_
+- [x] 5-7: _[Projeto - Lista de tarefas]()_
+- [x] 5-7: _[Projeto - Adivinhe a Cor]()_
+- [x] 5-7: _[Projeto - Carta Misteriosa]()_
 
 ##### Bloco 6: HTML & CSS avançado
 
@@ -54,14 +54,14 @@ O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda i
 - [x] 6-3: _CSS Flexbox - Part 1_
 - [x] 6-4: _CSS Flexbox - Part 2_
 - [x] 6-5: _CSS Responsivo - Mobile First_
-- [ ] 6-6: _[Projeto - Página inicial do Facebook]()_
+- [x] 6-6: _[Projeto - Página inicial do Facebook]()_
 
 ##### Bloco 7: JavaScript ES6 & Testes Unitários
 
 - [x] 7-1: _JavaScript ES6 - let, const, arrow functions e template literals_
 - [x] 7-2: _JavaScript ES6 - Objects_
 - [x] 7-3: _Testes unitários em JavaScript_
-- [ ] 7-4: _[Projeto - JavaScript Testes Unitários]()_
+- [x] 7-4: _[Projeto - JavaScript Testes Unitários]()_
 
 ##### Bloco 8: JavaScript ES6
 
@@ -69,20 +69,20 @@ O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda i
 - [x] 8-2: _JavaScript ES6 - Higher Order Functions - map e filter_
 - [x] 8-3: _JavaScript ES6 - Higher Order Functions - reduce_
 - [x] 8-4: _JavaScript ES6 - spread operator, rest parameter, destructuring e mais_
-- [ ] 8-5: _[Projeto - Zoo functions]()_
+- [x] 8-5: _[Projeto - Zoo functions]()_
 
 ##### Bloco 9: Assincronicidade & Callbacks
 
 - [x] 9-1: _JavaScript Assíncrono e Callbacks_
 - [x] 9-2: _JavaScript Promises_
-- [ ] 9-3: _[Projeto - Carrinho de Compras]()_
+- [x] 9-3: _[Projeto - Carrinho de Compras]()_
 
 ##### Bloco 10: Jest
 
 - [x] 10-1: _Primeiros passos no Jest_
 - [x] 10-2: _Jest - Testes Assíncronos_
 - [x] 10-3: _Jest - Simulando comportamentos_
-- [ ] 10-4: _[Projeto - Jest Assíncrono e Mocking]()_
+- [x] 10-4: _[Projeto - Jest Assíncrono e Mocking]()_
 
 ## Desenvolvimento Front-end :hourglass_flowing_sand:
 
@@ -90,31 +90,31 @@ O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda i
 
 - [x] 11-1: _'Hello, world!' no React!_
 - [x] 11-2: _Componentes React_
-- [ ] 11-3: _[Projeto - Movie Cards Library]()_
+- [x] 11-3: _[Projeto - Movie Cards Library]()_
 
 ##### Bloco 12: React
 
 - [x] 12-1: _Components com estado_
 - [x] 12-2: _Eventos e formulários no React_
-- [ ] 12-3: _[Projeto - Movie Cards Library Stateful]()_
+- [x] 12-3: _[Projeto - Movie Cards Library Stateful]()_
 
 ##### Bloco 13: React
 
 - [x] 13-1: _Melhorando o reuso de componentes: props.children e PropTypes_
 - [x] 13-2: _Ciclo de vida de componentes em React_
 - [x] 13-3: _React Router_
-- [ ] 13-4: _[Projeto - Movie Cards Library CRUD]()_
+- [x] 13-4: _[Projeto - Movie Cards Library CRUD]()_
 
 ##### Bloco 14: Metodologias Ágeis
 
 - [x] 14-1: _Metodologias Ágeis_
-- [ ] 14-2: _[Projeto - Frontend Online Store]()_
+- [x] 14-2: _[Projeto - Frontend Online Store]()_
 
 ##### Bloco 15: Testes em React
 
 - [x] 15-1: _Testando React com a React Testing Library_
 - [x] 15-2: _Testando React com a React Testing Library - Parte 2_
-- [ ] 15-3: _[Projeto - Testes em React]()_
+- [x] 15-3: _[Projeto - Testes em React]()_
 
 ##### Bloco 16: Introdução ao Redux
 
@@ -123,46 +123,46 @@ O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda i
 - [x] 16-3: _React com Redux - Prática_
 - [x] 16-4: _React com Redux - Parte 2_
 - [x] 16-5: _Testes síncronos com React-Redux_
-- [ ] 16-6: _[Projeto - Tabela com filtros de dados]()_
+- [x] 16-6: _[Projeto - Tabela com filtros de dados]()_
 
 ##### Bloco 17: Projeto React
 
-- [ ] 17-1: _[Projeto - Jogo de Trivia]()_
+- [x] 17-1: _[Projeto - Jogo de Trivia]()_
 
 ##### Bloco 18: React & Context API
 
 - [x] 18-1: _Context API do React_
-- [ ] 18-2: _React Hooks - useState e useContext_
-- [ ] 18-3: _React Hooks - useEffect e Hooks customizados_
-- [ ] 18-4: _[Projeto - StarWars Datatable com Context API e Hooks]()_
+- [x] 18-2: _React Hooks - useState e useContext_
+- [x] 18-3: _React Hooks - useEffect e Hooks customizados_
+- [x] 18-4: _[Projeto - StarWars Datatable com Context API e Hooks]()_
 
 ##### Bloco 19: Projeto Final de Front-end
 
-- [ ] 19-1: _[Projeto - App de Receitas]()_
+- [x] 19-1: _[Projeto - App de Receitas]()_
 
 ## Desenvolvimento Back-end :hourglass_flowing_sand:
 
 ##### Bloco 20: Introdução - Bancos de dados relacionais
 
-- [ ] 20-1: _Banco de dados SQL_
-- [ ] 20-2: _Encontrando dados em um banco de dados_
-- [ ] 20-3: _Filtrando dados de forma específica_
-- [ ] 20-4: _Manipulando tabelas_
-- [ ] 20-5: _[Projeto - All For One]()_
+- [x] 20-1: _Banco de dados SQL_
+- [x] 20-2: _Encontrando dados em um banco de dados_
+- [x] 20-3: _Filtrando dados de forma específica_
+- [x] 20-4: _Manipulando tabelas_
+- [x] 20-5: _[Projeto - All For One]()_
 
 ##### Bloco 21: Bancos de dados relacionais
 
-- [ ] 21-1: _Funções mais usadas no SQL_
-- [ ] 21-2: _Descomplicando JOINs e UNIONs_
-- [ ] 21-3: _Stored Routines & Subqueries_
-- [ ] 21-4: _[Projeto - Vocabulary Booster]()_
+- [x] 21-1: _Funções mais usadas no SQL_
+- [x] 21-2: _Descomplicando JOINs e UNIONs_
+- [x] 21-3: _Stored Routines & Subqueries_
+- [x] 21-4: _[Projeto - Vocabulary Booster]()_
 
 ##### Bloco 22: Bancos de dados relacionais
 
-- [ ] 22-1: _Transformando ideias em um modelo de banco de dados_
-- [ ] 22-2: _Normalização, Formas Normais e Dumps_
-- [ ] 22-2: _Transformando ideias em um modelo de banco de dados - Parte 2_
-- [ ] 22-3: _[Projeto - One For All]()_
+- [x] 22-1: _Transformando ideias em um modelo de banco de dados_
+- [x] 22-2: _Normalização, Formas Normais e Dumps_
+- [x] 22-2: _Transformando ideias em um modelo de banco de dados - Parte 2_
+- [x] 22-3: _[Projeto - One For All]()_
 
 ##### Bloco 23: IntroduÃ§Ã£o - NoSQL
 
