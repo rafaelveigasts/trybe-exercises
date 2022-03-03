@@ -8,24 +8,40 @@ Dentro da classe Tv, crie o método turnOn , que imprimirá os atributos inicial
 Instancie um objeto a partir da classe Tv, chame o método turnOn para imprimir seus atributos. */
 
 class TV {
-  brand: string;
-  size: number;
-  resolution: string;
-  connections: string[];
-  connectedTo: string;
+  private _brand: string;
+  private _size: number;
+  private _resolution: string;
+  private _connections: string[];
+  private _connectedTo: string;
 
-  constructor(brand: string, size: number, resolution: string, connections: string[], connectedTo: string) {
-    this.brand = brand;
-    this.size = size;
-    this.resolution = resolution;
-    this.connections = connections;
-    this.connectedTo = connectedTo;
+  constructor(_brand: string, _size: number, _resolution: string, _connections: string[], _connectedTo: string) {
+    this._brand = _brand;
+    this._size = _size;
+    this._resolution = _resolution;
+    this._connections = _connections;
+    this._connectedTo = _connectedTo;
   }
 
   turnOn():void {
-    console.log(`${this.brand} ${this.size} ${this.resolution} ${this.connections} ${this.connectedTo}`);
+    console.log(`${this._brand} ${this._size} ${this._resolution} ${this._connections} ${this._connectedTo}`);
   }
+
+  get connectedTo(): string {
+    return this._connectedTo;
+  }
+
+  set connectedTo(value: string) {
+    if (this._connections.includes(value)) {
+      this._connectedTo = value;
+      console.log(this._connectedTo);
+    } else {
+      console.log('Não existe conexão disponível');
+    }
+  }
+
 }
 
-const tv = new TV('LG', 55, '4k', ['HDMI', 'Ethernet'], 'Wi-Fi');
+const tv = new TV('LG', 55, '4k', ['HDMI', 'Ethernet', 'Wi-Fi'], 'Wi-Fi');
 tv.turnOn();
+
+tv.connectedTo = 'Wi-Fi';
