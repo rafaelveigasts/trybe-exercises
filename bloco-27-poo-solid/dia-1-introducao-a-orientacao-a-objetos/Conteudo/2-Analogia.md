@@ -24,3 +24,8 @@ O pilar herança permite que classes filhas , que herdam métodos e atributos de
 
 O pilar polimorfismo permite que coisas diferentes aconteçam ao chamarmos objetos de classes filhas distintas de uma mesma super classe. Por exemplo, pense que existe a classe Pessoa , que possui um método dormir , só que esse método não é implementado (não possui nenhum código). Então são criadas duas outras classes: PessoaQueDormeDeBrucos e PessoaQueDormeDeLado , e ambas implementam o método dormir conforme seus nomes. Se em algum lugar do código eu espero um objeto da classe Pessoa , eu posso perfeitamente passar um objeto de uma classe filha (já que ele herda tudo que tem na classe Pessoa ), ou seja, eu posso passar tanto um objeto da classe PessoaQueDormeDeBrucos quanto da classe PessoaQueDormeDeLado . Como o código esperava um objeto da classe Pessoa , qualquer um dos dois servem, mas se o método dormir for chamado, ele irá se comportar de forma diferente.
 
+## Conclusão da analogia
+
+E aí, conseguiu ter uma noção de classe , objeto/instância da classe , atributo , método/mensagem , abstração , encapsulamento , herança e polimorfismo ?
+
+Espero que sim, mas se ainda parece um pouco confuso, calma que vamos ver em mais detalhes e com código, e você vai sair fera em Orientação a Objetos! 😎
