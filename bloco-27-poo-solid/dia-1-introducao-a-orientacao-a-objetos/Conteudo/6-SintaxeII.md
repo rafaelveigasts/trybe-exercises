@@ -69,3 +69,22 @@ Mariah
 17
 171
 */
+
+Observe que há uma validação de dados no set age . É para este tipo de coisa que utilizamos atributos privados: para validar alterações nos dados. Considere, após o código anterior, rodar o seguinte código
+
+p2.age = 300;
+console.log(p2.age);
+// Saída: 17
+
+A idade da pessoa p2 continua 17, pois a validação no set age impede que existam pessoas com 300 anos de idade. Esse é o poder do encapsulamento.
+Agora um exemplo de sintaxes que são inválidas neste contexto:
+
+
+// Acesso externo à classe a atributo privado
+p1._weight;
+p1._weight = 1;
+// Acesso a atributo inexistente
+p1.weight;
+p1.weight = 1;
+// Escrita em atributo readonly
+p1.height = 1;
