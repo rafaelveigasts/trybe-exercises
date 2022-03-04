@@ -107,6 +107,18 @@ class Order {
     this._disscount = value;
   }
 
+  get total(): number {
+    return this.items.reduce((total, item) => {const pay = total + item.price;
+    return pay }, 0);
+    }
+
+  get discount(): number {
+    return this.total * this.disscount;
+  }
+
+  get totalWithDiscount(): number {
+    return this.total - this.discount;
+  }
 }
 
 const client = new Person("João");
@@ -118,3 +130,6 @@ const acai = new OrderItem("Açaí", 10);
 const order = new Order(client, [item1, suco, acai], "cartão", 0.1);
 
 console.log (order);
+console.log (order.total);
+console.log (order.discount);
+console.log (order.totalWithDiscount);
