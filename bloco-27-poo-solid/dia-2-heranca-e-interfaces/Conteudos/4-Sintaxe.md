@@ -154,3 +154,9 @@ Mude a visibilidade do método sayHello de public para protected .
 Ao mudar a visibilidade, o compilador (ou o vs code) vai mostrar um erro. Conserte esse erro utilizando o novo método sayHello2 .
 Mude a visibilidade do método sayHello de protected para private . O que acontece?
 Desfaça estas alterações (ou seja, volte para como era ao final do primeiro exercício) antes de fazer o próximo exercício.
+
+## Super
+Para Fixar
+Com base no final do primeiro exercício de fixação.
+No construtor da Subclass , o atributo isSuper deve ser setado como false . Você vai precisar utilizar o super .
+Dentro da função que recebe um objeto da Superclass como parâmetro, cheque o valor do atributo isSuper e imprima no console "Super!" se for true e "Sub!" se for false ;

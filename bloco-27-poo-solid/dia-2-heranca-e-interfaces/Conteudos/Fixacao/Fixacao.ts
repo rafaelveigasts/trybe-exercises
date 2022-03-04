@@ -9,23 +9,26 @@ class Superclass {
   }
 
   // A _Superclass_ deve possuir um método público chamado `sayHello`, que deve imprimir um "Olá mundo!".
-  protected sayHello(): void {
+  public sayHello(): void {
     console.log('Olá mundo!');
   }
 }
 
 // Crie uma classe chamada _Subclass_ que herda da _Superclass_.
 class Subclass extends Superclass {
-  public sayHello2(): void {
-    // O método `sayHello` deve ser chamado.
-    this.sayHello();
+  constructor(){
+    super();
+    this.isSuper = false;
+
   }
+
  }
 
 // Crie uma função que recebe um objeto da _Superclass_.
 const myFunc = (object: Subclass) => {
   // Dentro da função, chame o método `sayHello` do objeto passado como parâmetro.
-  object.sayHello2();
+  object.sayHello();
+  console.log(object.isSuper ? 'É uma superclasse' : 'Não é uma superclasse');
 };
 
 // Crie um objeto da _Superclass_ e outro da _Subclass_.
@@ -33,7 +36,7 @@ const sup = new Superclass();
 const sub = new Subclass();
 
 // Chame a função 2 vezes, passando os objetos criados.
-// myFunc(sup);
+myFunc(sup);
 myFunc(sub);
 
 /* Para fixar:
