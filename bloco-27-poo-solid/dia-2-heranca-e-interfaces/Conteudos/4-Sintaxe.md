@@ -156,7 +156,35 @@ Mude a visibilidade do método sayHello de protected para private . O que aconte
 Desfaça estas alterações (ou seja, volte para como era ao final do primeiro exercício) antes de fazer o próximo exercício.
 
 ## Super
-Para Fixar
+Sempre que você, na subclasse, queira referenciar a superclasse, poderá utilizar a palavra reservada super . Super bacana, né? 🤣
+Deixando a gracinha de lado, vamos a um exemplo que não funciona:
+
+class Animal {
+  constructor(protected birthDate: Date) { }
+}
+class Bird extends Animal {
+  constructor(public name: string) { } // ERRO
+}
+
+Em TypeScript, o método construtor de uma subclasse deve ser o mesmo da superclasse (os exemplos anteriores funcionaram pois não tinham o construtor), ou deve chamar o da superclasse.
+Agora vamos a um exemplo que funciona:
+
+class Animal {
+  constructor(protected birthDate: Date) { }
+}
+class Bird extends Animal {
+  constructor(public name: string) {
+    super(new Date());
+  }
+}
+
+O super é basicamente uma referência à superclasse.
+
+Ao ser invocado como uma função, está invocando o construtor da superclasse.
+
+Por fim, o super também é útil quando fazemos sobrescrita de métodos, um dos temas da aula de amanhã 😉.
+
+Para fixar:
 Com base no final do primeiro exercício de fixação.
 No construtor da Subclass , o atributo isSuper deve ser setado como false . Você vai precisar utilizar o super .
 Dentro da função que recebe um objeto da Superclass como parâmetro, cheque o valor do atributo isSuper e imprima no console "Super!" se for true e "Sub!" se for false ;
