@@ -78,3 +78,96 @@ class LocalDbModel implements Imodel {
     return character;
   }
 }
+
+class CharacterService {
+  constructor(readonly model: LocalDbModel) { }
+  async create(character: Character) {
+    const newCharacter = await this.model.create(character);
+    return ({ status: 201, data: newCharacter });
+  }
+
+  async getAll() {
+    const allCharacter = await this.model.getAll();
+    return ({ status: 200, data: allCharacter });
+  }
+
+  async getById(id: number) {
+    const character = await this.model.getById(id);
+    return ({ status: 200, data: character });
+  }
+
+  async update(id: number, character: Character) {
+    const updatedCharacter = await this.model.update(id, character);
+    return ({ status: 200, data: updatedCharacter });
+  }
+
+  async delete(id: number) {
+    const deleted = await this.model.delete(id);
+    return ({ status: 200, data: deleted });
+  }
+
+  async getByName(name: string) {
+    const character = await this.model.getAll();
+    const filtered = character.filter(c => c.name === name);
+    return ({ status: 200, data: filtered });
+  }
+
+  async getBySpecialMove(specialMove: string) {
+    const character = await this.model.getAll();
+    const filtered = character.filter(c => c.specialMove === specialMove);
+    return ({ status: 200, data: filtered });
+  }
+
+  async getByNameAndSpecialMove(name: string, specialMove: string) {
+    const character = await this.model.getAll();
+    const filtered = character.filter(c => c.name === name && c.specialMove === specialMove);
+    return ({ status: 200, data: filtered });
+  }
+
+  async getByNameOrSpecialMove(name: string, specialMove: string) {
+    const character = await this.model.getAll();
+    const filtered = character.filter(c => c.name === name || c.specialMove === specialMove);
+    return ({ status: 200, data: filtered });
+  }
+
+  async getByNameAndSpecialMoveOrName(name: string, specialMove: string) {
+    const character = await this.model.getAll();
+    const filtered = character.filter(c => c.name === name && c.specialMove === specialMove || c.name === name);
+    return ({ status: 200, data: filtered });
+  }
+}
+
+  
+class MockDbModel implements Imodel {
+  async create(character: Character) {
+    console.log('character created');
+    return { id: 1, name: 'Peach', specialMove: 'Toad' };
+  };
+
+  async update(id: number, character: Character) {
+    console.log('character updated');
+    return { id: 1, name: 'Yoshi', specialMove: 'Egg Lay' };
+  };
+
+  async delete(id: number) {
+    console.log('character deleted');
+    return true;
+  };
+
+  async getAll() {
+    return [
+      { id: 1, name: 'Samus', specialMove: 'Charge Shot' },
+      { id: 2, name: 'Kirby', specialMove: 'Inhale' }
+    ];
+  }
+
+  async getById(id: number) {
+    return { id: 1, name: 'Mario', specialMove: 'Fireball' };
+  }
+}
+
+const A = new CharacterService(new LocalDbModel());
+A.getAll().then(console.log);
+
+const B = new CharacterService(new MockDbModel());
+B.getAll().then(console.log);
