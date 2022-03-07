@@ -4,6 +4,7 @@
 
 import Order from "./Order";
 import OrderItem from "./OrderItem";
+import OrderRepository from "./OrderRepository";
 import Student from "./Student";
 import Subject from "./Subject";
 import Teacher from "./Teacher";
@@ -26,7 +27,13 @@ const lucasOrder = new Order(lucas, [sandwiche, juice], 'dinheiro', 0.10);
 const martaOrder = new Order(marta, [sandwiche, juice], 'cartão');
 const joaoOrder = new Order(joao, [sandwiche, juice, dessert], 'cartão');
 
-console.log('Pedido da Carolina: ', carolinaOrder);
-console.log('Pedido do Lucas: ', lucasOrder);
-console.log('Pedido da Marta: ', martaOrder);
-console.log('Pedido do João: ', joaoOrder);
+const orderRepository = new OrderRepository();
+orderRepository.addOrder(carolinaOrder);
+orderRepository.addOrder(lucasOrder);
+orderRepository.addOrder(martaOrder);
+orderRepository.addOrder(joaoOrder);
+orderRepository.addOrder(carolinaOrder);
+
+console.log('Pedidos da Carolina: ', orderRepository.listByClient(carolina));
+console.log('Maior valor para o menor: ', orderRepository.listBySortedValue('maior'));
+console.log('Menor valor para o maior: ', orderRepository.listBySortedValue('menor'));
