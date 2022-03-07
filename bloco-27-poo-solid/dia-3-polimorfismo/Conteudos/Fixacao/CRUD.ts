@@ -40,3 +40,41 @@ interface Imodel {
   getById: (id: number) => Promise<DbCharacter>;
 }
 
+class LocalDbModel implements Imodel {
+  async create(character: Character): Promise<DbCharacter> {
+    const newCharacter = { ...character, id: db.length + 1 };
+    db.push(newCharacter);
+    return newCharacter;
+  }
+
+  async update(id: number, character: Character): Promise<DbCharacter> {
+    const index = db.findIndex(c => c.id === id);
+    if (index < 0) {
+      throw new Error('Character not found');
+    }
+    const newCharacter = { ...character, id };
+    db[index] = newCharacter;
+    return newCharacter;
+  }
+
+  async delete(id: number): Promise<boolean> {
+    const index = db.findIndex(c => c.id === id);
+    if (index < 0) {
+      throw new Error('Character not found');
+    }
+    db.splice(index, 1);
+    return true;
+  }
+
+  async getAll(): Promise<DbCharacter[]> {
+    return db;
+  }
+
+  async getById(id: number): Promise<DbCharacter> {
+    const character = db.find(c => c.id === id);
+    if (!character) {
+      throw new Error('Character not found');
+    }
+    return character;
+  }
+}
