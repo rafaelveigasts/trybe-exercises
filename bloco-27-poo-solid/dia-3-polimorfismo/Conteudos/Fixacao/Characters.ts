@@ -50,8 +50,8 @@ function characterPresentation( character: Characters ) {
   character.specialMove()
 }
 
-const ryu = new MeleeCharacter('Ryu', 'Hadouken')
-const ken = new LongRangeCharacter('Ken', 'Shoryuken')
+const archer = new LongRangeCharacter('Archer', 'arrow')
+const swordsman = new MeleeCharacter('Swordsman', 'sword')
 
-characterPresentation(ryu)
-characterPresentation(ken)
+characterPresentation(archer)
+characterPresentation(swordsman)
