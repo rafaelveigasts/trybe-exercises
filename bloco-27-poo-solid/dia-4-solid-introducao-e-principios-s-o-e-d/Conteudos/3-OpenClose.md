@@ -212,3 +212,9 @@ export default function progressNotification(
       break;
   }
 };
+
+## OCP Conclusão
+
+Dessa forma, no momento em que você está escrevendo uma função para resolver um problema, é importante se perguntar se é possível que, futuramente, essa função seja usada para resolver outros problemas similares ao atual. Se sim, se esforce para deixá-la aberta a extensões para poder mantê-la fechada a modificações .
+
+Como em qualquer princípio, não há necessidade de radicalismo aqui: se uma função não deve ser usada em outros contextos, ela não precisa estar aberta a extensão. Se no futuro isso mudar, você faz uma refatoração. Mas pense com cuidado! A função deixada aberta hoje é uma refatoração a menos para amanhã!
