@@ -229,3 +229,17 @@ export class ReadingTracker {
 
   // Aqui viriam mais métodos, que fogem o escopo deste exercício 
 }
+
+## DIP Conclusão
+
+Por mais que a ideia seja ter funções autocontidas, dependências sempre existirão. A inversão de dependência faz com que o acoplamento entre as entidades seja o menor possível.
+
+Como foi visto, no final do exemplo era possível passar qualquer objeto de qualquer classe, desde que esta implementasse o método play e que possuísse um atributo name . Isso faz com que seja possível criar diversos outros instrumentos para atender às necessidades da classe Musician , como por exemplo piano, violino, etc.
+
+No contexto de desenvolvimento web, podemos imaginar que uma pessoa que é cliente do seu sistema precisa receber uma notificação quando um item que ela comprou tenha saído para a entrega. Essa notificação pode ser via e-mail, SMS, whatsapp, etc.
+
+Supondo que o primeiro tipo de notificação implementado tenha sido o por e-mail, melhor do que criar o objeto EmailNotificator dentro da compra é passar um objeto que respeite a interface Notificator . Além disso, fazer EmailNotificator , SMSNotificator e WhatsappNotificator implementarem a interface Notificator .
+
+Com isso fica fácil trocar de uma forma de notificação para outra. E se no futuro um TelegramNotificator seja criado, vai ser muito simples de utilizar a novidade sem sequer alterar a classe da compra que já está configurada para receber qualquer Notificator .
+
+Não é pra esquecer que podemos passar um Notificator mockado para testar a classe de compra unitariamente 😄.
