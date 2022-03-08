@@ -228,3 +228,186 @@ Tudo que fizemos aqui foi jogar cada parte da lógica para uma função diferent
 Agora não precisamos ler todo o código para saber exatamente o que a função faz! Além disso nosso código está mais testável, podemos escrever testes unitários para cada função muito mais facilmente.
 
 Podemos, por exemplo, testar unitariamente se a função approvedStudents está se comportando conforme esperado:
+
+// ./tests/approvedStudents.spec.ts
+
+import { expect } from "chai";
+import { approvedStudents } from "../src";
+
+const disciplinesDict = {
+  mathematics: 'matemática',
+  history: 'história',
+};
+
+describe('Testando a função "approvedStudents"', function () {
+  describe('quando todas as notas são maiores que 0.7', function () {
+    it('retorna "true"', function () {
+      const disciplines = [
+        { name: disciplinesDict.mathematics, grade: 0.8 },
+        { name: disciplinesDict.history, grade: 0.9 },
+      ];
+      const student = {
+        name: "test",
+        disciplines: disciplines
+      };
+      const result = approvedStudents(student);
+
+      expect(result).to.be.equal(true);
+    });
+  });
+
+  describe('quando todas as notas são menores que 0.7', function () {
+    it('retorna "false"', function () {
+      const disciplines = [
+        { name: disciplinesDict.mathematics, grade: 0.1 },
+        { name: disciplinesDict.history, grade: 0.2 },
+      ];
+      const student = {
+        name: "test",
+        disciplines: disciplines
+      };
+      const result = approvedStudents(student);
+
+      expect(result).to.be.equal(false);
+    });
+  });
+
+  describe('quando parte das notas são menores que 0.7', function () {
+    it('retorna "false"', function () {
+      const disciplines = [
+        { name: disciplinesDict.mathematics, grade: 0.5 },
+        { name: disciplinesDict.history, grade: 0.9 },
+      ];
+      const student = {
+        name: "test",
+        disciplines: disciplines
+      };
+      const result = approvedStudents(student);
+
+      expect(result).to.be.equal(false);
+    });
+  });
+});
+
+
+Também podemos testar de maneira isolada a função "percentageGradesIntoLetters":
+
+
+// ./tests/percentageGradesIntoLetters.spec.ts
+
+import { expect } from "chai";
+import { percentageGradesIntoLetters } from "../src";
+
+const disciplinesDict = {
+  mathematics: 'matemática',
+};
+
+describe('Testando a função "percentageGradesIntoLetters"', function () {
+  describe('quando a nota é maior ou igual a 0.9', function () {
+    it('retorna "A"', function () {
+      const student = {
+        name: 'Lee',
+        disciplines: [
+          { name: disciplinesDict.mathematics, grade: 0.9 },
+        ],
+      };
+
+      const {
+        disciplines: [{ letterGrade }],
+      } = percentageGradesIntoLetters(student);
+
+      expect(letterGrade).to.be.equals('A');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.8 e menor que 0.9', function () {
+    it('retorna "B"', function () {
+      const student = {
+        name: 'Lee',
+        disciplines: [
+          { name: disciplinesDict.mathematics, grade: 0.8 },
+        ],
+      };
+
+      const {
+        disciplines: [{ letterGrade }],
+      } = percentageGradesIntoLetters(student);
+
+      expect(letterGrade).to.be.equals('B');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.7 e menor que 0.8', function () {
+    it('retorna "C"', function () {
+      const student = {
+        name: 'Lee',
+        disciplines: [
+          { name: disciplinesDict.mathematics, grade: 0.7 },
+        ],
+      };
+
+      const {
+        disciplines: [{ letterGrade }],
+      } = percentageGradesIntoLetters(student);
+
+      expect(letterGrade).to.be.equals('C');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.6 e menor que 0.7', function () {
+    it('retorna "D"', function () {
+      const student = {
+        name: 'Lee',
+        disciplines: [
+          { name: disciplinesDict.mathematics, grade: 0.6 },
+        ],
+      };
+
+      const {
+        disciplines: [{ letterGrade }],
+      } = percentageGradesIntoLetters(student);
+
+      expect(letterGrade).to.be.equals('D');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.1 e menor que 0.6', function () {
+    it('retorna "E"', function () {
+      const student = {
+        name: 'Lee',
+        disciplines: [
+          { name: disciplinesDict.mathematics, grade: 0.1 },
+        ],
+      };
+
+      const {
+        disciplines: [{ letterGrade }],
+      } = percentageGradesIntoLetters(student);
+
+      expect(letterGrade).to.be.equals('E');
+    });
+  });
+
+  describe('quando a nota é menor que 0.1', function () {
+    it('retorna "F"', function () {
+      const student = {
+        name: 'Lee',
+        disciplines: [
+          { name: 'matemática', grade: 0.05 },
+        ],
+      };
+
+      const {
+        disciplines: [{ letterGrade }],
+      } = percentageGradesIntoLetters(student);
+
+      expect(letterGrade).to.be.equals('F');
+    });
+  });
+});
+
+Você pode testar usando o comando npm run test ;
+
+Rode o linter utilizando o comando npm run lint para validarmos o que fizemos até agora.
+
+Deixamos o nosso código muito melhor de ser lido e testado, o que é ótimo! Mas, ainda assim, o ESLint levanta o alerta para a complexidade cognitiva . Agora ele acusa a função percentageGradesIntoLetters de ser complexa demais. Então vamos dividi-la em partes ainda menores!
