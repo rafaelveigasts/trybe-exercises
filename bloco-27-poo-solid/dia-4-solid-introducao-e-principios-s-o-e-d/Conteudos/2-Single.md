@@ -67,3 +67,84 @@ Adicione um arquivo .eslintrc.json na raiz do projeto, com o seguinte conteúdo:
 }
 
 Crie duas pastas, tests e src , para nossos exemplos. Crie um arquivo index.ts na pasta src ;
+
+## SRP Exemplo ruim
+
+Suponha que você deve construir uma aplicação para gerenciar a situação de estudantes numa escola. A sua primeira tarefa é criar uma função que, ao ser chamada, determina a aprovação ou não de uma pessoa estudante e atualiza seu status no banco de dados como Aprovada ou Reprovada . Além disso, as notas marcadas de 0% a 100% (0.0 a 1.0) devem ser convertidas para os conceitos de A a F .
+Aí você escreve o seguinte:
+
+// ./src/index.ts
+
+type Discipline = {
+  name: string;
+  grade: number;
+  letterGrade?: string;
+};
+
+type Student = {
+  name: string;
+  disciplines: Discipline[];
+};
+
+function setApproved(students: Array<Student>) {
+  const studentsWithLetterGrade = students.map((student) => {
+    const disciplinesWithLetterGrade = student.disciplines.map((discipline) => {
+      if (discipline.grade >= 0.9) discipline.letterGrade = 'A';
+      else if (discipline.grade >= 0.8) discipline.letterGrade = 'B';
+      else if (discipline.grade >= 0.7) discipline.letterGrade = 'C';
+      else if (discipline.grade >= 0.6) discipline.letterGrade = 'D';
+      else if (discipline.grade >= 0.1) discipline.letterGrade = 'E';
+      else discipline.letterGrade = 'F';
+
+      return discipline;
+    });
+
+    return {
+      name: student.name,
+      disciplines: disciplinesWithLetterGrade,
+    };
+  });
+
+  const approvedStudents = studentsWithLetterGrade.filter(({ disciplines }) =>
+    disciplines.every((discipline) => discipline.grade > 0.7));
+
+  /* Finja que o console.log é algo que atualiza uma base de dados */
+  approvedStudents.map(({ name, disciplines }) => {
+    console.log(`A pessoa com nome ${name} foi aprovada!`);
+    disciplines.map(({ name, letterGrade }) =>
+      console.log(`${name}: ${letterGrade}`));
+  });
+}
+
+/* Abaixo temos um exemplo de execução */
+const students = [
+  {
+    name: 'Lee',
+    disciplines: [
+      { name: 'matemática', grade: 0.8 },
+      { name: 'história', grade: 0.6 },
+    ],
+  },
+  {
+    name: 'Clementine',
+    disciplines: [
+      { name: 'matemática', grade: 0.8 },
+      { name: 'história', grade: 0.9 },
+    ],
+  },
+];
+
+setApproved(students);
+
+/*
+Saída:
+A pessoa com nome Clementine foi aprovada!
+matemática: B
+história: A
+*/
+
+Rode o código utilizando o comando ts-node src . Rode o linter utilizando o comando npm run lint .
+
+Veja bem: nossas variáveis e funções têm bons nomes, o código faz o que se pede, usa Higher Order Functions e outros recursos do Typescript, mas ele está tão... difícil de entender! Não está? Podemos não saber exatamente o motivo, mas definitivamente precisamos quebrar a cabeça para acompanhar seu funcionamento. Não por acaso, no backend, esse código dispara vários erros no ESLint , além de alertar a alta complexidade cognitiva!
+
+Outro ponto de atenção que devemos ter é referente aos testes. Imagine que iremos escrever testes para a função setApproved , e perceba quantos comportamentos distintos precisaremos garantir para uma única função. Ou seja, a testabilidade desse código também não está legal.
