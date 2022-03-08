@@ -1,17 +1,15 @@
 // Para testar!
 // ./index.ts
 
-import Employee from './Employee';
+import Subject from './Subject';
 
-const testInterfaceEmployee: Employee = {
-    registration: 'FNC1234567891011',
-    salary: 1200.00,
-    admissionDate: new Date(),
-    generateRegistration(): string {
-        const randomStr = String(Date.now() * (Math.random() + 1)).replace(/\W/g, '');
+const math = new Subject('Matemática');
+const history = new Subject('História');
+const philosophy = new Subject('Filosofia');
 
-        return `FNC${randomStr}`;
-    }
-}
+console.log(math);
+console.log(history);
+console.log(philosophy);
 
-console.log(testInterfaceEmployee);
+// deve retornar erro
+// const invalidSubjectName = new Subject('Po');
