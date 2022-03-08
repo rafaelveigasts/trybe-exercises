@@ -1,6 +1,7 @@
 // ./tests/percentageGradesIntoLetters.spec.ts
 
 import { expect } from "chai";
+import { describe, it } from "mocha";
 import { percentageGradesIntoLetters } from "../src";
 
 const disciplinesDict = {

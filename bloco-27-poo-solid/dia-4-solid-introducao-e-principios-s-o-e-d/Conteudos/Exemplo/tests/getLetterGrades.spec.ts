@@ -1,6 +1,7 @@
 // ./tests/getLetterGrades.spec.ts
 
 import { expect } from 'chai';
+import { describe, it } from 'mocha';
 import { getLetterGrades } from '../src';
 
 const disciplinesDict = {
