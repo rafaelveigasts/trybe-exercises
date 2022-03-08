@@ -582,3 +582,58 @@ Rode novamente o linter utilizando o comando npm run lint . Agora não é espera
 Perceba que da mesma forma como simplificamos o entendimento de nosso código simplificamos também a testabilidade dele, sendo possível escrever testes cada vez mais simples e legíveis.
 
 Compare o código do começo com o de agora. O entendimento está ou não está melhor? Se precisássemos fazer alguma alteração no código, ou escrever testes, em qual dos dois códigos você iria preferir trabalhar?
+
+
+## Para Fixar
+
+Observe o código abaixo e faça as alterações necessárias para que ele passe a respeitar o Princípio da Responsabilidade Única (SRP) .
+
+// ReadingTracker.ts
+type Book = {
+  book: string;
+  author: string;
+  genre: string;
+}
+
+class ReadingTracker {
+  private readingGoal: number;
+  private booksRead: number;
+  private wishlist: Book[];
+
+  constructor(readingGoal: number) {
+    this.readingGoal = readingGoal;
+    this.booksRead = 0;
+    this.wishlist = [];
+  }
+
+  trackReadings(readsCount: number) {
+    this.booksRead += readsCount;
+    if (this.booksRead >= this.readingGoal) {
+      this.progressNotification(
+        "Congratulations! You've reached your reading goal!"
+      );
+      return;
+    }
+    this.progressNotification(
+      "There are still some books to go!"
+    );
+  }
+
+  addToWishList(book: Book): void {
+    this.wishlist.push(book);
+  }
+
+  showWishlist(): void {
+    console.log(this.wishlist);
+  }
+
+  progressNotification(message: string): void {
+    console.log(message);
+  }
+}
+
+const readTracker = new ReadingTracker(20);
+readTracker.addToWishList({'The Road', 'Cormac McCarthy', 'Dystopia'});
+readTracker.showWishlist();
+readTracker.trackReadings(12);
+readTracker.trackReadings(9);
