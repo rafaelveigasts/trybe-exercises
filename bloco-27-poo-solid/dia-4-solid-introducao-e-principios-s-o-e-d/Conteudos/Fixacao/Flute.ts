@@ -6,8 +6,11 @@ class Flute {
 }
 
 class Musician {
-  // Agora a flauta é recebida como parâmetro
-  constructor(public name: string, public flute: Flute) { }
+  // Agora o parâmetro da flauta tem um valor padrão caso nenhuma seja passada
+  constructor(
+    public name: string,
+    public flute: Flute = new Flute('Minha flauta')
+  ) { }
 
   play() {
     this.flute.play();
@@ -17,6 +20,5 @@ class Musician {
   }
 }
 
-const flute = new Flute('Minha flauta');
-const musician = new Musician('Márcia', flute);
+const musician = new Musician('Márcia');
 musician.play();
