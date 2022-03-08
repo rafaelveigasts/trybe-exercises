@@ -637,3 +637,23 @@ readTracker.addToWishList({'The Road', 'Cormac McCarthy', 'Dystopia'});
 readTracker.showWishlist();
 readTracker.trackReadings(12);
 readTracker.trackReadings(9);
+
+## SRP Conclusão
+
+A mesma ideia utilizada aqui para as funções se aplica às classes: cada classe deve possuir somente uma finalidade. Isso também se aplica, em certo nível, à organização dos arquivos que contém nosso código.
+
+O código apresentado aqui foi um exemplo. Todas as funções ficaram no mesmo arquivo.
+
+Possivelmente as funções que fazem a conversão das notas numéricas em letras devessem ficar em um arquivo separado das funções que checam se a pessoa estudante foi aprovada ou não, visto que se agrupam de forma a obter resultados que não estão necessariamente ligados.
+
+Mas atenção!
+
+Você pode estar se perguntando agora: "Ora, mas era possível eu separar as funções em ainda mais responsabilidades diferentes! Eu não deveria fazer isso?". Não necessariamente!
+
+Como toda e qualquer técnica, esse princípio não é uma bala de prata . Ele não vai resolver todos os problemas do seu código. Além disso, o exercício de descrever o que a função faz e separar seus comportamentos de acordo com os verbos sempre será carregado de certa subjetividade.
+
+Sempre será possível dividir a sua função em partes menores, então lembre-se: o objetivo é ter código legível!
+
+Use o princípio para que ele te ajude a melhorar seu código mas não se torne refém dele. É só pensar que um código com várias funções pequenas demais também fica confuso e também dispara o alerta de complexidade cognitiva .
+
+Simplicidade e limpeza do código! É isso que você precisa buscar sempre. 😎
