@@ -49,64 +49,58 @@ readTracker.trackReadings(12);
 readTracker.trackReadings(9); */
 
 // ReadingTracker.ts
-import progressNotification from './notifications';
 
-class ReadingTracker {
+interface Notificator {
+  sendNotification(message: string): void;
+}
+
+class ConsoleNotification implements Notificator {
+  sendNotification(message: string) {
+    console.log(`Here we go again! - ${message}`)
+  }
+}
+
+class EmailNotification implements Notificator {
+  private email: string;
+  constructor(email: string) {
+    this.email = email;
+  }
+  sendNotification(message: string) {
+    console.log(
+      `Here should go the implementation to send notification to the email: ${this.email} - ${message}`
+    )
+  }
+}
+
+class PhoneNotification implements Notificator {
+  private phone: number;
+  constructor(phone: number) {
+    this.phone = phone;
+  }
+  sendNotification(message: string) {
+    console.log(
+      `Here should go the implementation to send notification to the phone ${this.phone} - ${message}`
+    );
+  }
+}
+
+export class ReadingTracker {
   private readingGoal: number;
   private booksRead: number;
-
-  constructor(readingGoal: number) {
+  constructor(readingGoal: number,  public notificator: Notificator = new ConsoleNotification()) {
     this.readingGoal = readingGoal;
     this.booksRead = 0;
   }
 
   trackReadings(readsCount: number) {
-    this.booksRead += readsCount;
+    this.booksRead += readsCount
     if (this.booksRead >= this.readingGoal) {
-      this.progressNotification(
+      this.notificator.sendNotification(
         "Congratulations! You've reached your reading goal!"
-      );
+      )
       return;
     }
-    this.progressNotification(
-      "There are still some books to go!"
-    );
+    this.notificator.sendNotification("There are still some books to go!")
   }
+  // Aqui viriam mais métodos, que fogem o escopo deste exercício 
 }
-
-const readTracker = new ReadingTracker(20);
-readTracker.trackReadings(12);
-readTracker.trackReadings(9);
-
-// BooksWishlist.ts
-type Book = {
-  book: string;
-  author: string;
-  genre: string;
-}
-
-class BooksWishlist {
-  private wishlist: Book[];
-  constructor(book: Book) {
-    this.wishlist = [];
-    this.wishlist.push(book);
-  }
-
-  addToWishList(newBook: Book): void {
-    this.wishlist.push(newBook);
-  }
-
-  showWishlist(): void {
-    return console.log(this.wishlist);
-  }
-}
-
-const wishlist = new BooksWishlist({book: 'The Road', author: 'Cormac McCarthy', genre: 'Dystopia'})
-wishlist.addToWishList({book: 'Misery', author: 'Stephen King', genre: 'Thriller'});
-wishlist.showWishlist();
-
-// notifications.ts
-
-export default function progressNotification(message: string): void {
-  console.log(message)
-};
