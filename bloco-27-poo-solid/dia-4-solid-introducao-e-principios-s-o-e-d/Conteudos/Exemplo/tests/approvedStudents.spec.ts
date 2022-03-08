@@ -1,15 +1,16 @@
 // ./tests/approvedStudents.spec.ts
 
 import { expect } from "chai";
+import {describe, it} from "mocha";
 import { approvedStudents } from "../src";
 
 const disciplinesDict = {
-  mathematics: 'matemática',
-  history: 'história',
+  mathematics: "matemática",
+  history: "história",
 };
 
 describe('Testando a função "approvedStudents"', function () {
-  describe('quando todas as notas são maiores que 0.7', function () {
+  describe("quando todas as notas são maiores que 0.7", function () {
     it('retorna "true"', function () {
       const disciplines = [
         { name: disciplinesDict.mathematics, grade: 0.8 },
@@ -17,7 +18,7 @@ describe('Testando a função "approvedStudents"', function () {
       ];
       const student = {
         name: "test",
-        disciplines: disciplines
+        disciplines: disciplines,
       };
       const result = approvedStudents(student);
 
@@ -25,7 +26,7 @@ describe('Testando a função "approvedStudents"', function () {
     });
   });
 
-  describe('quando todas as notas são menores que 0.7', function () {
+  describe("quando todas as notas são menores que 0.7", function () {
     it('retorna "false"', function () {
       const disciplines = [
         { name: disciplinesDict.mathematics, grade: 0.1 },
@@ -33,7 +34,7 @@ describe('Testando a função "approvedStudents"', function () {
       ];
       const student = {
         name: "test",
-        disciplines: disciplines
+        disciplines: disciplines,
       };
       const result = approvedStudents(student);
 
@@ -41,7 +42,7 @@ describe('Testando a função "approvedStudents"', function () {
     });
   });
 
-  describe('quando parte das notas são menores que 0.7', function () {
+  describe("quando parte das notas são menores que 0.7", function () {
     it('retorna "false"', function () {
       const disciplines = [
         { name: disciplinesDict.mathematics, grade: 0.5 },
@@ -49,7 +50,7 @@ describe('Testando a função "approvedStudents"', function () {
       ];
       const student = {
         name: "test",
-        disciplines: disciplines
+        disciplines: disciplines,
       };
       const result = approvedStudents(student);
 
