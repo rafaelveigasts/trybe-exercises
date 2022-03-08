@@ -148,3 +148,83 @@ Rode o código utilizando o comando ts-node src . Rode o linter utilizando o com
 Veja bem: nossas variáveis e funções têm bons nomes, o código faz o que se pede, usa Higher Order Functions e outros recursos do Typescript, mas ele está tão... difícil de entender! Não está? Podemos não saber exatamente o motivo, mas definitivamente precisamos quebrar a cabeça para acompanhar seu funcionamento. Não por acaso, no backend, esse código dispara vários erros no ESLint , além de alertar a alta complexidade cognitiva!
 
 Outro ponto de atenção que devemos ter é referente aos testes. Imagine que iremos escrever testes para a função setApproved , e perceba quantos comportamentos distintos precisaremos garantir para uma única função. Ou seja, a testabilidade desse código também não está legal.
+
+
+## SRP Exemplo "menos pior"
+
+Certo, então como escrevemos um código melhor? É aí que podemos acionar o single responsibility principle .
+
+O primeiro passo para acionar o princípio é ler atentamente o que foi pedido .
+
+No nosso caso, foi isso: "A sua primeira tarefa é criar uma função que, ao ser chamada, determina a aprovação ou não de uma pessoa estudante e atualiza seu status no banco de dados como Aprovada ou Reprovada . Além disso, as notas marcadas de 0% a 100% (0.0 a 1.0) devem ser convertidas para os conceitos de A a F " .
+
+Observe com atenção os termos destacados: a especificação pede que nosso código determine a aprovação, atualize seu status e converta as notas para conceitos de A a F . Fazemos tudo o que foi pedido, mas repare que a especificação descreve o que deve ser feito com três verbos: determinar, atualizar e converter. Daí já temos um code smell , uma pista. Devemos fazer três coisas diferentes!
+
+Vamos começar separando esses três comportamentos em funções diferentes:
+
+// ./src/index.ts
+
+type Discipline = {
+  name: string;
+  grade: number;
+  letterGrade?: string;
+};
+
+type Student = {
+  name: string;
+  disciplines: Discipline[];
+};
+
+/* "Converter" */
+const percentageGradesIntoLetters = ({ name, disciplines }: Student) => ({
+  name,
+  disciplines: disciplines.map(({ name, grade }) => {
+    let letterGrade;
+
+    if (grade >= 0.9) letterGrade = 'A';
+    else if (grade >= 0.8) letterGrade = 'B';
+    else if (grade >= 0.7) letterGrade = 'C';
+    else if (grade >= 0.6) letterGrade = 'D';
+    else if (grade >= 0.1) letterGrade = 'E';
+    else letterGrade = 'F';
+
+    return { name, grade, letterGrade };
+  })});
+
+/* "Determinar" */
+const approvedStudents = ({ disciplines }: Student): boolean =>
+  disciplines.every(
+    ({ grade }) => grade > 0.7
+  );
+
+/* "Atualizar" */
+const updateApprovalData = ({ name: studentName, disciplines }: Student): void => {
+  console.log(`A pessoa com nome ${studentName} foi aprovada!`);
+
+  disciplines.map(({ name, letterGrade }) =>
+    console.log(`${name}: ${letterGrade}`));
+};
+
+function setApproved(students: Student[]): void {
+  students
+    .map(percentageGradesIntoLetters)
+    .filter(approvedStudents)
+    .map(updateApprovalData);
+}
+
+/*
+  Não se esqueça que é necessário exportar ao final as funções para que você
+  possa testa-las
+*/
+export {
+  percentageGradesIntoLetters,
+  approvedStudents,
+  updateApprovalData,
+  setApproved,
+};
+
+Tudo que fizemos aqui foi jogar cada parte da lógica para uma função diferente. Pode parecer pouco, mas releia a função setApproved . Compare com a versão anterior. Só de separarmos nosso código em várias funções a leitura da função fica muito mais fácil!
+
+Agora não precisamos ler todo o código para saber exatamente o que a função faz! Além disso nosso código está mais testável, podemos escrever testes unitários para cada função muito mais facilmente.
+
+Podemos, por exemplo, testar unitariamente se a função approvedStudents está se comportando conforme esperado:
