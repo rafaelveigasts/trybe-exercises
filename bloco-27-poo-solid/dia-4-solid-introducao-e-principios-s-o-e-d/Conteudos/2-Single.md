@@ -486,3 +486,99 @@ export {
   setApproved,
   getLetterGrades,
 };
+
+Rode o linter utilizando o comando npm run lint para validarmos o que fizemos até agora.
+E pronto! A função percentageGradesIntoLetters está ou não está mais legível agora?! A cada iteração estamos fazendo pequenas melhorias no código separando suas responsabilidades, mas ao fazer isso estamos, aos poucos, deixando ele melhor! E, simplesmente fazendo um esforço para separar responsabilidades, a complexidade cognitiva sumiu! No que se refere ao Single Responsibility Principle , nossa missão está concluída!
+
+Vamos também adaptar um novo teste usando o percentageGradesIntoLetters.spec.ts como base, para chamar diretamente a nova função getLetterGrades :
+
+// ./tests/getLetterGrades.spec.ts
+
+import { expect } from 'chai';
+import { getLetterGrades } from '../src';
+
+const disciplinesDict = {
+  mathematics: 'matemática',
+};
+
+describe('Testando a função "getLetterGrades"', function () {
+  describe('quando a nota é maior ou igual a 0.9', function () {
+    it('retorna "A"', function () {
+      const discipline = { name: disciplinesDict.mathematics, grade: 0.9 };
+
+      const {
+        letterGrade,
+      } = getLetterGrades(discipline);
+
+      expect(letterGrade).to.be.equals('A');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.8 e menor que 0.9', function () {
+    it('retorna "B"', function () {
+      const discipline = { name: disciplinesDict.mathematics, grade: 0.8 };
+
+      const {
+        letterGrade,
+      } = getLetterGrades(discipline);
+
+      expect(letterGrade).to.be.equals('B');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.7 e menor que 0.8', function () {
+    it('retorna "C"', function () {
+      const discipline = { name: disciplinesDict.mathematics, grade: 0.7 };
+
+      const {
+        letterGrade,
+      } = getLetterGrades(discipline);
+
+      expect(letterGrade).to.be.equals('C');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.6 e menor que 0.7', function () {
+    it('retorna "D"', function () {
+      const discipline = { name: disciplinesDict.mathematics, grade: 0.6 };
+
+      const {
+        letterGrade,
+      } = getLetterGrades(discipline);
+
+      expect(letterGrade).to.be.equals('D');
+    });
+  });
+
+  describe('quando a nota é maior ou igual a 0.1 e menor que 0.6', function () {
+    it('retorna "E"', function () {
+      const discipline = { name: disciplinesDict.mathematics, grade: 0.1 };
+
+      const {
+        letterGrade,
+      } = getLetterGrades(discipline);
+
+      expect(letterGrade).to.be.equals('E');
+    });
+  });
+
+  describe('quando a nota é menor que 0.1', function () {
+    it('retorna "F"', function () {
+      const discipline = { name: disciplinesDict.mathematics, grade: 0.05 };
+
+      const {
+        letterGrade,
+      } = getLetterGrades(discipline);
+
+      expect(letterGrade).to.be.equals('F');
+    });
+  });
+});
+
+Rode novamente os testes usando o comando npm run test ;
+
+Rode novamente o linter utilizando o comando npm run lint . Agora não é esperado nenhum problema.
+
+Perceba que da mesma forma como simplificamos o entendimento de nosso código simplificamos também a testabilidade dele, sendo possível escrever testes cada vez mais simples e legíveis.
+
+Compare o código do começo com o de agora. O entendimento está ou não está melhor? Se precisássemos fazer alguma alteração no código, ou escrever testes, em qual dos dois códigos você iria preferir trabalhar?
