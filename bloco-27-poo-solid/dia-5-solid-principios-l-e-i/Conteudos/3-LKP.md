@@ -211,3 +211,18 @@ const conn = new RedisConnector({
   port: 6379});
 
 // O resto do index.ts continua igualzinho 😎
+
+
+## LSP Conclusão
+
+Felicidades: agora você já tem sua superclasse (neste caso uma interface) Connector , e como MySQLConnector e RedisConnector estendem (neste caso, implementam) Connector , você pode tranquilamente passar qualquer uma dessas duas onde Connector seja esperada.
+
+Algumas considerações sobre o LSP:
+
+A ideia principal é que você deve manter a assinatura dos métodos das subclasses idênticos aos da superclasse (o TypeScript já te obriga a isto, mas existem linguagens que não o fazem).
+
+Os métodos implementados nas subclasses devem possuir a mesma assinatura e a mesma semântica , ou seja, devem fazer a mesma coisa. É importante ressaltar isso, pois nada te impede de manter a assinatura, mas utilizar os dados para fazer algo completamente diferente, o que semanticamente quebra o princípio.
+
+As validações dos dados necessários para o correto funcionamento do método criado na subclasse não devem ser mais estritas. Ex: Imagine que RedisConnector.incrementCount faça uma verificação do tamanho do token antes de prosseguir. Como essa verificação não existe e não é esperada em Connector , pode ser que dê algum erro em algum lugar onde Connector era esperada e RedisConnector foi passada, o que fere o princípio.
+
+Por último, mas não menos importante, é bom lembrar que é só um princípio, e não uma lei. Use conforme a necessidade 😉.
