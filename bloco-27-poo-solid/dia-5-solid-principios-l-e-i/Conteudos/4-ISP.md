@@ -172,3 +172,17 @@ const main = async (connector: ReadOnlyConnector) => {
 }
 
 main(conn);
+
+## Aproveitando o LSP
+Perceba que se você passar um objeto instância da RedisConnector para a main que espera um ReadOnlyConnector você não recebe nenhum erro, visto que RedisConnector é "subclasse" de ReadOnlyConnector (sim, é uma interface, mas você entendeu), fazendo com que o princípio de substituição de Liskov seja mantido.
+
+Outro ponto bom de RedisConnector herdar de ReadOnlyRedisConnector (ao invés de ser uma cópia com mais métodos) é que havendo necessidade de modificar alguma coisa no método getCount , por exemplo, você só precisa modificar um arquivo: o ReadOnlyRedisConnector.ts , e a mudança automaticamente passa para a classe RedisConnector .
+
+## ISP Conclusão
+
+O ISP garante que cada classe tenha que implementar somente métodos que de fato ela vai precisar, deixando para outras a tarefa de implementar métodos adicionais. Isso colabora também com o SRP visto ontem.
+
+Como você pode perceber, os princípios SOLID são altamente ligados e coesos, e implementar um muitas vezes implica em implementar outro.
+
+Ao implementar os 5, você passa a ter códigos mais fáceis de entender, de manter e de escalar, e é por isso que as empresas adoram pessoas desenvolvedoras que os saibam 😄.
+
