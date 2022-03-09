@@ -201,3 +201,15 @@ Saída:
 27
 30
 */
+
+Para testar, rode o comando npx ts-node src no terminal bash do container .
+
+O index.ts simula algumas requisições que incrementam a quantidade de acessos à API utilizando o token especificado, por meio da função doSomeIncrements . No começo de cada lote de requisições, ele loga a contagem atual com a função logCount . Observe que a função doSomeIncrements é chamada a cada 500 milissegundos por 10 vezes, graças ao laço for . Por fim, é feito um log do último valor e, em seguida, o contador é limpo e a conexão é encerrada.
+
+## O problema do MySQL
+
+Até então, você possui o arquivo Connector.ts que atende bem as suas necessidades.
+
+Entretanto, cada vez mais clientes acessam sua API, e o banco SQL não consegue mais dar conta de tantos acessos, devido à sua baixa velocidade.
+
+A chefia te avisa pra resolver esse problema recriando a estrutura do banco com o Redis . Vamos ver como o Princípio de Substituição de Liskov (ou LSK) nos ajuda com isso?
