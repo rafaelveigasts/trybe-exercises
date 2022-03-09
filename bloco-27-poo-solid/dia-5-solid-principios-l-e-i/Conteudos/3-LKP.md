@@ -50,3 +50,164 @@ export interface ConnectorConstructor {
 }
 
 export default Connector;
+
+
+## Usando as interfaces nas classes
+
+Agora é bem simples: criamos a classe RedisConnector que implementa a interface Connector (bem como fazemos a MySQLConnector implementar a Connector também).
+
+Em seguida mudamos nosso index.ts para realizar as importações pertinentes, e utilizar a interface Connector como tipo da variável connector .
+
+A estrutura do projeto está assim:
+
+Projeto
+|   docker-compose.yml
+|   package-lock.json
+|   package.json
+|   
+\---src
+    |   index.ts
+    |   
+    \---Connectors
+        |   Connector.ts
+        |   index.ts
+        |   
+        +---mysql
+        |       MySQLConnector.ts
+        |       
+        \---redis
+                RedisConnector.ts
+
+
+
+Mais código = menos confusão:
+
+
+
+// ./src/Connectors/redis/RedisConnector.ts
+
+import redis, { RedisClient } from 'redis';
+import Connector, { ConnectorConstructor } from '../Connector';
+
+export default class RedisConnector implements Connector {
+
+  protected client: RedisClient;
+
+  constructor(config: ConnectorConstructor) {
+    this.client = redis.createClient(config);
+    return this;
+  }
+
+  public async getCount(token: string): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.client.get(token, (error, reply) => {
+        if (error) reject(error);
+        else resolve(parseInt(reply as string, 10));
+      });
+    });
+  }
+
+  public closeConnection(): void {
+    this.client.quit();
+  }
+
+  public incrementCount(token: string): void {
+    this.client.incr(token);
+  }
+
+  public clearCount(token: string): void {
+    this.client.set(token, '0');
+  }
+
+  public firstCount = this.clearCount;
+}
+
+
+
+
+// ./src/Connectors/mysql/MySQLConnector.ts
+
+import mysql, { Connection } from 'mysql';
+import Connector, { ConnectorConstructor } from '../Connector';
+
+export default class MySQLConnector implements Connector {
+  private connection: Connection;
+
+  constructor(config: ConnectorConstructor) {
+    this.connection = mysql.createConnection({ ...config, database: undefined });
+    this.connection.connect();
+    const queries = [
+      `CREATE DATABASE IF NOT EXISTS ${config.database};`,
+      `USE ${config.database};`,
+      'CREATE TABLE IF NOT EXISTS counter (token CHAR(36) UNIQUE, count INT);',
+    ];
+    queries.forEach((query) => this.connection.query(query));
+  }
+
+  public async getCount(token: string): Promise<number> {
+    const query = `SELECT count FROM counter WHERE token='${token}';`;
+
+    return new Promise((resolve, reject) => {
+      this.connection.query(query, (error, results) => {
+        if (error) return reject(error);
+
+        let result = parseInt(results[0].count, 10);
+        result = Number.isNaN(result) ? 0 : result;
+        resolve(result);
+      });
+    });
+  }
+
+  public incrementCount(token: string): void {
+    this.connection.query(`UPDATE counter SET count = count + 1 WHERE token='${token}';`);
+  }
+
+  private async updateCount(token: string, value: number) {
+    this.connection.query(`UPDATE counter SET count=${value} WHERE token='${token}';`);
+  }
+
+  public clearCount(token: string): void {
+    this.updateCount(token, 0);
+  }
+
+  public firstCount(token: string): void {
+    this.connection.query(`INSERT IGNORE INTO counter VALUES('${token}', 0);`);
+  }
+
+  public closeConnection(): void {
+    this.connection.end();
+  }
+}
+
+
+
+
+
+// ./src/Connectors/index.ts
+
+import Connector, { ConnectorConstructor } from "./Connector";
+import MySQLConnector from "./mysql/MySQLConnector";
+import RedisConnector from "./redis/RedisConnector";
+
+export default Connector;
+export {
+  Connector,
+  ConnectorConstructor,
+  MySQLConnector,
+  RedisConnector
+};
+
+
+
+
+
+// ./src/index.ts
+
+import { Connector, RedisConnector } from "./Connectors";
+
+const token = 'ce42033d-9133-457a-a1a1-41ac0b63a333';
+const conn = new RedisConnector({
+  host: 'redisdb',
+  port: 6379});
+
+// O resto do index.ts continua igualzinho 😎
