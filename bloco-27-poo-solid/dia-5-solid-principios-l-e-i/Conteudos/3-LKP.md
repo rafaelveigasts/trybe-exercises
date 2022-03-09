@@ -22,3 +22,31 @@ Crie também as pastas src/Connectors/mysql/ e src/Connectors/redis/ , bem como 
 **mkdir -p src/Connectors/mysql src/Connectors/redis/ && touch src/Connectors/mysql/MySQLConnector.ts src/Connectors/redis/RedisConnector.ts**
 
 O arquivo src/Connectors/mysql/MySQLConnector.ts é o antigo arquivo src/Connector.ts , então você pode simplesmente renomeá-lo e colocá-lo nesta pasta correta ou copiar seu conteúdo para o arquivo no diretório novo e apagá-lo.
+
+## As interfaces
+
+Vamos extrair os métodos importantes da nossa atual MySQLConnector em uma interface, e agrupar junto com a já existente ConnectorConstructor no seu devido lugar:
+
+// .src/Connectors/Connector.ts
+
+export interface Connector {
+  getCount(token: string): number | Promise<number>;
+
+  incrementCount(token: string): void;
+  
+  closeConnection(): void;
+
+  clearCount(token: string): void;
+
+  firstCount(token: string): void;
+}
+
+export interface ConnectorConstructor {
+  host: string;
+  port: number;
+  database?: string;
+  user?: string;
+  password?: string;
+}
+
+export default Connector;
