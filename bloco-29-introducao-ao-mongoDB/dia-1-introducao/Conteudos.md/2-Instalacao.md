@@ -100,3 +100,20 @@ mongoimport : ferramenta para importar arquivos JSON , CSV ou TSV para uma inst�
 
 mongoexport : exporta dados de uma instância do MongoDB para arquivos JSON ou CSV .
 
+## Executando o MongoDB Community Edition
+
+### Considerações sobre o ulimit
+
+Alguns sistemas operacionais baseados em UNIX limitam os recursos de sistema que uma sessão pode utilizar. Esses limites têm grande impacto negativo para a operação do MongoDB, e em ambientes de produção devem ser observados com muita atenção. Veja a seção UNIX ulimit Settings da documentação do MongoDB para maiores informações.
+
+### Diretórios de trabalho
+
+Se você instalou o MongoDB via apt (gerenciador de pacotes do Linux), então algumas configurações são executadas e mantidas em diretórios do sistema operacional. Por padrão, no Linux, os dados ficarão armazenados em /var/lib/mongodb , e o log de funcionamento em /var/log/mongodb .
+
+No MacOS, os dados e os logs ficam em /usr/local/var/mongodb e /usr/local/var/log/mongodb , respectivamente.
+
+Por padrão, o MongoDB roda utilizando a conta do usuário mongodb , que também foi criada durante a instalação. Se você quiser rodar uma instância com outro usuário, deverá dar as permissões para ele nos diretórios de dados e log.
+
+### Arquivo de configuração
+
+O pacote oficial inclui um arquivo de configuração https://docs.mongodb.com/manual/reference/configuration-options/#conf-file ( /etc/mongod.conf ). Essas configurações (como especificação dos caminhos dos diretórios de dados e log) têm efeito após o startup da instância (ou seja, quando ela for iniciada). Logo, se você fizer qualquer modificação nesse arquivo com a instância do MongoDB rodando, deverá reiniciá-la para que tenha efeito.
