@@ -13,7 +13,7 @@ $in ( in , dentro de)
 $nin ( not in , não está dentro de)
 
 ### Utilizar os operadores lógicos
-$and ( and , se todas as condições forem verdadeiras retorna true )
+$and ( and , se todas as condições forem verdadeiras retorna true ) 
 $or ( or , se apenas uma condição for verdadeira retorna true )
 Compor filtros avançados com
 $not ( not , inverte o resultado da expressão)
@@ -31,4 +31,5 @@ deleteMany() ( deleteMany , remove todos os documentos que satisfazem o filtro)
 deleteOne() ( deleteOne , remove apenas um documento que satisfaz o filtro)
 
 ## Por que isso é importante?
+
 Filtrar dados é uma das principais ações realizadas em um banco de dados. Então, para tirar o máximo de proveito disso e conseguir fazer boas buscas, é necessário conhecer os diferentes operadores de filtro que podem ser utilizados em suas consultas.
