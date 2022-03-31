@@ -1,0 +1,186 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('cinema');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.movies.drop();
+
+// Insert a few documents into the sales collection.
+db.movies.insertMany([
+ {
+    title: "Batman",
+    category: [
+      "action",
+      "adventure"
+    ],
+    imdbRating: 7.7,
+    budget: 35,
+    ratings: [
+      85,
+      100,
+      102,
+      105
+    ],
+    description: "The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker."
+  },
+  {
+    title: "Godzilla",
+    category: [
+      "action",
+      "adventure",
+      "sci-fi"
+    ],
+    imdbRating: 6.6,
+    budget: 10,
+    ratings: [
+      78,
+      52,
+      95,
+      102
+    ],
+    description: "The world is beset by the appearance of monstrous creatures, but one of them may be the only one who can save humanity."
+  },
+  {
+    title: "Home Alone",
+    category: [
+      "family",
+      "comedy"
+    ],
+    imdbRating: 7.4,
+    ratings: [
+      200,
+      99,
+      65
+    ],
+    description: "An eight-year-old troublemaker must protect his house from a pair of burglars when he is accidentally left home alone by his family during Christmas vacation."
+  },
+]);
+
+// Utilizando o operador $all , retorne todos os filmes que contenham action e adventure no array category .
+db.movies.find({category: {$all: ["action", "adventure"]}})
+// Agora retorne os filmes que contenham action no array category e possuem nota do IMDB maior do que 7 .
+// Retorne todos os filmes com ratings maior do que 103 , exibindo apenas os campos title e ratings .
+db.movies.find({category: {$all: ["action"]}, imdbRating: {$gt: 7}})
+
+// Retorne todos os filmes com ratings entre 100 e 105 , exibindo apenas os campos title e ratings .
+db.movies.find(
+  {
+    ratings: 
+    {
+      $gt: 100, $lt: 105
+    }
+  },
+    {
+      title: 1,
+      ratings: 1
+    });
+
+// Retorne todos os filmes com ratings entre 64 e 105 e divisíveis por 9 , exibindo apenas os campos title e ratings .
+db.movies.find(
+  {
+    ratings: 
+    {
+      $gt: 64, $lt: 105, $mod: [9, 0]
+    }
+  },
+    {
+      title: 1,
+      ratings: 1
+    });
+
+// Retorne os filmes da categoria adventure e com ratings maior do que 103 , exibindo apenas os campos title , ratings e category .
+db.movies.find(
+  {
+    category: "adventure",
+    ratings: {$gt: 103}
+  },
+    {
+      title: 1,
+      ratings: 1,
+      category: 1
+    });
+
+
+// Retorne somente o título de todos os filmes com dois elementos no array category .
+db.movies.find(
+  {
+    category: {$size: 2}
+  },
+    {
+      title: 1
+    });
+
+
+// Retorne somente o título de todos os filmes com quatro elementos no array ratings .
+db.movies.find(
+  {
+    ratings: {$size: 4}
+  },
+    {
+      title: 1
+    });
+
+// Busque os filmes em que o módulo 5 do campo budget seja 0 e que o array category tenha tamanho 2 .
+db.movies.find(
+  {
+    budget: {$mod: [5, 0]},
+    category: {$size: 2}
+  },
+    {
+      title: 1
+    });
+
+// Retorne os filmes da categoria "sci-fi" ou que possua o ratings maior do que 199 , exibindo apenas os campos title , ratings e category .
+db.movies.find(
+  {
+    $or: [
+      {category: "sci-fi"},
+      {ratings: {$gt: 199}}
+    ]
+  },
+    {
+      title: 1,
+      ratings: 1,
+      category: 1
+    });
+
+// Retorne os filmes em que o ratings possua tamanho 4 e que seja da category "adventure" ou "family" , mas que não tenha o imdbRating menor que 7.
+db.movies.find(
+  {
+    $and: [
+      {ratings: {$size: 4}},
+      {$or: [
+        {category: "adventure"},
+        {category: "family"}
+      ]},
+      {imdbRating: {$gt: 7}}
+    ]
+  },
+    {
+      title: 1,
+      ratings: 1,
+      category: 1
+    });
+
+// Utilizando o operador $regex , retorne todos os filmes em que a descrição comece com a palavra "The" .
+db.movies.find(
+  {
+    description: {$regex: /^The/}
+  },
+    {
+      title: 1
+    });
+
+// Utilizando o operador $regex , retorne todos os filmes em que a descrição termine com a palavra "humanity." .
+db.movies.find(
+  {
+    description: {$regex: /humanity.$/}
+  },
+    {
+      title: 1
+    });
