@@ -20,27 +20,28 @@
       }
     };
 
-    // public create = async (req: Request, res: Response): Promise<Response> => {
-    //   try {
-    //     const book = await this.bookService.createBook(req.body);
-    //     return res.status(201).send(book);
-    //   } catch (err: unknown) {
-    //     return res.status(500).send({ message: this.notFound });
-    //   }
-    // };
+    public create = async (req: Request, res: Response): Promise<Response> => {
+      try {
+        const book = await this.bookService.createBook(req.body);
+        return res.status(201).send(book);
+        console.log('controller', req.body);
+      } catch (err: unknown) {
+        return res.status(500).send({ message: this.notFound });
+      }
+    };
 
-    // public getBook = async (req: Request, res: Response): Promise<Response> => {
-    //   try {
-    //     const { id } = req.params;
-    //     const book = await this.bookService.getBook(id);
-    //     if (book) {
-    //       return res.status(200).send(book);
-    //     }
-    //     return res.status(404).send({ message: this.notFound });
-    //   } catch (err: unknown) {
-    //     return res.status(500).send({ message: this.internalError });
-    //   }
-    // };
+    public getBook = async (req: Request, res: Response): Promise<Response> => {
+      try {
+        const { id } = req.params;
+        const book = await this.bookService.getBook(id);
+        if (book) {
+          return res.status(200).send(book);
+        }
+        return res.status(404).send({ message: this.notFound });
+      } catch (err: unknown) {
+        return res.status(500).send({ message: this.internalError });
+      }
+    };
 
     public updateBook = async (req: Request, res: Response):
     Promise<Response> => {
@@ -56,19 +57,19 @@
       }
     };
 
-    // public deleteBook = async (req: Request, res: Response):
-    // Promise<Response> => {
-    //   try {
-    //     const { id } = req.params;
-    //     const book = await this.bookService.deleteBook(id);
-    //     if (book) {
-    //       return res.status(200).send(book);
-    //     }
-    //     return res.status(404).send({ message: this.notFound });
-    //   } catch (err: unknown) {
-    //     return res.status(500).send({ message: this.internalError });
-    //   }
-    // };
+    public deleteBook = async (req: Request, res: Response):
+    Promise<Response> => {
+      try {
+        const { id } = req.params;
+        const book = await this.bookService.deleteBook(id);
+        if (book) {
+          return res.status(200).send(book);
+        }
+        return res.status(404).send({ message: this.notFound });
+      } catch (err: unknown) {
+        return res.status(500).send({ message: this.internalError });
+      }
+    };
   }
 
   export default BookController;
