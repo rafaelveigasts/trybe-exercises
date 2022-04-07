@@ -19,3 +19,24 @@ Ele recebe dois argumentos, o primeiro é um filtro, o meio que você usará par
   }
 
 // ...
+
+Tente atualizar algum dos documentos por meio da rota '/books/:id'.
+
+É essencial descomentar os trechos de código que referenciam este método no Service , no Controller e no routes .
+
+Você reparou que o documento retornado é a versão antes da atualização feita? Se isso não é o que você quer, há uma forma de retornar a versão do documento com as atualizações recém aplicadas. Para isso, você precisará definir mais um argumento, o new , setando seu valor para true .
+
+// models/BookModel.ts
+
+// ...
+
+//   public async editBook(id: string, bookData: object): Promise<IBook | null> {
+//     const book = await this.bookModel.findOneAndUpdate(
+//       { _id: id },
+//       { ...bookData },
+         { new: true },
+//     );
+//     return book;
+//   }
+
+// ...
