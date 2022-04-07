@@ -14,6 +14,14 @@ class BookModel {
     const books = await this.bookModel.find();
     return books;
   }
+
+  public async editBook(id: string, bookData: object): Promise<IBook | null> {
+    const book = await this.bookModel.findOneAndUpdate(
+      { _id: id },
+      { ...bookData },
+    );
+    return book;
+  }
 }
 
 export default BookModel;

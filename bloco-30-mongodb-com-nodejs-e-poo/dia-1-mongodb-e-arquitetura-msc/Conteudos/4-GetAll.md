@@ -112,3 +112,18 @@ Com isso feito, inicie a aplicação com npm run dev e faça uma requisição GE
 
 Certifique-se que seu container ou o server local do MongoDB está rodando, ao inicializar a aplicação.
 
+## Para Fixar
+Vamos praticar o que vimos inserindo dados em uma coleção Movies , que popularemos da seguinte forma:
+
+use model_example
+db.movies.insertMany([
+    { title: 'The Exorcist', releaseYear: 1971 },
+    { title: 'Jaws', releaseYear: 1975 },
+    { title: 'The Bride of Frankenstein', releaseYear: 1935 },
+    { title: 'The Creature of the Black Lagoon', releaseYear: 1954 },
+    { title: 'The Invisible Man', releaseYear: 1933 },
+    { title: 'Nosferatu', releaseYear: 1922 },
+    { title: 'The Mummy', releaseYear: 1933 },
+]);
+
+Utilizando MongoDB com Mongoose, liste todos os filmes da collection Movies com o método getAll , utilizando o MongoDB como banco de dados.
