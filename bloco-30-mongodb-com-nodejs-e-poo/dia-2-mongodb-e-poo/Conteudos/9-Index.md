@@ -1,3 +1,6 @@
+## Index
+O ápice do desenvolvimento de nossa aplicação culmina no arquivo src/index.ts , no qual são criados os objetos das classes que viemos desenvolvendo, e por fim é inicializado o servidor.
+
   // src/index.ts
   import FrameController from './Controllers/Frame';
   import LensController from './Controllers/Lens';
@@ -21,3 +24,4 @@
   server.addRouter(frameRouter.router);
 
   server.startServer();
+  
