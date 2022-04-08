@@ -104,3 +104,5 @@ Seguiremos a mesma lógica vista acima, para a criação de LensService .
   export default LensService;
 
 
+Para fixar
+Utilizando-se dos conceitos abordados até aqui, reflita sobre as principais vantagens da criação de uma classe abstrata para Services .
