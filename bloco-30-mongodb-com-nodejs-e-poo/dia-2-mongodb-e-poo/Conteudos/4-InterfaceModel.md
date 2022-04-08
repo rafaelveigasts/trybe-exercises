@@ -48,3 +48,40 @@ Observe que MongoModel continua recebendo um genérico T , pois essa classe pode
 Além disso todas os métodos estão implementados com o uso do atributo protegido model . Observe que o tipo deste model é o tipo Model presente no mongoose , mas como haveria conflito com a nossa interface homônima, utilizamos o alias M para o Model do mongoose . Não só isso, este M recebe também um genérico, que nada mais é do que a junção do tipo do seu model com o Document do mongoose .
 
 Vamos olhar a criação dos models específicos para compreender melhor.
+
+
+## Models
+Vamos construir nosso primeiro model, esse será o model da armação de nossos óculos que serão produzidos.
+
+  // src/Models/Frame.ts
+
+  import { Schema, model as createModel, Document } from 'mongoose';
+  import Frame from '../Interfaces/Frame';
+  import MongoModel from './MongoModel';
+
+  interface FrameDocument extends Frame, Document { }
+
+  const frameSchema = new Schema<FrameDocument>({
+    material: String,
+    color: String,
+  });
+
+  class FrameModel extends MongoModel<Frame> {
+    constructor(model = createModel('Armacoes', frameSchema)) {
+      super(model);
+    }
+  }
+
+  export default FrameModel;
+
+
+O mongoose solicita que, ao criarmos um model com a função createModel , passemos a ela um esquema ( Schema ) que deverá ser respeitado. Esse esquema deve ter o tipo do model a ser criado e também do Document do mongoose . Ou seja, deve ser um tipo que estenda estes dois. Isso é necessário para quando o nosso objeto criado pelo model tenha todos esses métodos e atributos disponíveis para usarmos. Por este motivo, vamos começar pela interface que vai tipar nosso esquema.
+
+Criamos uma interface com o nome de FrameDocument , por ser uma interface que estende as interfaces Frame e Document . Ao criarmos nosso Schema, chamado de frameSchema , passamos como genérico o FrameDocument . Em seguida, ao criarmos o model com a createModel , passamos como segundo parâmetro o frameSchema .
+
+Veja que só definimos o nome do nosso model importado do mongoose como createModel , para não criar confusão com o Model importado da interface.
+
+Observe que interessante: bastou a gente criar o esquema e sobrescrever o construtor com o valor padrão do model e pronto, temos uma classe que funciona como model para nosso Frame, com todos os métodos (create, read, readOne) agindo em cima do banco mongodb.
+
+Seguiremos a mesma lógica vista acima, para a criação de LensModel .
+
