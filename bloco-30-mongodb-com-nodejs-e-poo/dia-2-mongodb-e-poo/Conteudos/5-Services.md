@@ -79,3 +79,28 @@ Já o método create precisa realizar validações específicas da criação de 
 Essa validação é feita por meio do método safeParse do esquema criado com o Zod , que neste caso é o frameSchema . Se o objeto não estiver de acordo com o esquema, a propriedade (chave) success do objeto de retorno do safeParse passa a possuir o valor false , e o erro de validação fica na chave error . O Zod oferece também o método schema.parse , que levanta um erro ao invés de retornar um valor. Você pode usá-lo caso ache melhor para a sua aplicação. Ao rodar o código completo no final do exemplo do dia, você poderá observar que havendo alguma inconsistência nos dados, como ausência de campo, um tipo de dado que seja divergente do esperado ou até mesmo validação da quantidade de caracteres de uma string em nosso frameSchema , a pessoa usuária receberá como resposta da requisição um objeto contendo a mensagem de erro detalhada.
 
 Seguiremos a mesma lógica vista acima, para a criação de LensService .
+
+
+  // src/Services/Lens.ts
+
+  import Lens, { lensSchema } from '../Interfaces/Lens';
+  import Service, { ServiceError } from '.';
+  import LensModel from '../Models/Lens';
+
+  class LensService extends Service<Lens> {
+    constructor(model = new LensModel()) {
+      super(model);
+    }
+
+    create = async (obj: Lens): Promise<Lens | ServiceError | null> => {
+      const parsed = lensSchema.safeParse(obj);
+      if (!parsed.success) {
+        return { error: parsed.error };
+      }
+      return this.model.create(obj);
+    };
+  }
+
+  export default LensService;
+
+
