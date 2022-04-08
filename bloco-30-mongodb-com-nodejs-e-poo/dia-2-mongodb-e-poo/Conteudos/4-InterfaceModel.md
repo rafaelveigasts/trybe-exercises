@@ -85,3 +85,28 @@ Observe que interessante: bastou a gente criar o esquema e sobrescrever o constr
 
 Seguiremos a mesma lógica vista acima, para a criação de LensModel .
 
+
+  // src/Models/Lens.ts
+
+  import { Schema, model as createModel, Document } from 'mongoose';
+  import Lens from '../Interfaces/Lens';
+  import MongoModel from './MongoModel';
+
+  interface LensDocument extends Lens, Document { }
+
+  const lensSchema = new Schema<LensDocument>({
+    degree: Number,
+    antiGlare: Boolean,
+    blueLightFilter: Boolean,
+  });
+
+  class LensModel extends MongoModel<Lens> {
+    constructor(model = createModel('Lenses', lensSchema)) {
+      super(model);
+    }
+  }
+
+  export default LensModel;
+
+
+Impressionante o poder da orientação a objetos. Podemos criar diversas classes para diversos models, apenas criando o esquema (exigido pelo mongoose ) e herdando de MongoModel . Além disso, se for necessário, os métodos do CRUD podem ser sobrescritos na subclasse, de forma a implementar validações ou regras específicas para um model específico.

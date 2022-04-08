@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const lensSchema = z.object({
   degree: z.number(),
-  anriGlare: z.boolean(),
+  antiGlare: z.boolean(),
   blueLightFilter: z.boolean(),
 });
 
