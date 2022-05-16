@@ -1,6 +1,9 @@
-Acessando uma VPS
-Por questões de segurança, o acesso à VPS deve ser feito via SSH, preferencialmente utilizando criptografia assimétrica. A criptografia assimétrica funciona por meio de duas chaves, uma pública e uma privada. A chave privada deve ficar somente com você, e ninguém mais deve ver (isso inclui outros computadores, ou seja, nada de compartilhar a chave privada). Já a chave pública pode ser tranquilamente compartilhada.
-Acesso com login e senha
+## Acessando uma VPS
+P
+or questões de segurança, o acesso à VPS deve ser feito via SSH, preferencialmente utilizando criptografia assimétrica. A criptografia assimétrica funciona por meio de duas chaves, uma pública e uma privada. A chave privada deve ficar somente com você, e ninguém mais deve ver (isso inclui outros computadores, ou seja, nada de compartilhar a chave privada). Já a chave pública pode ser tranquilamente compartilhada.
+
+## Acesso com login e senha
+
 Apesar do uso de uma dupla de chaves ser o mais seguro e melhor, por mais que algumas fornecedoras de VPS ofereçam a opção de colar uma chave pública ou já criar um par de chaves, é provável que, ao contratar uma VPS, você receba um endereço IP https://pt.wikipedia.org/wiki/Endere%C3%A7o_IP e te peçam para criar uma senha.
 Para acessar a VPS basta utilizar o comando ssh user@ip e digitar a senha quando for solicitado, onde user neste primeiro momento é root e ip é o endereço IP estático na VPS. Exemplo:
 
@@ -59,7 +62,7 @@ A tela de início do sistema varia de acordo com sistema operacional, versão de
 Reiterando: por mais que na primeira vez que você acessar a VPS recém contratada você consiga fazer isso utilizando login e senha, esta não é a forma mais segura. É interessante neste caso configurar o acesso via SSH por meio de um conjunto de chaves pública e privada. Para isso, o primeiro passo é criar estas chaves.
 
 
-Configurando o SSH client
+## Configurando o SSH client
 Se você já tem ou já sabe gerar um par de chaves, pode pular esta parte. Utilizando o utilitário ssh-keygen (que vem junto com a instalação do OpenSSH https://www.openssh.com/ , já inclusa no Ubuntu) podemos gerar as duas chaves de uma só vez:
 
 
@@ -69,7 +72,7 @@ ssh-keygen
 A saída do comando deve ser algo como
 
 
-Generating public/private rsa key pair.
+## Generating public/private rsa key pair.
 Enter file in which to save the key (/home/USERNAME/.ssh/id_rsa):
 Created directory '/home/USERNAME/.ssh'.
 Enter passphrase (empty for no passphrase):
