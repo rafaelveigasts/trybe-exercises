@@ -11,7 +11,7 @@ docker pull python
 # Baixe uma versão específica
 docker pull python:tag
 
-Observação: troque a palavra tag pela versão desejada.
+Observação: troque a palavra tag https://hub.docker.com/_/python pela versão desejada.
 Execute o REPL a partir da imagem baixada:
 
 docker run -it --rm python:tag
