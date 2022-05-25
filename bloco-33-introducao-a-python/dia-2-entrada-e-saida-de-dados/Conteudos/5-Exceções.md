@@ -24,7 +24,7 @@ print('2' + 2)
 #   File "<stdin>", line 1, in <module>
 # TypeError: can only concatenate str (not "int") to str
 
-Observe que, apenas no exemplo acima, podemos observar três exceções: ZeroDivisionError, NameError e TypeError. A lista completa de exceções já embutidas na linguagem pode ser vista aqui.
+Observe que, apenas no exemplo acima, podemos observar três exceções: ZeroDivisionError, NameError e TypeError. A lista completa de exceções já embutidas na linguagem pode ser vista aqui https://docs.python.org/pt-br/3/library/exceptions.html#bltin-exceptions .
 
 ## Tratamento de exceções
 
