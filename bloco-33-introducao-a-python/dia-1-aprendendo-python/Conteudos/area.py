@@ -14,4 +14,3 @@ def rectangle(length, width):
 def circle(radius):
     '''Calculate area of circle.'''
     return PI * radius * radius
-    
