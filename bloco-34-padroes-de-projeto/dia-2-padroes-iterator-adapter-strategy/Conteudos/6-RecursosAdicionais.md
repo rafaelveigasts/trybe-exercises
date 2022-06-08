@@ -1,0 +1,3 @@
+## Recursos adicionais (opcional)
+Eduardo Mendes - Padrões de Projeto - https://www.youtube.com/watch?v=hVOP_XR9gEw&list=PLOQgLBuj2-3IPHFlBmqhtbM4vLJg9tob4
+Design Patterns - https://wiki.c2.com/?DesignPatterns
