@@ -1,0 +1,4 @@
+## Recursos adicionais (opcional)
+
+Padrões de projeto em Python - https://refactoring.guru/pt-br/design-patterns/python
+Design Patterns: o que são, conheça a GOF e benefícios! - https://blog.betrybe.com/desenvolvimento-web/design-patterns-tudo-sobre/
