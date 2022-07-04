@@ -13,6 +13,7 @@ print("FIM!")
 iterative_countdown(5)
 Vamos ver agora como fica o código iterativo de cálculo de fatorial:
 
+```
 def iterative_factorial(n):
 fact = 1
 
@@ -22,6 +23,7 @@ fact = 1
     return fact
 
 iterative_factorial(5)
+```
 
 Como vimos anteriormente, escolher entre uma solução recursiva ou iterativa depende muito do que estamos buscando.
 

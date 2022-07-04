@@ -27,6 +27,7 @@ Quando a função termina de ser executada, ela sai da pilha.
 
 Vamos utilizar esse código com recursão e visualizar o funcionamento da pilha de chamadas:
 
+```
 def saudacao():
 print("Oi")
 
@@ -40,6 +41,7 @@ print("Fim")
 despedida()
 
 init()
+```
 
 <img src='call_stack.gif' />
 

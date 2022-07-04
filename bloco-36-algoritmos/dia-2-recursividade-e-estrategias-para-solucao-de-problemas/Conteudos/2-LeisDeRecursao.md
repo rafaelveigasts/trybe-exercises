@@ -6,11 +6,13 @@ Exemplo:
 
 A função countdown abaixo tem como objetivo fazer uma contagem regressiva partindo de n até zero.
 
+```
 def countdown(n):
 print(n)
 countdown(n - 1) # chamada recursiva
 
 countdown(5)
+```
 
 Observe que dentro da implementação desta solução, a função chama ela mesma.
 Você pode estar se perguntando: "O que é isso!? " 🤔
@@ -24,6 +26,7 @@ Quando estamos escrevendo uma função recursiva, precisamos informar nossa cond
 O caso recursivo é a chamada da própria função novamente.
 Então, como seria a correção desse código para que ele funcione de acordo com esperado?🤔 Observe a resposta abaixo:
 
+```
 def countdown(n):
 if n == 0: # caso base
 print("FIM!")
@@ -32,6 +35,7 @@ print(n)
 countdown(n - 1) # caso recursivo
 
 countdown(5)
+```
 
 Pronto! Agora a função funciona corretamente!
 Anota aí 🖊:
@@ -94,11 +98,13 @@ Podemos reescrever 5! como 5! = 5 x 4!
 Observando esse caso, vemos que a função 5! possui uma chamada de outra função fatorial dentro dela. Logo, temos uma recursão!
 Vamos escrever um código para resolvê-lo?
 
+```
 def factorial(n):
-if n == 1: # caso base
-return 1
-else:
-return n \* factorial(n - 1) # caso recursivo
+  if n == 1: # caso base
+    return 1
+  else:
+    return n \* factorial(n - 1) # caso recursivo
+```
 
 O código acima funciona da seguinte maneira:
 
