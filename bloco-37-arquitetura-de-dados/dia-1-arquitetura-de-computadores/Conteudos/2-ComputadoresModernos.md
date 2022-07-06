@@ -6,6 +6,6 @@ Quando pensamos na palavra computador, o que vem à sua mente? Provavelmente um 
 
 A maioria desses dispositivos funciona com base no modelo inventado em 1945 pelo matemático John Von Neumann, o Modelo de Von Neumann. Esse modelo define um computador como uma máquina que possui dois elementos principais: uma memória principal (como a memória RAM), onde podemos registrar e ler instruções e dados, e um processador (CPU), responsável por buscar tais informações, realizar os cálculos e armazenar os resultados novamente na memória.
 
-<img src=Von-Neumann-model-.png>
+<img src=Von-Neumann-model-.jpg>
 
 Vamos ver com mais detalhes como cada um desses componentes funcionam juntos e individualmente.
