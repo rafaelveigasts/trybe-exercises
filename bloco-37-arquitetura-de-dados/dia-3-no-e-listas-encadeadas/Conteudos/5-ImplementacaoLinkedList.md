@@ -72,3 +72,63 @@ class LinkedList:
 Desta forma, adicionando o valor 3 e posteriormente o valor 1 teremos o resultado:
 
     ```LinkedList(len=2 value=Node(value=1 next=Node(value=3 next=None)))```
+
+<hr>
+
+### Inserir no final
+
+<img src='linked_list_example_insert_last-.webp'>
+
+Devemos informar que o elemento que estamos inserindo será o último na nossa estrutura de cadeia de Nodes:
+
+> linked_list_content.py
+
+# from node import Node
+
+```
+class LinkedList:
+    # ...
+
+    def insert_last(self, value):
+        last_value = Node(value)
+        current_value = self.head_value
+
+        while current_value.next:
+            current_value = current_value.next
+        current_value.next = last_value
+        self.__length += 1
+```
+
+Idealmente esta abordagem estaria correta, desde que houvesse ao menos um elemento em nossa estrutura. Porém, caso não haja nenhum elemento, o trecho while current_value.next: causaria o erro AttributeError: 'NoneType' object has no attribute 'next'.
+
+Isso acontece, pois o head_value ainda não possui valor. Para corrigir essa lógica, podemos utilizar a função insert_first escrita previamente:
+
+> linked_list_content.py
+
+```
+# from node import Node
+
+
+class LinkedList:
+    # ...
+
+    def insert_last(self, value):
+        last_value = Node(value)
+        current_value = self.head_value
+
+        # Mais abaixo criaremos o método is_empty()
+        # que substituirá a condição deste if
+        if current_value is None:
+            return self.insert_first(value)
+
+        while current_value.next:
+            current_value = current_value.next
+        current_value.next = last_value
+        self.__length += 1
+```
+
+Desta forma, adicionando o valor 3 e posteriormente o valor 1 teremos o resultado:
+
+`LinkedList(len=2 value=Node(value=3 next=Node(value=1 next=None)))`
+
+Percebam que usamos a variável auxiliar current_value para percorrer toda a cadeia de Nodes. Isto é necessário, pois assim não perdemos a referência para a cabeça da estrutura, head_value.
