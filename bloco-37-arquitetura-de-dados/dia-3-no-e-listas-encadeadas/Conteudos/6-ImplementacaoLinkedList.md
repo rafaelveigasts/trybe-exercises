@@ -248,3 +248,46 @@ class LinkedList:
 ```
 
 Desta forma, podemos voltar nossos esforços apenas para a parte que estava "descoberta". Ou seja, voltamos a nossa lógica apenas para as posições do meio da nossa estrutura. A lógica é similar ao remover do final remove_last, no entanto, não analisamos se existe um próximo, mas sim se o próximo é a posição que queremos remover.
+
+<hr>
+
+## Obter elemento em qualquer posição
+
+Devemos informar a posição do elemento que desejamos visualizar o conteúdo. Esta função deve retornar uma cópia do Node existente em nossa estrutura.
+
+Levaremos em consideração as seguintes observações:
+
+> Se o elemento tem a posição inferior a 1, será retornado o conteúdo da posição inicial;
+
+> Se o elemento tem a posição igual ou superior a quantidade de elementos, será retornado o conteúdo da posição final.
+
+```
+linked_list_content.py
+
+# from node import Node
+
+
+class LinkedList:
+    # ...
+
+    def get_element_at(self, position):
+        value_returned = None
+        value_to_be_returned = self.head_value
+        if value_to_be_returned:
+            while position > 0 and value_to_be_returned.next:
+                value_to_be_returned = value_to_be_returned.next
+                position -= 1
+            if value_to_be_returned:
+                value_returned = Node(value_to_be_returned.value)
+        return value_returned
+```
+
+⚠️Um ponto de atenção para as verificações constantes presentes no código. Elas indicam que:
+
+Caso não haja elementos em nossa estrutura, será retornado None;
+
+Caso a posição seja menor igual a 0, será retornado o primeiro elemento;
+
+Caso a posição seja maior ou igual a N, onde N é o tamanho da lista, será retornado o último elemento.
+
+Por fim, retornamos um novo Node com o mesmo valor do existente em nossa estrutura. Isto é necessário para que retornemos apenas o valor, e não a referência aos demais elementos.
