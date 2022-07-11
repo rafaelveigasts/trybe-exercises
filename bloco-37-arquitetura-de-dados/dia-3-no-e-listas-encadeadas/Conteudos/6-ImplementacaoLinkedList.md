@@ -173,3 +173,38 @@ class LinkedList:
 ```
 
 Desta forma podemos voltar nossos esforços apenas para a parte que estava "descoberta". Ou seja, voltamos a nossa lógica apenas para as posições do meio da nossa estrutura. A lógica é similar ao inserir no final insert_last, no entanto, não analisamos se existe um próximo, mas sim se o próximo é a posição que queremos inserir o novo valor.
+
+<hr>
+
+## Remover no início
+
+Devemos informar que o elemento que estamos removendo será o último da nossa estrutura de cadeia de Nodes. Os problemas vistos na sessão Inserir no final também se aplicam aqui.
+
+Dito isso, caso tenhamos apenas um elemento em nossa estrutura, invocaremos a função de remoção existente, remove_first:
+
+```
+linked_list_content.py
+# from node import Node
+
+
+class LinkedList:
+    # ...
+
+    def remove_last(self):
+        if len(self) <= 1:
+            return self.remove_first()
+
+        previous_to_be_removed = self.head_value
+
+        while previous_to_be_removed.next.next:
+            previous_to_be_removed = previous_to_be_removed.next
+
+        value_to_be_removed = previous_to_be_removed.next
+        previous_to_be_removed.next = None
+        self.__length -= 1
+        return value_to_be_removed
+```
+
+> 💡 Veja que essa função requer uma atenção especial, pois além de uma variável auxiliar que utilizamos como ponteiro para identificar o Node a ser removido, precisamos ter uma outra variável para indicar o Node anterior. Desta forma, indicamos que o Node anterior ao último vai apontar para None como próximo, liberando assim a referência ao anteriormente tido como último em nossa estrutura.
+
+<hr>
