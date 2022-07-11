@@ -75,7 +75,7 @@ Desta forma, adicionando o valor 3 e posteriormente o valor 1 teremos o resultad
 
 <hr>
 
-### Inserir no final
+## Inserir no final
 
 <img src='linked_list_example_insert_last-.webp'>
 
@@ -132,3 +132,44 @@ Desta forma, adicionando o valor 3 e posteriormente o valor 1 teremos o resultad
 `LinkedList(len=2 value=Node(value=3 next=Node(value=1 next=None)))`
 
 Percebam que usamos a variável auxiliar current_value para percorrer toda a cadeia de Nodes. Isto é necessário, pois assim não perdemos a referência para a cabeça da estrutura, head_value.
+
+<hr>
+
+## Inserir em qualquer posição
+
+<img src='linked_list_example_insert_anywhere-.webp'/>
+
+Devemos informar que o elemento que estamos inserindo será adicionado na posição desejada em nossa estrutura.
+
+👀 De olho na dica: a primeira posição, assim como em arrays, será considerada como 0
+
+Levaremos em consideração as seguintes observações:
+
+> Se o elemento tem a posição inferior a 1, será adicionado na posição inicial, utilizando a função insert_first;
+
+> Se o elemento tem a posição igual ou superior à quantidade de elementos, será adicionado na posição final, utilizando a função insert_last.
+
+```
+linked_list_content.py
+# from node import Node
+
+
+class LinkedList:
+    # ...
+
+    def insert_at(self, value, position):
+        if position < 1:
+            return self.insert_first(value)
+        if position >= len(self):
+            return self.insert_last(value)
+        current_value = self.head_value
+        while position > 1:
+            current_value = current_value.next
+            position -= 1
+        next_value = Node(value)
+        next_value.next = current_value.next
+        current_value.next = next_value
+        self.__length += 1
+```
+
+Desta forma podemos voltar nossos esforços apenas para a parte que estava "descoberta". Ou seja, voltamos a nossa lógica apenas para as posições do meio da nossa estrutura. A lógica é similar ao inserir no final insert_last, no entanto, não analisamos se existe um próximo, mas sim se o próximo é a posição que queremos inserir o novo valor.
