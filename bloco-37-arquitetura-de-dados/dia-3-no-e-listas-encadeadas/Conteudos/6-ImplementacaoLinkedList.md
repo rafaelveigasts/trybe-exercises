@@ -291,3 +291,26 @@ Caso a posição seja menor igual a 0, será retornado o primeiro elemento;
 Caso a posição seja maior ou igual a N, onde N é o tamanho da lista, será retornado o último elemento.
 
 Por fim, retornamos um novo Node com o mesmo valor do existente em nossa estrutura. Isto é necessário para que retornemos apenas o valor, e não a referência aos demais elementos.
+
+<hr>
+
+## Está vazia
+
+Devemos informar se a estrutura está vazia. Nesse caso, como possuímos um campo length, podemos utilizá-lo como ponto a ser analisado, afinal, se o mesmo for 0 nossa estrutura não possui elementos.
+
+```
+linked_list_content.py
+
+# from node import Node
+
+
+class LinkedList:
+    # ...
+
+    def is_empty(self):
+        return not self.__length
+```
+
+O uso do not neste contexto nos informa se a estrutura está vazia, já que not 0 == True.
+
+<hr>
