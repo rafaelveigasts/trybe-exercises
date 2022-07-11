@@ -208,3 +208,43 @@ class LinkedList:
 > 💡 Veja que essa função requer uma atenção especial, pois além de uma variável auxiliar que utilizamos como ponteiro para identificar o Node a ser removido, precisamos ter uma outra variável para indicar o Node anterior. Desta forma, indicamos que o Node anterior ao último vai apontar para None como próximo, liberando assim a referência ao anteriormente tido como último em nossa estrutura.
 
 <hr>
+
+## Remover em qualquer posição
+
+<img src='linked_list_example_remove_anywhere-.webp'>
+
+Devemos informar a posição do elemento que desejamos a remoção de nossa estrutura.
+
+Levaremos em consideração as seguintes observações:
+
+> Se o elemento tem a posição inferior a 1, será removido na posição inicial, utilizando a função remove_first;
+
+> Se o elemento tem a posição igual ou superior a quantidade de elementos, será removido na posição final, utilizando a função remove_last.
+
+```
+linked_list_content.py
+
+# from node import Node
+
+
+class LinkedList:
+    # ...
+
+    def remove_at(self, position):
+        if position < 1:
+            return self.remove_first()
+        if position >= len(self):
+            return self.remove_last()
+
+        previous_to_be_removed = self.head_value
+        while position > 1:
+            previous_to_be_removed = previous_to_be_removed.next
+            position -= 1
+        value_to_be_removed = previous_to_be_removed.next
+        previous_to_be_removed.next = value_to_be_removed.next
+        value_to_be_removed.next = None
+        self.__length -= 1
+        return value_to_be_removed
+```
+
+Desta forma, podemos voltar nossos esforços apenas para a parte que estava "descoberta". Ou seja, voltamos a nossa lógica apenas para as posições do meio da nossa estrutura. A lógica é similar ao remover do final remove_last, no entanto, não analisamos se existe um próximo, mas sim se o próximo é a posição que queremos remover.
