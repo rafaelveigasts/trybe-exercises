@@ -19,3 +19,5 @@ Imagine você precisa criar um aplicativo para controlar o cadastro de pessoas q
 Mas agora você precisa alterar o nome da pessoa de id número 14. Como podemos acessar esse objeto para fazer a alteração? Podemos iterar sobre essa lista buscando o id, com complexidade O(n). Se a lista estiver ordenada, podemos realizar uma busca binária e gastar O(log n) para cada busca. Nesse caso, a cada nova pessoa adicionada, a lista precisaria ser novamente ordenada, elevando o custo de inserção para O(n log n).
 
 ➡️ O conteúdo de hoje é essencial, justamente porque a hashmap é uma estrutura de dados do tipo chave-valor que nos permite inserir e localizar o cadastro da pessoa em O(1)! Essa estrutura é muito poderosa e, por isso, é largamente utilizada na computação. Por esse motivo também é muito cobrada em entrevistas que exigem resolução de problemas algorítmicos (whiteboard interviews), sobretudo em empresas de grande porte. Heróis de anime sabem bem disso:
+
+https://www.youtube.com/embed/pKO9UjSeLew
